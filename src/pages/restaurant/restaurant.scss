@@ -1,0 +1,34 @@
+page-restaurant {
+
+	.profile-description {
+		margin-top: 10px !important;
+		white-space: normal !important;
+	}
+
+	.no-margin-bottom {
+		margin-bottom: 0px !important;
+	}
+
+	.searchbar-pap {
+		background: none !important;
+		border-bottom: 0.55px solid rgba(0, 0, 0, 0.09) !important; 
+	}
+
+	
+	.segment-button {
+		border-top: 0 !important;
+		border-radius: 0px !important;
+		border-color: rgba(0, 0, 0, 0.09) !important;
+		color: rgba(0, 0, 0, 0.5) !important;
+	}
+
+	.segment-left {
+		border-left: 0px !important;
+	}
+
+	.segment-activated {
+		background-color: rgba(0, 0, 0, 0.5) !important;
+		color: rgba(255,255,255, 0.9) !important; 
+	}
+
+}

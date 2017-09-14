@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Restaurante</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+	<ion-list class="no-margin-bottom">
+	    <ion-item>
+	      <ion-thumbnail item-start>
+	        <img src="assets/img/place.png">
+	      </ion-thumbnail>
+	      <h2>Bar Pajarita</h2>
+	      <p>Calle lagartito 33, Madrid</p>
+	      <p class="profile-description">Situados en el barrio de Malasaña, Pajarita os proporciona una experiencia única en un ambiente acogedor, moderno y cuidado.</p>
+	    </ion-item>
+  	</ion-list>
+
+  	<div>
+	  <ion-segment [(ngModel)]="pictureOptions">
+	    <ion-segment-button value="restaurant" class="segment-left">
+	      Fotos del restaurante
+	    </ion-segment-button>
+	    <ion-segment-button value="users" class="segment-right">
+	      Fotos de usuarios
+	    </ion-segment-button>
+	  </ion-segment>
+	</div>
+
+  	<div>
+  		
+  		<ion-grid [ngSwitch]="pictureOptions">
+
+  			<!-- Restaurant images -->
+  			<ion-row *ngSwitchCase="'restaurant'">
+  				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
+  				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
+  				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
+  			</ion-row>
+
+			<!-- Users images -->
+  			<ion-row *ngSwitchCase="'users'">
+  				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
+  				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
+  			</ion-row>  			
+
+  		</ion-grid>
+
+  	</div>
+
+</ion-content>

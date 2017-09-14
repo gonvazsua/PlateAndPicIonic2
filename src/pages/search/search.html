@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Buscar</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+	<ion-searchbar (ionInput)="getSearchResults($event)" class="searchbar-pap" placeholder="Buscar"></ion-searchbar>
+
+	<div>
+	  <ion-segment [(ngModel)]="searchOptions">
+	    <ion-segment-button value="restaurants" class="segment-left">
+	      Restaurantes
+	    </ion-segment-button>
+	    <ion-segment-button value="users" class="segment-right">
+	      Usuarios
+	    </ion-segment-button>
+	  </ion-segment>
+	</div>
+
+
+	<div [ngSwitch]="searchOptions">
+
+	  <!-- User results -->
+
+	  <ion-list *ngSwitchCase="'users'">
+	    <ion-item>
+	      <ion-thumbnail item-start>
+	        <img src="assets/img/picture.png">
+	      </ion-thumbnail>
+	      <h2>Nuria Castro Albertos</h2>
+	      <p>@ncasalb</p>
+	    </ion-item>
+  	  </ion-list>
+
+  	  <!-- Restaurants results -->
+
+	  <ion-list *ngSwitchCase="'restaurants'">
+	    <ion-item>
+	      <ion-thumbnail item-start>
+	        <img src="assets/img/place.png">
+	      </ion-thumbnail>
+	      <h2>Bar Pajarita</h2>
+	      <p>En calle lagartito, Madrid</p>
+	    </ion-item>
+  	  </ion-list>	  	  
+
+
+  	</div>
+
+</ion-content>

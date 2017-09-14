@@ -1,0 +1,60 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Actualizar perfil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<form [formGroup]="profileDataForm" (ngSubmit)="checkUpdate()">
+
+		<ion-list>
+
+	  		<ion-item>
+	    		<ion-input formControlName="username" value="{{user.username}}" type="text" placeholder="Nombre usuario"></ion-input>
+	  		</ion-item>
+		
+			<ion-item>
+	    		<ion-input formControlName="firstname" value="{{user.firstname}}" type="text" placeholder="Nombre"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input formControlName="lastname" value="{{user.lastname}}" type="text" placeholder="Apellidos"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-textarea formControlName="target" name="target" maxlength="150" placeholder="¿Qué nos cuentas sobre ti?"></ion-textarea>
+	  		</ion-item>
+
+		</ion-list>
+
+		<!-- Validation messages -->
+
+		<ion-list *ngIf="showFormErrors">
+			<ion-item color="danger">
+				
+				<p *ngIf="profileDataForm.get('username').hasError('required')">* Nombre de usuario obligatorio</p>
+
+				<p *ngIf="profileDataForm.get('firstname').hasError('required')">* Password obligatorio</p>
+
+				<p *ngIf="profileDataForm.get('lastname').hasError('required')">* Password obligatorio</p>
+				
+			</ion-item>
+
+	  		
+		</ion-list>
+
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<button type="submit" ion-button full color="success" [disabled]="!profileDataForm.valid">Guardar</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+	</form>
+
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Configuración</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-list>
+  		
+  		<ion-item>
+		    <ion-thumbnail item-start>
+		      <img src="assets/img/picture.png" (click)="goToUpdateProfilePicture()">
+		    </ion-thumbnail>
+			<h2 (click)="goToUpdateProfilePicture()">Cambiar foto de perfil</h2>
+			<button ion-button clear item-end icon-only><ion-icon name="right"></ion-icon></button>
+		</ion-item>
+
+		<ion-item>
+		    <ion-thumbnail item-start>
+		      <img src="assets/img/no-image.png" (click)="goToUpdateProfileData()">
+		    </ion-thumbnail>
+			<h2 (click)="goToUpdateProfileData()">Cambiar datos personales</h2>
+		</ion-item>
+
+		<ion-item>
+		    <ion-thumbnail item-start>
+		      <img src="assets/img/email.png" (click)="goToUpdateEmail()">
+		    </ion-thumbnail>
+			<h2 (click)="goToUpdateEmail()">Cambiar email</h2>
+		</ion-item>
+
+		<ion-item>
+		    <ion-thumbnail item-start>
+		      <img src="assets/img/password.png" (click)="goToUpdatePassword()">
+		    </ion-thumbnail>
+			<h2 (click)="goToUpdatePassword()">Cambiar contraseña</h2>
+		</ion-item>
+
+		<ion-item>
+		    <ion-thumbnail item-start>
+		      <img src="assets/img/logout.png" (click)="goToLogout()">
+		    </ion-thumbnail>
+			<h2 (click)="goToLogout()">Desconectar</h2>
+		</ion-item>
+
+</ion-list>
+
+</ion-content>

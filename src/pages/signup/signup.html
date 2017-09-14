@@ -1,0 +1,65 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Registro</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+
+		<ion-list>
+
+	  		<ion-item>
+	    		<ion-input formControlName="username" type="text" placeholder="Nombre usuario"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input formControlName="repeatPassword" type="password" placeholder="Repite password"></ion-input>
+	  		</ion-item>
+
+		</ion-list>
+
+		<!-- Validation messages -->
+		<ion-list *ngIf="!signUpForm.valid">
+
+			<ion-item color="danger" *ngIf="!signUpForm.valid">
+				
+				<p *ngIf="signUpForm.get('username').hasError('required')">* Nombre de usuario obligatorio</p>
+				
+				<p *ngIf="signUpForm.get('email').hasError('required')">* Email obligatorio</p>
+				<p *ngIf="signUpForm.get('email').hasError('email')">* Email no valido</p>
+
+				<p *ngIf="signUpForm.get('password').hasError('required')">* Password obligatorio</p>
+				<p *ngIf="signUpForm.get('password').hasError('minlength')">* Password mínimo 4 caracteres</p>
+
+				<p *ngIf="signUpForm.get('repeatPassword').hasError('required')">* Confirma password</p>
+				<p *ngIf="signUpForm.get('repeatPassword').hasError('minlength')">* Password mínimo 4 caracteres</p>
+
+			</ion-item>
+
+	  		
+		</ion-list>
+
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<button type="submit" ion-button full color="success" [disabled]="!signUpForm.valid">He terminado</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+	</form>
+
+</ion-content>
