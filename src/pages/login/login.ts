@@ -41,7 +41,7 @@ export class LoginPage {
 
     checkLogin(){
 
-      this.showLoginErrors = this.loginForm.valid;
+      this.showLoginErrors = !this.loginForm.valid;
 
       if(!this.showLoginErrors){
         this.login();

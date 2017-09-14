@@ -12,21 +12,30 @@
 	<form [formGroup]="profileDataForm" (ngSubmit)="checkUpdate()">
 
 		<ion-list>
-
-	  		<ion-item>
-	    		<ion-input formControlName="username" value="{{user.username}}" type="text" placeholder="Nombre usuario"></ion-input>
-	  		</ion-item>
 		
 			<ion-item>
-	    		<ion-input formControlName="firstname" value="{{user.firstname}}" type="text" placeholder="Nombre"></ion-input>
+				<ion-label stacked>Nombre</ion-label>
+	    		<ion-input formControlName="firstname" value="{{user.firstname}}" type="text" placeholder="Nombre" maxlength="50"></ion-input>
 	  		</ion-item>
 
 	  		<ion-item>
-	    		<ion-input formControlName="lastname" value="{{user.lastname}}" type="text" placeholder="Apellidos"></ion-input>
+	  			<ion-label stacked>Apellidos</ion-label>
+	    		<ion-input formControlName="lastname" value="{{user.lastname}}" type="text" placeholder="Apellidos" maxlength="50"></ion-input>
 	  		</ion-item>
 
 	  		<ion-item>
-	    		<ion-textarea formControlName="target" name="target" maxlength="150" placeholder="¿Qué nos cuentas sobre ti?"></ion-textarea>
+	  			<ion-label stacked>Nombre de usuario</ion-label>
+	    		<ion-input formControlName="username" value="{{user.username}}" type="text" placeholder="Nombre usuario" maxlength="50"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	  			<ion-label stacked>Email</ion-label>
+	    		<ion-input formControlName="email" value="{{user.email}}" type="text" placeholder="Email" maxlength="50"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	  			<ion-label stacked>Sobre ti</ion-label>
+	    		<ion-textarea formControlName="target" name="target" maxlength="150" placeholder="¿Qué nos cuentas sobre ti?" value="{{user.target}}"></ion-textarea>
 	  		</ion-item>
 
 		</ion-list>
@@ -41,6 +50,9 @@
 				<p *ngIf="profileDataForm.get('firstname').hasError('required')">* Password obligatorio</p>
 
 				<p *ngIf="profileDataForm.get('lastname').hasError('required')">* Password obligatorio</p>
+
+				<p *ngIf="profileDataForm.get('email').hasError('required')">* Email obligatorio</p>
+				<p *ngIf="profileDataForm.get('email').hasError('email')">* Email no válido</p>
 				
 			</ion-item>
 

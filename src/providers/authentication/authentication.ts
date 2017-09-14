@@ -36,12 +36,12 @@ export class AuthenticationProvider {
 
 		  					},
 		  					(err) => {
-                  reject(err);
+                  reject(err._body);
 		  					}
 		  				);
   				},
   				(err) => {
-  					reject(false);
+  					reject("Ha ocurrido un problema");
   				}
   			);
 
@@ -70,7 +70,7 @@ export class AuthenticationProvider {
 
   					},
   					(err) => {
-              reject(err.json());
+              reject(err._body);
   					}
   				);
   		});

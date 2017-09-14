@@ -5,6 +5,7 @@ import { AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { UserProvider } from '../../providers/user/user';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { AlertProvider } from '../../providers/alert/alert';
 
 @IonicPage()
 @Component({
@@ -23,15 +24,17 @@ export class ChangeProfileDataPage {
   		public formBuilder: FormBuilder,
   		public alertCtrl: AlertController,
       public userProvider: UserProvider,
-      public loading: LoadingProvider) {
+      public loading: LoadingProvider,
+      public alert: AlertProvider) {
 
       this.showFormErrors = false;
       this.user = new User(null, null, null, null, null, null, null);
 
   		this.profileDataForm = this.formBuilder.group({
-  			username: ['', [Validators.required]],
-  			firstname: ['', [Validators.required]],
-  			lastname: ['', [Validators.required]],
+  			username: ['', [Validators.required, Validators.maxLength(50)]],
+  			firstname: ['', [Validators.required, Validators.maxLength(50)]],
+  			lastname: ['', [Validators.required, Validators.maxLength(50)]],
+        email: ['', [Validators.required, Validators.maxLength(50), Validators.email]],
   			target: ['', [Validators.maxLength(150)]],
   		});
 
@@ -56,7 +59,7 @@ export class ChangeProfileDataPage {
 
     checkUpdate(){
 
-      this.showFormErrors = this.profileDataForm.valid;
+      this.showFormErrors = !this.profileDataForm.valid;
 
       if(!this.showFormErrors){
         this.update();
@@ -66,22 +69,31 @@ export class ChangeProfileDataPage {
 
   	update(){
 
-  		//Call to update user service
+  		this.loading.show();
 
-  		this.showSuccessMessage();
+      this.updateUserValues();
+
+      this.userProvider.updatePersonalData(this.user).then(
+        (success) => {
+          this.loading.hide();
+          this.alert.show('¡Bien!', 'Tus datos han sido actualizados');
+        },
+        (err) => {
+          this.loading.hide();
+          this.alert.show("¡Ups!",err);
+        }
+      );
 
   	}
 
-	  showSuccessMessage(){
+    updateUserValues(){
 
-		  let alert = this.alertCtrl.create({
-      		title: '¡Listo!',
-      		subTitle: 'Tus datos han sido actualizados',
-      		buttons: ['OK']
-    	});
+      this.user.firstname = this.profileDataForm.get("firstname").value;
+      this.user.lastname = this.profileDataForm.get("lastname").value;
+      this.user.username = this.profileDataForm.get("username").value;
+      this.user.email = this.profileDataForm.get("email").value;
+      this.user.target = this.profileDataForm.get("target").value;
 
-    	alert.present();
-
-	  }  	
+    }
 
 }
