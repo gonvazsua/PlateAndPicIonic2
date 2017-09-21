@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChangeProfilePicturePage } from '../change-profile-picture/change-profile-picture';
-import { ChangeEmailPage } from '../change-email/change-email';
 import { ChangePasswordPage } from '../change-password/change-password';
 import { ChangeProfileDataPage } from '../change-profile-data/change-profile-data';
 import { IndexPage } from '../index/index';
@@ -30,10 +29,6 @@ export class SettingsPage {
 
   goToUpdateProfileData(){
   	this.navCtrl.push(ChangeProfileDataPage);
-  }
-
-  goToUpdateEmail(){
-  	this.navCtrl.push(ChangeEmailPage);
   }
 
   goToUpdatePassword(){

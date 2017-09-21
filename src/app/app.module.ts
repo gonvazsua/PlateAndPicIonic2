@@ -9,7 +9,6 @@ import { IndexPage } from '../pages/index/index';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { SettingsPage } from '../pages/settings/settings';
-import { ChangeEmailPage } from '../pages/change-email/change-email';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { ChangeProfileDataPage } from '../pages/change-profile-data/change-profile-data';
 import { ChangeProfilePicturePage } from '../pages/change-profile-picture/change-profile-picture';
@@ -37,7 +36,6 @@ import { AlertProvider } from '../providers/alert/alert';
     LoginPage,
     SignupPage,
     SettingsPage,
-    ChangeEmailPage,
     ChangePasswordPage,
     ChangeProfileDataPage,
     ChangeProfilePicturePage,
@@ -62,7 +60,6 @@ import { AlertProvider } from '../providers/alert/alert';
     LoginPage,
     SignupPage,
     SettingsPage,
-    ChangeEmailPage,
     ChangePasswordPage,
     ChangeProfileDataPage,
     ChangeProfilePicturePage,

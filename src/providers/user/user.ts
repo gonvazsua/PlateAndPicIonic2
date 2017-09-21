@@ -58,7 +58,7 @@ export class UserProvider {
 			  		headers.append('Authorization', this.token);
 			  		headers.append('Content-Type', 'application/json');
 
-			  		this.http.post(Constants.UPDATE_PERSONAL_DATA, JSON.stringify(user), {headers: headers})
+			  		this.http.post(Constants.UPDATE_PERSONAL_DATA_URL, JSON.stringify(user), {headers: headers})
 		  				.subscribe(
 		  					res => {
 
@@ -75,7 +75,43 @@ export class UserProvider {
 	  				reject("Ha ocurrido un problema");
 	  			}
   			);
+  		});
+  	}
 
+  	updatePassword(lastPassword, newPassword1, newPassword2){
+
+  		return new Promise((resolve, reject) => {
+
+  			this.storage.get('token').then(
+	  			(data) => {
+	  				this.token = data;
+	  				let headers = new Headers();
+			  		headers.append('Authorization', this.token);
+			  		headers.append('Content-Type', 'application/json');
+
+			  		let body = {
+			  			'lastPassword': lastPassword,
+			  			'newPassword1': newPassword1,
+			  			'newPassword2': newPassword2
+			  		};
+
+			  		this.http.post(Constants.UPDATE_PASSWORDS_URL, body, {headers: headers})
+		  				.subscribe(
+		  					res => {
+
+		  						resolve(res);
+
+		  					},
+		  					(err) => {
+                  				reject(err._body);
+		  					}
+		  				);
+
+	  			},
+	  			(err) => {
+	  				reject("Ha ocurrido un problema");
+	  			}
+  			);
   		});
 
   	}

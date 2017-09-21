@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { UserProvider } from '../../providers/user/user';
 import { LoadingProvider } from '../../providers/loading/loading';
@@ -22,7 +21,6 @@ export class ChangeProfileDataPage {
   		public navCtrl: NavController, 
   		public navParams: NavParams,
   		public formBuilder: FormBuilder,
-  		public alertCtrl: AlertController,
       public userProvider: UserProvider,
       public loading: LoadingProvider,
       public alert: AlertProvider) {
