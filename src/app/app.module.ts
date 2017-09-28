@@ -28,6 +28,7 @@ import { AuthenticationProvider } from '../providers/authentication/authenticati
 import { UserProvider } from '../providers/user/user';
 import { LoadingProvider } from '../providers/loading/loading';
 import { AlertProvider } from '../providers/alert/alert';
+import { PlatePictureProvider } from '../providers/plate-picture/plate-picture';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { AlertProvider } from '../providers/alert/alert';
     AuthenticationProvider,
     UserProvider,
     LoadingProvider,
-    AlertProvider
+    AlertProvider,
+    PlatePictureProvider
   ]
 })
 export class AppModule {}

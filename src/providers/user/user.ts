@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { User } from '../../models/user';
 import { Storage } from '@ionic/storage';
@@ -18,7 +18,9 @@ export class UserProvider {
 
   	}
 
-
+  	/*
+		Return promise with logged user by storaged token
+  	*/
   	getLoggedUser(){
 
   		return new Promise((resolve, reject) => {
@@ -47,6 +49,9 @@ export class UserProvider {
 
   	}
 
+  	/*
+		Update logged user data with user object passed as parameter
+  	*/
   	updatePersonalData(user){
 
   		return new Promise((resolve, reject) => {
@@ -78,6 +83,9 @@ export class UserProvider {
   		});
   	}
 
+  	/*
+		Update password of logged user by token
+  	*/
   	updatePassword(lastPassword, newPassword1, newPassword2){
 
   		return new Promise((resolve, reject) => {
@@ -112,6 +120,44 @@ export class UserProvider {
 	  				reject("Ha ocurrido un problema");
 	  			}
   			);
+  		});
+
+  	}
+
+  	/*
+		Return promise with User object loaded by Id
+  	*/
+  	getUserById(userId){
+
+  		return new Promise((resolve, reject) => {
+
+  			this.storage.get('token').then(
+	  			(data) => {
+	  				
+	  				let params: URLSearchParams = new URLSearchParams();
+	  				let requestOptions = new RequestOptions();
+	  				let headers = new Headers();
+
+			  		headers.append('Authorization', this.token);
+			  		params.set('userId', userId);
+
+			  		requestOptions.headers = headers;
+	  				requestOptions.params = params;
+
+			  		this.http.get(Constants.GET_USER_BY_ID, requestOptions).subscribe(
+			  			res => {
+			  				resolve(this.user.build(res.json()));
+			  			},
+			  			(err) => {
+			  				reject(err._body);
+			  			}
+			  		);
+	  			},
+	  			(err) => {
+	  				reject("Ha ocurrido un problema");
+	  			}
+  			);
+
   		});
 
   	}

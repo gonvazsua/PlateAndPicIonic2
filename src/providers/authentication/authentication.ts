@@ -7,7 +7,7 @@ import * as Constants from '../../constants/API';
 @Injectable()
 export class AuthenticationProvider {
 
-	public token: any;
+	  public token: any;
 
   	constructor(
   		public http: Http,
@@ -15,6 +15,9 @@ export class AuthenticationProvider {
     	
   	}
 
+    /*
+      Check if storaged data (username and password) are valid
+    */
   	checkAuthentication(){
 
   		return new Promise((resolve, reject) => {
@@ -77,6 +80,9 @@ export class AuthenticationProvider {
 
   	}
 
+    /*
+      Logout: Remove storaged user data
+    */
   	logout(){
   		
   		return new Promise((resolve, reject) => {
@@ -93,6 +99,9 @@ export class AuthenticationProvider {
   		});
   	}
 
+    /*
+      Update storaged token from authentication response
+    */
   	saveToken(res){
   		let response = res.json();
 		  this.token = response.token;
@@ -100,6 +109,10 @@ export class AuthenticationProvider {
 		  return response;
   	}
 
+    /*
+      Update profile data Storage depending if check "Keep connected has been checked"
+      data = {username, password}
+    */
   	updateUserDataStorage(data, keepConnected){
 
   		if(keepConnected)
