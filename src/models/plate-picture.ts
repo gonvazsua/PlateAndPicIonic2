@@ -1,6 +1,3 @@
-import { User } from "./user";
-import { Plate } from "./plate";
-
 export class PlatePicture {
 
 	constructor(

@@ -22,8 +22,8 @@ export class ProfilePage {
 	  	public navParams: NavParams,
 	  	public platePictureProvider: PlatePictureProvider,
 	  	public userProvider: UserProvider,
-      	public loading: LoadingProvider,
-      	public alert: AlertProvider) {
+      public loading: LoadingProvider,
+      public alert: AlertProvider) {
 
 		this.userPlatePictures = []; 
 		this.page = 0; 
@@ -47,7 +47,7 @@ export class ProfilePage {
   	*/
   	getUserAndLoadPlatePictures(){
 
-  		let userId = this.navParams.get('userId');
+      let userId = this.navParams.get('userId');
 
   		if(userId){
 
@@ -66,8 +66,6 @@ export class ProfilePage {
   	*/
   	loadUserByIdAndPlatePictures(userId){
 
-  		this.loading.show();
-
   		this.userProvider.getUserById(userId).then(
   			(data) => {
 
@@ -76,9 +74,9 @@ export class ProfilePage {
 
   			},
   			(err) => {
-  				console.log("Error in loadUserByIdAndPlatePictures" + err);
-  				this.loading.hide();
-          		this.alert.show("¡Ups!",err);
+  				this.page = 0;
+          console.log("Error in loadUserByIdAndPlatePictures" + err);
+  				this.alert.show("¡Ups!",err);
   			}
   		);
   	}
@@ -96,9 +94,9 @@ export class ProfilePage {
 
   			},
   			(err) => {
+          this.page = 0;
   				console.log("Error in loadLoggedUserAndPlatePictures" + err);
-  				this.loading.hide();
-          this.alert.show("¡Ups!",err);
+  				this.alert.show("¡Ups!",err);
   			}
   		);	
 
@@ -109,14 +107,19 @@ export class ProfilePage {
   	*/
   	loadPlatePictures(){
 
-  		this.platePictureProvider.getPlatePicturesByUser(this.user, this.page).then(
+      this.platePictureProvider.getPlatePicturesByUser(this.user, this.page).then(
 
         (data) => {
+          this.userPlatePictures.push(data);
+
+          if(data){
+            this.incrementPage();
+          }
 
         },
         (err) => {
+          this.page = 0;
           console.log("Error in loadLoggedUserAndPlatePictures" + err);
-          this.loading.hide();
           this.alert.show("¡Ups!",err);
         }
 
@@ -124,6 +127,10 @@ export class ProfilePage {
   		
   	}
 
-
-
+    /*
+      Increment the current page query
+    */
+    incrementPage(){
+      this.page = this.page + 1;
+    }
 }

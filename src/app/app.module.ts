@@ -29,6 +29,7 @@ import { UserProvider } from '../providers/user/user';
 import { LoadingProvider } from '../providers/loading/loading';
 import { AlertProvider } from '../providers/alert/alert';
 import { PlatePictureProvider } from '../providers/plate-picture/plate-picture';
+import { CommentProvider } from '../providers/comment/comment';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { PlatePictureProvider } from '../providers/plate-picture/plate-picture';
     UserProvider,
     LoadingProvider,
     AlertProvider,
-    PlatePictureProvider
+    PlatePictureProvider,
+    CommentProvider
   ]
 })
 export class AppModule {}

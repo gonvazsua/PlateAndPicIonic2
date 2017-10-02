@@ -13,9 +13,9 @@
 	      <ion-thumbnail item-start>
 	        <img src="assets/img/picture.png">
 	      </ion-thumbnail>
-	      <h2>Nuria Castro Albertos</h2>
-	      <p>@ncasalb</p>
-	      <p class="profile-description">Reconocida cabra loca, perreo lover empedernida!</p>
+	      <h2>{{user.firstname}} {{user.lastname}}</h2>
+	      <p>@{{user.username}}</p>
+	      <p class="profile-description">{{user.target}}</p>
 	    </ion-item>
   </ion-list>
 
@@ -23,9 +23,11 @@
 		
 		<ion-grid>
 			<ion-row>
-				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
-				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
-				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
+
+				<ion-col *ngFor="let platePicture of userPlatePictures" col-6 no-padding>
+					<img id="{{platePicture.platePictureId}}" src="{{platePicture.picture}}">
+				</ion-col>
+
 			</ion-row>
 		</ion-grid>
 
