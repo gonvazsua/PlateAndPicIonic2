@@ -8,7 +8,11 @@ import { Comment } from '../../models/comment';
 @Injectable()
 export class CommentProvider {
 
+	private newComment: Comment;
+
   	constructor(public http: Http, public storage: Storage) {
+
+  		this.newComment = new Comment(null,null,null,null,null,null, null);
     
   	}
 
@@ -52,6 +56,43 @@ export class CommentProvider {
   	}
 
   	/*
+		Save new Comment with platePicture and text
+  	*/
+  	saveComment(comment){
+
+  		return new Promise((resolve, reject) => {
+
+  			this.storage.get('token').then(
+	  			(token) => {
+
+	  				let headers = new Headers();
+		  			headers.append('Content-Type', 'application/json');
+		  			headers.append('Authorization', token);
+
+		  			this.http.post(Constants.SAVE_COMMENT, JSON.stringify(comment), {headers: headers})
+		  				.subscribe(
+		  					res => {
+
+		  						this.newComment = this.newComment.build(res.json());
+		  						resolve(this.newComment);
+
+		  					},
+		  					(err) => {
+		              			reject(err._body);
+		  					}
+		  				);
+
+	  			},
+	  			(err) => {
+	  				reject("Ha ocurrido un problema");
+	  			}
+  			);
+
+  		});
+
+  	}
+
+  	/*
 		Build a Comment object list from response body
   	*/
   	buildCommentList(jsonList): Array<Comment>{
@@ -63,7 +104,8 @@ export class CommentProvider {
 
   		for(let c of jsonList){
 
-  			comment = new Comment(c.commentId, c.comment, c.userId, c.username, c.userImage, c.registeredOn);
+  			comment = new Comment(c.commentId, c.comment, c.userId, c.username, c.userImage, 
+  				c.platePictureId, c.registeredOn);
   			commentList.push(c);
 
   		}

@@ -6,6 +6,8 @@ import { UserProvider } from '../../providers/user/user';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { AlertProvider } from '../../providers/alert/alert';
 
+export const PAGE_SIZE = 20;
+
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -110,11 +112,9 @@ export class ProfilePage {
       this.platePictureProvider.getPlatePicturesByUser(this.user, this.page).then(
 
         (data) => {
-          this.userPlatePictures.push(data);
-
-          if(data){
-            this.incrementPage();
-          }
+          
+          this.addPlatePictures(data);
+          this.incrementPage(data);
 
         },
         (err) => {
@@ -128,9 +128,26 @@ export class ProfilePage {
   	}
 
     /*
-      Increment the current page query
+      Add the data to PlatePicture list
     */
-    incrementPage(){
-      this.page = this.page + 1;
+    addPlatePictures(data){
+
+      for(let platePicture of data){
+
+        this.userPlatePictures.push(platePicture);
+
+      }
+
+    }
+
+    /*
+      Increment the current query page only if dataLength is equals to PAGE_SIZE constant
+    */
+    incrementPage(data){
+    
+      if(data.length == PAGE_SIZE){
+        this.page = this.page + 1;
+      }
+
     }
 }

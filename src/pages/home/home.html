@@ -10,8 +10,8 @@
 
       <ion-item>
         <ion-avatar item-start>
-          <img *ngIf="platePicture.userImage != null" src="{{platePicture.userImage}}">
-          
+          <img *ngIf="platePicture.userImage" src="{{platePicture.userImage}}">
+          <img *ngIf="!platePicture.userImage" src="assets/img/picture.png">
         </ion-avatar>
         <h2>@{{platePicture.username}}</h2>
         <p class="primary">

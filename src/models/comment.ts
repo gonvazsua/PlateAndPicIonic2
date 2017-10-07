@@ -1,12 +1,13 @@
 export class Comment {
 
 	constructor(
-		private commentId: number, 
-		private comment: string, 
-		private userId: number,
-		private username: string,
-		private userImage: string,
-		private registeredOn: string){
+		public commentId: number, 
+		public comment: string, 
+		public userId: number,
+		public username: string,
+		public userImage: string,
+		public platePictureId: number,
+		public registeredOn: string){
 
 	}
 
@@ -18,7 +19,7 @@ export class Comment {
 		else{
 			
 			return new Comment(data.commentId, data.comment, data.userId, data.username,
-				data.userImage, data.registeredOn);
+				data.userImage, data.platePictureId, data.registeredOn);
 		}
 
 	}

@@ -132,13 +132,13 @@ export class UserProvider {
   		return new Promise((resolve, reject) => {
 
   			this.storage.get('token').then(
-	  			(data) => {
+	  			(token) => {
 	  				
 	  				let params: URLSearchParams = new URLSearchParams();
 	  				let requestOptions = new RequestOptions();
 	  				let headers = new Headers();
 
-			  		headers.append('Authorization', this.token);
+			  		headers.append('Authorization', token);
 			  		params.set('userId', userId);
 
 			  		requestOptions.headers = headers;

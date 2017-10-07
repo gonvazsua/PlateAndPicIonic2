@@ -15,3 +15,4 @@ export const GET_LAST_PLATEPICTURES = ENDPOINT + "/platePicture/lastPlatePicture
 
 //COMMENTS
 export const GET_COMMENTS_BY_PLATEPICTUREID = ENDPOINT + "/comment/getByPlatePicture";
+export const SAVE_COMMENT = ENDPOINT + "/comment/save";

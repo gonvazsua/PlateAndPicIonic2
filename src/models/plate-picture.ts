@@ -1,22 +1,22 @@
 export class PlatePicture {
 
 	constructor(
-		private platePictureId: number, 
-		private title: string,
-		private userId: number,
-		private username: string,
-		private userImage: string,
-		private restaurantId: number,
-		private restaurantName: string,
-		private cityId: number,
-		private cityName: string,
-		private plateId: number,
-		private plateName: string,
-		private picture: string,
-		private likesNumber: number,
-		private commentsNumber: number,
-		private likeToUser: boolean,
-		private registeredOn: string){
+		public platePictureId: number, 
+		public title: string,
+		public userId: number,
+		public username: string,
+		public userImage: string,
+		public restaurantId: number,
+		public restaurantName: string,
+		public cityId: number,
+		public cityName: string,
+		public plateId: number,
+		public plateName: string,
+		public picture: string,
+		public likesNumber: number,
+		public commentsNumber: number,
+		public likeToUser: boolean,
+		public registeredOn: string){
 
 	}
 

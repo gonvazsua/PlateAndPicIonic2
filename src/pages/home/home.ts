@@ -80,10 +80,16 @@ export class HomePage {
       this.page = this.page + 1;
     }
 
+    /*
+      Go to comments page
+    */
   	goToComments(platePictureId){
   		this.navCtrl.push(CommentPage, {platePictureId: platePictureId});
   	}
 
+    /*
+      Go to Restaurants page
+    */
   	goToRestaurant(restaurantId){
   		this.navCtrl.push(RestaurantPage, {restaurantId: restaurantId});
   	}
