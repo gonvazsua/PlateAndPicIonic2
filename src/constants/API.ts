@@ -12,7 +12,11 @@ export const GET_USER_BY_ID = ENDPOINT + "/user/getUserById";
 //PLATEPICTURES
 export const GET_PLATEPICTURES_BY_USERNAME = ENDPOINT + "/platePicture/getByUsername";
 export const GET_LAST_PLATEPICTURES = ENDPOINT + "/platePicture/lastPlatePictures";
+export const GET_PLATEPICTURES_BY_RESTAURANT_ID = ENDPOINT + "/platePicture/getByRestaurant";
 
 //COMMENTS
 export const GET_COMMENTS_BY_PLATEPICTUREID = ENDPOINT + "/comment/getByPlatePicture";
 export const SAVE_COMMENT = ENDPOINT + "/comment/save";
+
+//RESTAURANTS
+export const GET_RESTAURANT_BY_ID = ENDPOINT + "/restaurant/getById";
