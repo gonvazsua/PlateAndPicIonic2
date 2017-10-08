@@ -41,11 +41,11 @@
   				<ion-col col-6 no-padding><img src="assets/img/test.jpg"></ion-col>
   			</ion-row>
 
-			<!-- Users images -->
+			  <!-- Users images -->
   			<ion-list *ngSwitchCase="'more-information'">
           <ion-item>
             <h2>Teléfono</h2>
-            <p *ngIf="restaurant.phoneNumber">{{restaurant.phoneNumber}}</p>
+            <p><a *ngIf="!restaurant.phoneNumber" href="tel:{{restaurant.phoneNumber}}">{{restaurant.phoneNumber}}</a></p>
             <p *ngIf="!restaurant.phoneNumber">Ninguno registrado</p>
           </ion-item>
           <ion-item>

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="background-white">
 
   <ion-navbar>
     <ion-title>Login</ion-title>
@@ -7,9 +7,14 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding  class="background">
 
-	<form [formGroup]="loginForm" (ngSubmit)="login()">
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+  	<form [formGroup]="loginForm" (ngSubmit)="login()">
 
 		<ion-list>
 
@@ -51,5 +56,6 @@
 		</ion-grid>
 
 	</form>
-
-</ion-content>
+    
+  </ion-toolbar>
+</ion-footer>

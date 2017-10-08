@@ -1,3 +1,25 @@
 page-index {
 
+	.background{
+		background-image: url('/assets/img/background.jpg');
+		background-size: cover;
+	}
+
+	.toolbar-background{
+		background-color: transparent !important;
+		border: none !important;
+	}
+
+	.white{
+		color: #FFF !important;
+	}
+
+	.col{
+		padding: 0px !important;
+	}
+
+	.mainTitle{
+		padding: 25px !important;
+	}
+
 }
