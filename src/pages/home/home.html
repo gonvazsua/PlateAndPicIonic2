@@ -13,17 +13,17 @@
           <img *ngIf="platePicture.userImage" src="{{platePicture.userImage}}">
           <img *ngIf="!platePicture.userImage" src="assets/img/picture.png">
         </ion-avatar>
-        <h2>@{{platePicture.username}}</h2>
+        <h2 text-lowercase>@{{platePicture.username}}</h2>
         <p class="primary">
-          En <a href="#" (click)="goToRestaurant(platePicture.restaurantId)">{{platePicture.restaurantName}}</a>
+          En <a href="#" (click)="goToRestaurant(platePicture.restaurantId)"  text-capitalize>{{platePicture.restaurantName}}</a>
         </p>
       </ion-item>
 
       <img src="{{platePicture.picture}}">
 
       <ion-card-content class="card-content-home">
-        <p><ion-icon name="pizza"></ion-icon> {{platePicture.plateName}}</p>
-        <p>{{platePicture.title}}</p>
+        <p text-capitalize><ion-icon name="restaurant"></ion-icon> {{platePicture.plateName}}</p>
+        <p *ngIf="platePicture.title"><ion-icon name="clipboard"></ion-icon> {{platePicture.title}}</p>
       </ion-card-content>
 
       <ion-row no-padding>
