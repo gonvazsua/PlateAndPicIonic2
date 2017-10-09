@@ -29,7 +29,7 @@ export class ProfilePage {
 
 		this.userPlatePictures = []; 
 		this.page = 0; 
-		this.user = new User(null, null, null, null, null, null, null);
+		this.user = new User(null, null, null, null, null, null, null, null);
 
 	}
 

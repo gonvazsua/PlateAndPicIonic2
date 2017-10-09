@@ -12,6 +12,7 @@ export class PlatePicture {
 		public cityName: string,
 		public plateId: number,
 		public plateName: string,
+		public plateActive: boolean,
 		public picture: string,
 		public likesNumber: number,
 		public commentsNumber: number,
@@ -29,7 +30,7 @@ export class PlatePicture {
 
 			return new PlatePicture(data.platePictureId, data.title, data.userId, data.username,
 				data.userImage, data.restaurantId, data.restaurantName, data.cityId, data.cityName,
-				data.plateId, data.plateName, data.picture, data.likesNumber, data.commentsNumber,
+				data.plateId, data.plateName, data.plateActive, data.picture, data.likesNumber, data.commentsNumber,
 				data.likeToUser, data.registeredOn);
 		}
 

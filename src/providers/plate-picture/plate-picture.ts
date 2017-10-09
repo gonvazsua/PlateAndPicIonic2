@@ -67,7 +67,7 @@ export class PlatePictureProvider {
       	platePicture = new PlatePicture(
       		pp.platePictureId, pp.title, pp.userId, pp.username,
 			pp.userImage, pp.restaurantId, pp.restaurantName, pp.cityId,
-			pp.cityName, pp.plateId, pp.plateName, pp.picture,
+			pp.cityName, pp.plateId, pp.plateName, pp.plateActive, pp.picture,
 			pp.likesNumber, pp.commentsNumber, pp.likeToUser, 
 			pp.registeredOn
       	);

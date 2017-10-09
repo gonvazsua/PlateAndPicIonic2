@@ -5,7 +5,8 @@ export class Plate {
 	constructor(
 		public plateId: number, 
 		public name: string, 
-		public plateType: string){
+		public plateType: string,
+		public active: boolean){
 
 	}
 

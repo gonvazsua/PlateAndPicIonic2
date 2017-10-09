@@ -13,7 +13,7 @@ export class UserProvider {
 
   	constructor(public http: Http, public storage: Storage) {
 
-    	this.user = new User(null, null, null, null, null, null, null);
+    	this.user = new User(null, null, null, null, null, null, null, null);
     	this.token = "";
 
   	}

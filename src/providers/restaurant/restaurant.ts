@@ -58,7 +58,7 @@ export class RestaurantProvider {
 
   		let restaurant = new Restaurant(data.restaurantId, data.name, data.address, data.phoneNumber,
 				data.registeredOn, data.cityId, data.cityName, data.priceAverage, data.picture,
-				data.description);
+				data.description, data.active);
 
   		return restaurant;
 

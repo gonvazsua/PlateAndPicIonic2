@@ -7,7 +7,8 @@ export class User {
 		public username: string,
 		public email: string,
 		public picture: string,
-		public target: string){
+		public target: string,
+		public restaurantId: number){
 
 	}
 
@@ -18,7 +19,7 @@ export class User {
 		}
 		else{
 			return new User(data.userId, data.firstname, data.lastname, data.username, data.email, 
-				data.picture, data.target);
+				data.picture, data.target, data.restaurantId);
 		}
 
 	}

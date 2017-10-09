@@ -26,7 +26,7 @@ export class RestaurantPage {
   		public alert: AlertProvider,
   		public platePictureProvider: PlatePictureProvider) {
 
-		this.restaurant = new Restaurant(null,null,null,null,null,null,null,null,null, null);
+		this.restaurant = new Restaurant(null,null,null,null,null,null,null,null,null, null, null);
 		this.restaurantId = this.navParams.get("restaurantId");
 		this.categories = [];
 
