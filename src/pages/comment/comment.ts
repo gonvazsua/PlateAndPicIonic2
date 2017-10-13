@@ -64,9 +64,11 @@ export class CommentPage {
 
   			(data) => {
 
+          this.commentsList.length = 0;
+
   				this.appendComments(data);
 
-				this.incrementPage(data);
+				  this.incrementPage(data);
 
   			},
   			(err) => {
