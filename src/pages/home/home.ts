@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CommentPage } from '../comment/comment';
 import { RestaurantPage } from '../restaurant/restaurant';
+import { ProfilePage } from '../profile/profile';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { AlertProvider } from '../../providers/alert/alert';
 import { PlatePictureProvider } from '../../providers/plate-picture/plate-picture';
@@ -47,9 +48,7 @@ export class HomePage {
 
           this.appendPlatePictures(data);
 
-          if(data){
-            this.incrementPage();
-          }
+          this.incrementPage(data);
 
         },
         (err) => {
@@ -74,10 +73,15 @@ export class HomePage {
     }
 
     /*
-      Increment the current query page
+      Increment the current query page if the length of data is higher than
+      the row limit of PlatePictures
     */
-    incrementPage(){
-      this.page = this.page + 1;
+    incrementPage(data){
+
+      if(data.length == this.platePictureProvider.getRowLimit()){
+        this.page = this.page + 1;
+      }
+
     }
 
     /*
@@ -93,5 +97,12 @@ export class HomePage {
   	goToRestaurant(restaurantId){
   		this.navCtrl.push(RestaurantPage, {restaurantId: restaurantId});
   	}
+
+    /*
+      Go to the profile with userId
+    */
+    goToProfile(userId){
+       this.navCtrl.push(ProfilePage, {userId: userId}); 
+    }
 
 }

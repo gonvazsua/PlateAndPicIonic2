@@ -5,12 +5,17 @@ import { Storage } from '@ionic/storage';
 import * as Constants from '../../constants/API';
 import { PlatePicture } from '../../models/plate-picture';
 
+export const ROW_LIMIT:number = 20;
 
 @Injectable()
 export class PlatePictureProvider {
 
   	constructor(public http: Http, public storage: Storage) {
     
+  	}
+
+  	getRowLimit():number {
+  		return ROW_LIMIT;
   	}
 
   	/*
