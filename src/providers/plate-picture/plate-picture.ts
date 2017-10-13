@@ -162,4 +162,66 @@ export class PlatePictureProvider {
 
   	}
 
+  	/*
+		Make a like of the platePictureId passed as parameter
+  	*/
+  	likePlatePicture(platePicture){
+
+  		this.storage.get('token').then(
+			(token) => {
+
+				let headers = new Headers();
+				headers.append('Content-Type', 'application/json');
+		  		headers.append('Authorization', token);
+
+		  		this.http.post(Constants.PLATEPICTURE_LIKE, JSON.stringify(platePicture), {headers: headers})
+	  				.subscribe(
+	  					res => {
+
+	  						//Nothing to do
+
+	  					},
+	  					(err) => {
+              				console.log("Error in like: " + JSON.stringify(platePicture));
+	  					}
+	  				);
+			},
+			(err) => {
+				console.log("Error in like: " + JSON.stringify(platePicture));
+			}
+		);
+
+  	}
+
+  	/*
+		Make a unlike of the platePictureId passed as parameter
+  	*/
+  	unlikePlatePicture(platePicture){
+
+  		this.storage.get('token').then(
+			(token) => {
+
+				let headers = new Headers();
+				headers.append('Content-Type', 'application/json');
+		  		headers.append('Authorization', token);
+
+		  		this.http.post(Constants.PLATEPICTURE_UNLIKE, JSON.stringify(platePicture), {headers: headers})
+	  				.subscribe(
+	  					res => {
+
+	  						//Nothing to do
+
+	  					},
+	  					(err) => {
+              				console.log("Error in like: " + JSON.stringify(platePicture));
+	  					}
+	  				);
+			},
+			(err) => {
+				console.log("Error in like: " + JSON.stringify(platePicture));
+			}
+		);
+
+  	}
+
 }

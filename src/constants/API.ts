@@ -13,6 +13,8 @@ export const GET_USER_BY_ID = ENDPOINT + "/user/getUserById";
 export const GET_PLATEPICTURES_BY_USERNAME = ENDPOINT + "/platePicture/getByUsername";
 export const GET_LAST_PLATEPICTURES = ENDPOINT + "/platePicture/lastPlatePictures";
 export const GET_PLATEPICTURES_BY_RESTAURANT_ID = ENDPOINT + "/platePicture/getByRestaurant";
+export const PLATEPICTURE_LIKE = ENDPOINT + "/platePicture/like";
+export const PLATEPICTURE_UNLIKE = ENDPOINT + "/platePicture/unlike";
 
 //COMMENTS
 export const GET_COMMENTS_BY_PLATEPICTUREID = ENDPOINT + "/comment/getByPlatePicture";
