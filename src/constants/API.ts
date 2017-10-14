@@ -23,6 +23,7 @@ export const SAVE_COMMENT = ENDPOINT + "/comment/save";
 
 //RESTAURANTS
 export const GET_RESTAURANT_BY_ID = ENDPOINT + "/restaurant/getById";
+export const GET_RESTAURANT_BY_NAME = ENDPOINT + "/restaurant/getRestaurantsByName";
 
 //PLATES
 export const GET_PLATES_BY_RESTAURANTID = ENDPOINT + "/plate/getPlatesByRestaurant";

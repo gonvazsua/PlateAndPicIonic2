@@ -47,9 +47,9 @@
             
             <ion-list>
               <ion-item>
-                <ion-label>Platos</ion-label>
+                <ion-label>Carta</ion-label>
                 <ion-select (ionChange)='filterPlatePicturesByPlate($event)'>
-                  <ion-option value="" selected>Todos</ion-option>
+                  <ion-option value="" selected>Completa</ion-option>
                   <ion-option *ngFor="let plate of plateList" value="{{plate.plateId}}">{{plate.plateName}}</ion-option>
                 </ion-select>
               </ion-item>
