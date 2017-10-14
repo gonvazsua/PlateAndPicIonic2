@@ -138,13 +138,52 @@ export class PlatePictureProvider {
 	  				let headers = new Headers();
 
 			  		headers.append('Authorization', token);
-			  		params.set('restaurantId', restaurantId.username);
+			  		params.set('restaurantId', restaurantId);
 			  		params.set('page', page);
 		
 			  		requestOptions.headers = headers;
 	  				requestOptions.params = params;
 
 			  		this.http.get(Constants.GET_PLATEPICTURES_BY_RESTAURANT_ID, requestOptions).subscribe(
+			  			res => {
+			  				resolve(this.buildPlatePictureList(res.json()));
+			  			},
+			  			(err) => {
+			  				reject(err._body);
+			  			}
+			  		);
+	  			},
+	  			(err) => {
+	  				reject("Ha ocurrido un problema");
+	  			}
+  			);
+
+  		});
+
+  	}
+
+  	/*
+		Return promise with a PlatePicture list of the Plate ID passed as parameter
+  	*/
+  	getPlatePicturesByPlateId(plateId, page){
+
+  		return new Promise((resolve, reject) => {
+
+  			this.storage.get('token').then(
+	  			(token) => {
+
+	  				let params: URLSearchParams = new URLSearchParams();
+	  				let requestOptions = new RequestOptions();
+	  				let headers = new Headers();
+
+			  		headers.append('Authorization', token);
+			  		params.set('plateId', plateId);
+			  		params.set('page', page);
+		
+			  		requestOptions.headers = headers;
+	  				requestOptions.params = params;
+
+			  		this.http.get(Constants.GET_PLATEPICTURES_BY_PLATE_ID, requestOptions).subscribe(
 			  			res => {
 			  				resolve(this.buildPlatePictureList(res.json()));
 			  			},

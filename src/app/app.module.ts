@@ -31,6 +31,7 @@ import { AlertProvider } from '../providers/alert/alert';
 import { PlatePictureProvider } from '../providers/plate-picture/plate-picture';
 import { CommentProvider } from '../providers/comment/comment';
 import { RestaurantProvider } from '../providers/restaurant/restaurant';
+import { PlateProvider } from '../providers/plate/plate';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { RestaurantProvider } from '../providers/restaurant/restaurant';
     AlertProvider,
     PlatePictureProvider,
     CommentProvider,
-    RestaurantProvider
+    RestaurantProvider,
+    PlateProvider
   ]
 })
 export class AppModule {}

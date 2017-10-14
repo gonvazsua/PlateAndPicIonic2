@@ -2,21 +2,20 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
+import { Plate } from '../../models/plate';
 import * as Constants from '../../constants/API';
-import { Restaurant } from '../../models/restaurant';
-
 
 @Injectable()
-export class RestaurantProvider {
+export class PlateProvider {
 
-	constructor(public http: Http, public storage: Storage) {
-    
+  	constructor(public http: Http, public storage: Storage) {
+    	
   	}
 
   	/*
-		Get a Restaurant object with the ID passed as parameter
+		Return promise with a Plate list of the restaurant passed as parameter
   	*/
-  	getRestaurantById(restaurantId){
+  	getPlatesByRestaurantId(restaurantId){
 
   		return new Promise((resolve, reject) => {
 
@@ -33,9 +32,9 @@ export class RestaurantProvider {
 			  		requestOptions.headers = headers;
 	  				requestOptions.params = params;
 
-			  		this.http.get(Constants.GET_RESTAURANT_BY_ID, requestOptions).subscribe(
+			  		this.http.get(Constants.GET_PLATES_BY_RESTAURANTID, requestOptions).subscribe(
 			  			res => {
-			  				resolve(res.json());
+			  				resolve(this.buildPlateList(res.json()));
 			  			},
 			  			(err) => {
 			  				reject(err._body);
@@ -52,16 +51,28 @@ export class RestaurantProvider {
   	}
 
   	/*
-		Build Restaurant object from json response
-  	*/
-  	buildRestaurant(data): Restaurant{
+      Build Plate list from response in json
+    */
+    buildPlateList(jsonList): Array<Plate>{
 
-  		let restaurant = new Restaurant(data.restaurantId, data.name, data.address, data.phoneNumber,
-				data.registeredOn, data.cityId, data.cityName, data.priceAverage, data.picture,
-				data.description, data.active, data.categories);
+      let plateList: Array<Plate>;
+      let plate: Plate;
 
-  		return restaurant;
+      plateList = [];
+      
+      for(let p of jsonList){
 
-  	}
+      	plate = new Plate(
+      		p.plateId, p.plateName, p.restaurantId, p.restaurantName,
+      		p.plateType, p.plateActive
+      	);
+
+      	plateList.push(plate);
+
+      }
+
+      return plateList;
+
+    }
 
 }

@@ -11,7 +11,8 @@ export class Restaurant {
 		public priceAverage: string,
 		public picture: string,
 		public description: string,
-		public active: boolean){
+		public active: boolean,
+		public categories: string){
 
 	}
 
@@ -24,7 +25,7 @@ export class Restaurant {
 			
 			return new Restaurant(data.restaurantId, data.name, data.address, data.phoneNumber,
 				data.registeredOn, data.cityId, data.cityName, data.priceAverage, data.picture,
-				data.description, data.active);
+				data.description, data.active, data.categories);
 		}
 
 	}

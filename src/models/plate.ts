@@ -4,9 +4,11 @@ export class Plate {
 
 	constructor(
 		public plateId: number, 
-		public name: string, 
+		public plateName: string, 
+		public restaurantId: number,
+		public restaurantName: string,
 		public plateType: string,
-		public active: boolean){
+		public plateActive: boolean){
 
 	}
 

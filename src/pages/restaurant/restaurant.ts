@@ -4,6 +4,8 @@ import { Restaurant } from '../../models/restaurant';
 import { RestaurantProvider } from '../../providers/restaurant/restaurant';
 import { AlertProvider } from '../../providers/alert/alert';
 import { PlatePictureProvider } from '../../providers/plate-picture/plate-picture';
+import { PlatePicture } from '../../models/plate-picture';
+import { PlateProvider } from '../../providers/plate/plate';
 
 @IonicPage()
 @Component({
@@ -14,7 +16,10 @@ export class RestaurantPage {
 
 	private restaurant: Restaurant;
 	private restaurantId: number;
-	private categories: Array<Object>;
+	private categories: Array<string>;
+  private plateList: Array<Object>;
+  private platePictureList: Array<PlatePicture>;
+  private page: number;
 
 	//Segment var
 	private segmentOption: string;
@@ -24,13 +29,16 @@ export class RestaurantPage {
   		public navParams: NavParams,
   		public restaurantProvider: RestaurantProvider,
   		public alert: AlertProvider,
-  		public platePictureProvider: PlatePictureProvider) {
+  		public platePictureProvider: PlatePictureProvider,
+      public plateProvider: PlateProvider) {
 
-		this.restaurant = new Restaurant(null,null,null,null,null,null,null,null,null, null, null);
-		this.restaurantId = this.navParams.get("restaurantId");
-		this.categories = [];
-
-		this.segmentOption = "pictures";
+		  this.restaurant = new Restaurant(null,null,null,null,null,null,null,null,null, null, null, null);
+		  this.restaurantId = this.navParams.get("restaurantId");
+		  this.categories = [];
+      this.plateList = [];
+      this.platePictureList = [];
+      this.page = 0;
+		  this.segmentOption = "pictures";
 
   	}
 
@@ -43,16 +51,21 @@ export class RestaurantPage {
 
   		this.loadPlatePicturesByRestaurantId();
 
+      this.loadPlatesByRestaurantId();
+
   	}
 
   	/*
-		Get restaurant with the id passed as parameter
+		  Get restaurant with the id passed as parameter
   	*/
   	loadRestaurantById(){
 
   		this.restaurantProvider.getRestaurantById(this.restaurantId).then(
   			(restaurant) => {
-  				this.restaurant = this.restaurant.build(restaurant);
+  				
+          this.restaurant = this.restaurant.build(restaurant);
+          this.loadCategoriesList();
+
   			},
   			(err) => {
   				this.alert.show("¡Ups!", err);
@@ -62,12 +75,127 @@ export class RestaurantPage {
   	} 
 
   	/*
-		Load the plate pictures of the restaurant passed as parameter
+		  Load the plate pictures of the restaurant passed as parameter
   	*/
   	loadPlatePicturesByRestaurantId(){
 
+      this.platePictureProvider.getPlatePicturesByRestaurantId(this.restaurantId, this.page).then(
 
+        (data) => {
+
+          this.appendPlatePictures(data);
+
+          this.incrementPage(data);
+
+        },
+        (err) => {
+
+          console.log("Error in loadPlatePicturesByRestaurantId" + err);
+          this.alert.show("¡Ups!",err);
+
+        }
+
+      );
 
   	}
+
+    /*
+      Push a platePictureList into lastPlatePictures array
+    */
+    appendPlatePictures(platePicturesResults){
+
+      for(let platePicture of platePicturesResults){
+        this.platePictureList.push(platePicture);
+      }
+
+    }
+
+    /*
+      Increment the current query page if the length of data is higher than
+      the row limit of PlatePictures
+    */
+    incrementPage(data){
+
+      if(data.length == this.platePictureProvider.getRowLimit()){
+        this.page = this.page + 1;
+      }
+
+    }
+
+    /*
+      Load the plate list of the restaurant passed as parameter
+    */
+    loadPlatesByRestaurantId(){
+
+      this.plateProvider.getPlatesByRestaurantId(this.restaurantId).then(
+
+        (data) => {
+          this.appendPlates(data);
+        },
+        (err) => {
+
+        }
+
+      );
+
+    }
+
+    /*
+      Append the plates result to the plate list
+    */
+    appendPlates(plates){
+
+      for(let plate of plates){
+        this.plateList.push(plate);
+      }
+
+    }
+
+    /*
+      Filter PlatePictures by plate name
+    */
+    filterPlatePicturesByPlate(plateId){
+
+      this.page = 0;
+      this.platePictureList.length = 0;
+
+      if(plateId == ''){
+        return this.loadPlatePicturesByRestaurantId();
+      }
+
+      this.platePictureProvider.getPlatePicturesByPlateId(plateId, this.page).then(
+
+        (data) => {
+
+          this.appendPlatePictures(data);
+
+          this.incrementPage(data);
+
+        },
+        (err) => {
+
+          console.log("Error in filterPlatePicturesByPlate" + err);
+          this.alert.show("¡Ups!",err);
+
+        }
+
+      );
+
+    }
+
+    /*
+      Parse categories separated by comma in a list
+    */
+    loadCategoriesList(){
+
+      let separator = ',';
+
+      if(this.restaurant.categories && this.restaurant.categories.length > 0){
+      
+        this.categories = this.restaurant.categories.split(separator);
+
+      }
+
+    }
 
 }

@@ -13,6 +13,7 @@ export const GET_USER_BY_ID = ENDPOINT + "/user/getUserById";
 export const GET_PLATEPICTURES_BY_USERNAME = ENDPOINT + "/platePicture/getByUsername";
 export const GET_LAST_PLATEPICTURES = ENDPOINT + "/platePicture/lastPlatePictures";
 export const GET_PLATEPICTURES_BY_RESTAURANT_ID = ENDPOINT + "/platePicture/getByRestaurant";
+export const GET_PLATEPICTURES_BY_PLATE_ID = ENDPOINT + "/platePicture/getByPlate";
 export const PLATEPICTURE_LIKE = ENDPOINT + "/platePicture/like";
 export const PLATEPICTURE_UNLIKE = ENDPOINT + "/platePicture/unlike";
 
@@ -22,3 +23,6 @@ export const SAVE_COMMENT = ENDPOINT + "/comment/save";
 
 //RESTAURANTS
 export const GET_RESTAURANT_BY_ID = ENDPOINT + "/restaurant/getById";
+
+//PLATES
+export const GET_PLATES_BY_RESTAURANTID = ENDPOINT + "/plate/getPlatesByRestaurant";
