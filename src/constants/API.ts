@@ -27,3 +27,7 @@ export const GET_RESTAURANT_BY_NAME = ENDPOINT + "/restaurant/getRestaurantsByNa
 
 //PLATES
 export const GET_PLATES_BY_RESTAURANTID = ENDPOINT + "/plate/getPlatesByRestaurant";
+
+//API-Places
+export const GET_API_KEY = "AIzaSyD_WL2_rolCu7nOpAbyDtv-uxdh7ZlIv8Q";
+export const GET_API_PLACES_ENDPOINT = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=1000&types=restaurant";

@@ -52,9 +52,9 @@ export class RestaurantProvider {
   	}
 
   	/*
-		Get a Restaurant object with the name passed as parameter
+		Find a Restaurants list with the name passed as parameter
   	*/
-  	getRestaurantByName(name){
+  	findRestaurantsByName(name){
 
   		return new Promise((resolve, reject) => {
 
@@ -66,14 +66,21 @@ export class RestaurantProvider {
 	  				let headers = new Headers();
 
 			  		headers.append('Authorization', token);
-			  		params.set('restaurantName', name);
+			  		params.set('name', name);
 		
 			  		requestOptions.headers = headers;
 	  				requestOptions.params = params;
 
 			  		this.http.get(Constants.GET_RESTAURANT_BY_NAME, requestOptions).subscribe(
 			  			res => {
-			  				resolve(res.json());
+
+			  				let data = res.json();
+			  				
+			  				if(data.length > 0)
+			  					resolve(res.json());
+			  				else
+			  					resolve(null);
+
 			  			},
 			  			(err) => {
 			  				reject(err._body);
@@ -86,19 +93,6 @@ export class RestaurantProvider {
   			);
 
   		});
-
-  	}
-
-  	/*
-		Build Restaurant object from json response
-  	*/
-  	buildRestaurant(data): Restaurant{
-
-  		let restaurant = new Restaurant(data.restaurantId, data.name, data.address, data.phoneNumber,
-				data.registeredOn, data.cityId, data.cityName, data.priceAverage, data.picture,
-				data.description, data.active, data.categories);
-
-  		return restaurant;
 
   	}
 

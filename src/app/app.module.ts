@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { IndexPage } from '../pages/index/index';
 import { LoginPage } from '../pages/login/login';
@@ -32,6 +33,8 @@ import { PlatePictureProvider } from '../providers/plate-picture/plate-picture';
 import { CommentProvider } from '../providers/comment/comment';
 import { RestaurantProvider } from '../providers/restaurant/restaurant';
 import { PlateProvider } from '../providers/plate/plate';
+import { ApiPlacesProvider } from '../providers/api-places/api-places';
+import { GeolocationProvider } from '../providers/geolocation/geolocation';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,7 @@ import { PlateProvider } from '../providers/plate/plate';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Geolocation,
     PictureServiceProvider,
     AuthenticationProvider,
     UserProvider,
@@ -87,7 +91,9 @@ import { PlateProvider } from '../providers/plate/plate';
     PlatePictureProvider,
     CommentProvider,
     RestaurantProvider,
-    PlateProvider
+    PlateProvider,
+    ApiPlacesProvider,
+    GeolocationProvider
   ]
 })
 export class AppModule {}
