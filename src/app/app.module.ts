@@ -33,7 +33,6 @@ import { PlatePictureProvider } from '../providers/plate-picture/plate-picture';
 import { CommentProvider } from '../providers/comment/comment';
 import { RestaurantProvider } from '../providers/restaurant/restaurant';
 import { PlateProvider } from '../providers/plate/plate';
-import { ApiPlacesProvider } from '../providers/api-places/api-places';
 import { GeolocationProvider } from '../providers/geolocation/geolocation';
 
 @NgModule({
@@ -92,7 +91,6 @@ import { GeolocationProvider } from '../providers/geolocation/geolocation';
     CommentProvider,
     RestaurantProvider,
     PlateProvider,
-    ApiPlacesProvider,
     GeolocationProvider
   ]
 })

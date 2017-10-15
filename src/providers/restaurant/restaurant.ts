@@ -54,7 +54,7 @@ export class RestaurantProvider {
   	/*
 		Find a Restaurants list with the name passed as parameter
   	*/
-  	findRestaurantsByName(name){
+  	findRestaurantsByName(name, latitude, longitude){
 
   		return new Promise((resolve, reject) => {
 
@@ -67,6 +67,8 @@ export class RestaurantProvider {
 
 			  		headers.append('Authorization', token);
 			  		params.set('name', name);
+			  		params.set('latitude', latitude);
+			  		params.set('longitude', longitude);
 		
 			  		requestOptions.headers = headers;
 	  				requestOptions.params = params;

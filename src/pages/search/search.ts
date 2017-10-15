@@ -5,7 +5,6 @@ import { Plate } from '../../models/plate';
 import { User } from '../../models/user';
 import { RestaurantProvider } from '../../providers/restaurant/restaurant';
 import { RestaurantPage } from '../restaurant/restaurant';
-import { ApiPlacesProvider } from '../../providers/api-places/api-places';
 import { GeolocationProvider } from '../../providers/geolocation/geolocation';
 
 export const SEGMENT_RESTAURANT = "segment_restaurant";
@@ -23,6 +22,8 @@ export class SearchPage {
 
 	private searchSegment:string;
 	private keySearch:string;
+	private latitude: string;
+	private longitude: string;
 
 
 	//Results lists
@@ -33,7 +34,6 @@ export class SearchPage {
 		public navCtrl: NavController, 
 		public navParams: NavParams,
 		public restaurantProvider: RestaurantProvider,
-		public apiPlacesProvider: ApiPlacesProvider,
 		public geolocationProvider: GeolocationProvider) {
 		
 		//Initialize segment to Restaurants
@@ -49,7 +49,7 @@ export class SearchPage {
 	*/
 	ionViewDidLoad() {
 	    
-		this.searchRestaurants();
+		this.getLocation();
 
 	}
 
@@ -105,20 +105,12 @@ export class SearchPage {
 			return;
 		}
 
-		this.restaurantProvider.findRestaurantsByName(this.keySearch).then(
+		this.restaurantProvider.findRestaurantsByName(this.keySearch, this.latitude, this.longitude).then(
 			
 			(data) => {
 
-				if(data){
+				this.restaurantList = this.buildRestaurantList(data);
 
-					this.restaurantList = this.buildRestaurantList(data);
-
-				} else {
-
-					this.getGEOLocationAndfindRestaurantAPIPlaces();
-
-				}
-				
 			},
 			(err) => {
 
@@ -158,30 +150,37 @@ export class SearchPage {
   	}
 
   	/*
-		Get geolocation and find restaurant in API Places
+		Call to location provider to get coords: latitude, longitude
   	*/
-  	getGEOLocationAndfindRestaurantAPIPlaces(){
+  	getLocation(){
 
   		this.geolocationProvider.getLocation().then(
 
-  			(coord) => {
+  			(data) => {
 
-  				this.getRestaurantFromApiPlaces(coord);
+  				this.updateLocationVar(data);
 
   			},
   			(err) => {
-  				console.log(err);
-  				this.restaurantList.length = 0;
+
+  				console.log("Problem getting location");
+  				this.latitude = null;
+  				this.longitude = null;
+
   			}
 
   		);
 
   	}
 
-  	getRestaurantFromApiPlaces(coord){
+  	/*
+		Update latitude and longitude values
+  	*/
+  	updateLocationVar(coords){
 
-  		let restaurantsApi = this.apiPlacesProvider.findPlaces(coord.latitude, coord.longitude, this.keySearch);
-
+  		this.latitude = coords.latitude;
+  		this.longitude = coords.longitude;
+  	
   	}
 
 }
