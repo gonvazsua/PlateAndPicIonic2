@@ -13,7 +13,7 @@ export class PlateProvider {
   	}
 
   	/*
-		Return promise with a Plate list of the restaurant passed as parameter
+		  Return promise with a Plate list of the restaurant passed as parameter
   	*/
   	getPlatesByRestaurantId(restaurantId){
 
@@ -49,6 +49,45 @@ export class PlateProvider {
   		});
 
   	}
+
+    /*
+      Return promise with a Plate list of the restaurant passed as parameter
+    */
+    findPlatesByName(name, page){
+
+      return new Promise((resolve, reject) => {
+
+        this.storage.get('token').then(
+          (token) => {
+
+            let params: URLSearchParams = new URLSearchParams();
+            let requestOptions = new RequestOptions();
+            let headers = new Headers();
+
+            headers.append('Authorization', token);
+            params.set('name', name);
+            params.set('page', page);
+    
+            requestOptions.headers = headers;
+            requestOptions.params = params;
+
+            this.http.get(Constants.GET_PLATES_BY_NAME, requestOptions).subscribe(
+              res => {
+                resolve(this.buildPlateList(res.json()));
+              },
+              (err) => {
+                reject(err._body);
+              }
+            );
+          },
+          (err) => {
+            reject("Ha ocurrido un problema");
+          }
+        );
+
+      });
+
+    }
 
   	/*
       Build Plate list from response in json

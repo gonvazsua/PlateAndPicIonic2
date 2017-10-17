@@ -11,7 +11,8 @@
 	<ion-list class="no-margin-bottom">
 	    <ion-item>
 	      <ion-thumbnail item-start>
-	        <img src="assets/img/picture.png">
+	        <img *ngIf="user.picture" src="{{user.picture}}">
+          	<img *ngIf="!user.picture" src="assets/img/picture.png">
 	      </ion-thumbnail>
 	      <h2>{{user.firstname}} {{user.lastname}}</h2>
 	      <p>@{{user.username}}</p>

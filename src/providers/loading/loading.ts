@@ -5,21 +5,29 @@ import { LoadingController } from 'ionic-angular';
 @Injectable()
 export class LoadingProvider {
 
-	public loader: any;
+	  public loader: any;
+    private isActive: boolean;
 
   	constructor(public loadingCtrl: LoadingController) {
     
   		this.loader = null;
+      this.isActive = false;
 
   	}
 
   	show(){
 
-  		this.loader = this.loadingCtrl.create({
-  			spinner: "crescent",
-        dismissOnPageChange: true
-  		});
-    	this.loader.present();
+      if(!this.isActive){
+
+        this.isActive = true;
+
+        this.loader = this.loadingCtrl.create({
+          spinner: "crescent",
+          dismissOnPageChange: true
+        });
+        this.loader.present();
+
+      }
 
   	}
 
@@ -27,6 +35,7 @@ export class LoadingProvider {
 
       if(this.loader != null){
         this.loader.dismiss();
+        this.isActive = false;
       }
 
     }

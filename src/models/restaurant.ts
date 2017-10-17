@@ -12,7 +12,11 @@ export class Restaurant {
 		public picture: string,
 		public description: string,
 		public active: boolean,
-		public categories: string){
+		public categories: string,
+		public latitude: string,
+		public longitude: string,
+		public apiPlaceId: string,
+		public rating: string){
 
 	}
 
@@ -25,7 +29,8 @@ export class Restaurant {
 			
 			return new Restaurant(data.restaurantId, data.name, data.address, data.phoneNumber,
 				data.registeredOn, data.cityId, data.cityName, data.priceAverage, data.picture,
-				data.description, data.active, data.categories);
+				data.description, data.active, data.categories, data.latitude, data.longitude,
+				data.apiPlaceId, data.rating);
 		}
 
 	}

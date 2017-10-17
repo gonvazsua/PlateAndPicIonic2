@@ -8,6 +8,7 @@ export const GET_AUTHENTICATED_USER_URL = ENDPOINT + "/user/getAuthenticatedUser
 export const UPDATE_PERSONAL_DATA_URL = ENDPOINT + "/user/updatePersonalData";
 export const UPDATE_PASSWORDS_URL = ENDPOINT + "/user/updatePassword";
 export const GET_USER_BY_ID = ENDPOINT + "/user/getUserById";
+export const FIND_USERS_BY_KEY = ENDPOINT + "/user/findByKey";
 
 //PLATEPICTURES
 export const GET_PLATEPICTURES_BY_USERNAME = ENDPOINT + "/platePicture/getByUsername";
@@ -24,9 +25,11 @@ export const SAVE_COMMENT = ENDPOINT + "/comment/save";
 //RESTAURANTS
 export const GET_RESTAURANT_BY_ID = ENDPOINT + "/restaurant/getById";
 export const GET_RESTAURANT_BY_NAME = ENDPOINT + "/restaurant/getRestaurantsByName";
+export const SAVE_RESTAURANT = ENDPOINT + "/restaurant/save";
 
 //PLATES
 export const GET_PLATES_BY_RESTAURANTID = ENDPOINT + "/plate/getPlatesByRestaurant";
+export const GET_PLATES_BY_NAME = ENDPOINT + "/plate/findPlatesByName";
 
 //API-Places
 export const GET_API_KEY = "AIzaSyD_WL2_rolCu7nOpAbyDtv-uxdh7ZlIv8Q";

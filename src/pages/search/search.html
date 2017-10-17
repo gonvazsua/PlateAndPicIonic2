@@ -32,6 +32,13 @@
 	  </ion-segment>
 	</div>
 
+	<!-- Loading div -->
+	<ion-grid *ngIf="isLoading">
+		<ion-row>
+			<ion-col text-center><ion-spinner name="bubbles"></ion-spinner></ion-col>
+		</ion-row>
+	</ion-grid>
+
 
 	<div [ngSwitch]="searchSegment">
 
@@ -39,7 +46,7 @@
 
 	  	<ion-list *ngSwitchCase="'segment_restaurant'">
 
-	    	<ion-item *ngFor="let restaurant of restaurantList" (click)="goToRestaurant(restaurant.restaurantId)">
+	    	<ion-item *ngFor="let restaurant of restaurantList" (click)="saveAndGoToRestaurant(restaurant.restaurantId, null)">
 	      		<ion-thumbnail item-start>
 	        		<img *ngIf="!restaurant.picture" src="assets/img/place.png">
 	        		<img *ngIf="restaurant.picture" src="{{restaurant.picture}}">
@@ -48,7 +55,7 @@
 	      		<p>{{restaurant.address}}, {{restaurant.cityName}}</p>
 	    	</ion-item>
 
-	    	<ion-card *ngIf="restaurantList.length == 0">
+	    	<ion-card *ngIf="restaurantList.length == 0 && !isLoading">
             	<ion-card-content>
               		No hemos encontrado restaurantes para tu búsqueda
             	</ion-card-content>
@@ -56,17 +63,46 @@
   	  	
   	  	</ion-list>
 
-	  <!-- User results -->
+  	  	<!-- Plates results -->
 
-	  <ion-list *ngSwitchCase="'segment_user'">
-	    	<ion-item>
+  	  	<ion-list *ngSwitchCase="'segment_plate'">
+
+		  	<ion-item *ngFor="let plate of plateList" (click)="saveAndGoToRestaurant(plate.restaurantId, plate.plateId)">
+		    	<ion-avatar item-start>
+		      		<img src="assets/img/dishes.png">
+		    	</ion-avatar>
+		    	<h2>{{plate.plateName}}</h2>
+		    	<p>En {{plate.restaurantName}}</p>
+		  	</ion-item>
+
+	    	<ion-card *ngIf="plateList.length == 0 && !isLoading">
+            	<ion-card-content>
+              		No hemos encontrado platos para tu búsqueda
+            	</ion-card-content>
+          	</ion-card>
+
+		</ion-list>
+
+	  	<!-- User results -->
+
+	  	<ion-list *ngSwitchCase="'segment_user'">
+
+	    	<ion-item *ngFor="let user of userList" (click)="goToProfile(user.userId)">
 	      		<ion-thumbnail item-start>
-	        		<img src="assets/img/picture.png">
+	        		<img *ngIf="user.picture" src="{{user.picture}}">
+          			<img *ngIf="!user.picture" src="assets/img/picture.png">
 	      		</ion-thumbnail>
-	      		<h2>Nuria Castro Albertos</h2>
-	      		<p>@ncasalb</p>
+	      		<h2>{{user.firstname}} {{user.lastname}}</h2>
+	      		<p>@{{user.username}}</p>
 	    	</ion-item>
-  	  </ion-list>	  	  
+
+	    	<ion-card *ngIf="userList.length == 0 && !isLoading">
+            	<ion-card-content>
+              		No hemos encontrado usuarios para tu búsqueda
+            	</ion-card-content>
+          	</ion-card>
+
+  	  	</ion-list>	  	  
 
 
   	</div>

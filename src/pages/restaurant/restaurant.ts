@@ -16,10 +16,12 @@ export class RestaurantPage {
 
 	private restaurant: Restaurant;
 	private restaurantId: number;
+  private plateId: number;
 	private categories: Array<string>;
   private plateList: Array<Object>;
   private platePictureList: Array<PlatePicture>;
   private page: number;
+  private select: string;
 
 	//Segment var
 	private segmentOption: string;
@@ -32,26 +34,41 @@ export class RestaurantPage {
   		public platePictureProvider: PlatePictureProvider,
       public plateProvider: PlateProvider) {
 
-		  this.restaurant = new Restaurant(null,null,null,null,null,null,null,null,null, null, null, null);
+		  this.restaurant = new Restaurant(null,null,null,null,null,null,null,null,null, null, 
+        null, null, null, null, null, null);
 		  this.restaurantId = this.navParams.get("restaurantId");
+      this.plateId = this.navParams.get("plateId");
 		  this.categories = [];
       this.plateList = [];
       this.platePictureList = [];
       this.page = 0;
 		  this.segmentOption = "pictures";
+      this.select = "";
 
   	}
 
   	/*
-		Always loaded on view start
+		  Always loaded on view start:
+      1. Load restaurant
+      2. Load platePictures of the restaurant
+      3. If param plateId exists: filter by plate
+      4. If param plateId does not exist: filter by restaurant;
   	*/
   	ionViewDidLoad() {
     	
   		this.loadRestaurantById();
 
-  		this.loadPlatePicturesByRestaurantId();
-
       this.loadPlatesByRestaurantId();
+
+      if(this.plateId != null && this.plateId > 0){
+
+
+          this.filterPlatePicturesByPlate(this.plateId);
+
+      } else {
+
+           this.loadPlatePicturesByRestaurantId();
+      }
 
   	}
 
@@ -166,6 +183,8 @@ export class RestaurantPage {
       this.platePictureProvider.getPlatePicturesByPlateId(plateId, this.page).then(
 
         (data) => {
+
+          this.select = plateId;
 
           this.appendPlatePictures(data);
 

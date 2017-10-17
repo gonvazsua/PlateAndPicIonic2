@@ -9,8 +9,13 @@ import { Restaurant } from '../../models/restaurant';
 @Injectable()
 export class RestaurantProvider {
 
+	private restaurant: Restaurant;
+
 	constructor(public http: Http, public storage: Storage) {
-    
+    	
+		this.restaurant = new Restaurant(null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null);
+
   	}
 
   	/*
@@ -88,6 +93,39 @@ export class RestaurantProvider {
 			  				reject(err._body);
 			  			}
 			  		);
+	  			},
+	  			(err) => {
+	  				reject("Ha ocurrido un problema");
+	  			}
+  			);
+
+  		});
+
+  	}
+
+  	saveRestaurant(restaurant){
+
+  		return new Promise((resolve, reject) => {
+
+  			this.storage.get('token').then(
+	  			(token) => {
+
+	  				let headers = new Headers();
+		  			headers.append('Content-Type', 'application/json');
+		  			headers.append('Authorization', token);
+
+		  			this.http.post(Constants.SAVE_RESTAURANT, JSON.stringify(restaurant), {headers: headers})
+		  				.subscribe(
+		  					res => {
+
+		  						resolve(res.json());
+
+		  					},
+		  					(err) => {
+		              			reject(err._body);
+		  					}
+		  				);
+
 	  			},
 	  			(err) => {
 	  				reject("Ha ocurrido un problema");

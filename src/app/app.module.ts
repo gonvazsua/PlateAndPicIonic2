@@ -34,6 +34,7 @@ import { CommentProvider } from '../providers/comment/comment';
 import { RestaurantProvider } from '../providers/restaurant/restaurant';
 import { PlateProvider } from '../providers/plate/plate';
 import { GeolocationProvider } from '../providers/geolocation/geolocation';
+import { ApiPlacesProvider } from '../providers/api-places/api-places';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { GeolocationProvider } from '../providers/geolocation/geolocation';
     CommentProvider,
     RestaurantProvider,
     PlateProvider,
-    GeolocationProvider
+    GeolocationProvider,
+    ApiPlacesProvider
   ]
 })
 export class AppModule {}
