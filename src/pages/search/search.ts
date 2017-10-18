@@ -105,6 +105,8 @@ export class SearchPage {
 	/*
 		Search restaurant by keySearch
 		If keysearch is empty, return a empty list
+
+		It has been decided that latitude and longitude are not used in this page
 	*/
 	searchRestaurants(){
 
@@ -116,7 +118,7 @@ export class SearchPage {
 		this.blockedSearch = true;
 		this.isLoading = true;
 
-		this.restaurantProvider.findRestaurantsByName(this.keySearch, this.latitude, this.longitude).then(
+		this.restaurantProvider.findRestaurantsByName(this.keySearch, null, null).then(
 			
 			(data) => {
 
