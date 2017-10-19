@@ -9,28 +9,39 @@ import { PictureServiceProvider } from '../../providers/picture-service/picture-
 })
 export class ChangeProfilePicturePage {
 
-	base64Image: any;
+	  private base64Image: string;
 
   	constructor(
   		private pictureService: PictureServiceProvider,
   		public navCtrl: NavController, 
-  		public navParams: NavParams) 
-  	{
-  		this.pictureService.base64Image.subscribe(
-  			(image) => {
-  				this.base64Image = image;
-  			}
-  		);
-  	}
+  		public navParams: NavParams) {
 
-	ionViewDidLoad() {
-	    console.log('ionViewDidLoad ChangeProfilePicturePage');
-	}
-
-  	openActionSheet(){
-
-  		this.pictureService.getPicture();
+  		this.base64Image = "";
 
   	}
+
+	  ionViewDidLoad() {
+	      console.log('ionViewDidLoad ChangeProfilePicturePage');
+        this.openActionSheetAndGetImage();
+	  }
+
+  	openActionSheetAndGetImage(){
+
+  		this.pictureService.getImageByActionSheet().then(
+
+        (image) => {
+          this.setImage(image);
+        },
+        (err) => {
+
+        }
+
+      );
+
+  	}
+
+    setImage(image){
+      this.base64Image = image;
+    }
 
 }

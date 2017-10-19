@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 
 import { IndexPage } from '../pages/index/index';
 import { LoginPage } from '../pages/login/login';
@@ -83,6 +84,7 @@ import { ApiPlacesProvider } from '../providers/api-places/api-places';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
+    Camera,
     PictureServiceProvider,
     AuthenticationProvider,
     UserProvider,

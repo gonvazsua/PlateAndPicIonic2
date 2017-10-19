@@ -1,4 +1,4 @@
-export const ENDPOINT = "http://localhost:8080";
+export const ENDPOINT = "http://192.168.1.133:8080";
 
 //LOGIN
 export const LOGIN_URL = ENDPOINT + "/auth";

@@ -6,82 +6,75 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class PictureServiceProvider {
 
-	public base64Image: any;
-	public getImage: any;
-
   	constructor(
   		private camera: Camera,
   		public actionSheetCtrl: ActionSheetController) {
-    	
-    	this.base64Image = null;
-    	this.getImage = Observable.create(observer => {
-        	this.getImage = observer;
-    	});
-  	}
-
-  	getPicture() {
-
-  		return this.showActionSheet();
 
   	}
 
-  	showActionSheet() {
+  	getImageByActionSheet() {
 
-	    let actionSheet = this.actionSheetCtrl.create({
-	      title: 'Selecciona',
-	      buttons: [
-	        {
-	          text: 'Abrir cámara',
-	          handler: () => {
-	            return this.takePicture(this.camera.PictureSourceType.CAMERA);
-	          }
-	        },{
-	          text: 'De la galería',
-	          handler: () => {
-	            return this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-	          }
-	        },{
-	          text: 'Cancelar',
-	          role: 'cancel',
-	          handler: () => {
-	            console.log('Cancel clicked');
-	          }
-	        }
-	      ]
-	    });
+  		return new Promise((resolve, reject) => {
 
-	    actionSheet.present();
+  			let actionSheet = this.actionSheetCtrl.create({
+			    title: 'Selecciona',
+			    buttons: [
+			        {
+			          text: 'Abrir cámara',
+			          handler: () => {
+			            resolve(this.takePicture(this.camera.PictureSourceType.CAMERA));
+			          }
+			        },{
+			          text: 'De la galería',
+			          handler: () => {
+			            resolve(this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY));
+			          }
+			        },{
+			          text: 'Cancelar',
+			          role: 'cancel',
+			          handler: () => {
+			            reject(null);
+			          }
+			        }
+			    ]
+			});
+
+			actionSheet.present();
+
+  		});
 
   	}
 
   	takePicture(sourceType){
 
-  		var image = "";
+  		return new Promise((resolve, reject) => {
 
-  		var options: CameraOptions = {
-		  	quality: 100,
-    		sourceType: sourceType,
-		  	destinationType: this.camera.DestinationType.DATA_URL,
-		  	encodingType: this.camera.EncodingType.JPEG,
-		  	mediaType: this.camera.MediaType.PICTURE
-		}
+  			var image = "";
 
-  		this.camera.getPicture(options).then(
-
-  			(imageData) => {
-				image = 'data:image/jpeg;base64,' + imageData;
-				this.base64Image.next(image);
-			},
-			(err) => {
-				image = "";
-				this.base64Image.next(image);
+	  		var options: CameraOptions = {
+			  	quality: 100,
+	    		sourceType: sourceType,
+			  	destinationType: this.camera.DestinationType.DATA_URL,
+			  	encodingType: this.camera.EncodingType.JPEG,
+			  	mediaType: this.camera.MediaType.PICTURE
 			}
-		);
 
-  	}
+	  		this.camera.getPicture(options).then(
 
-  	getBase64Image(){
-  		return this.base64Image;
+	  			(imageData) => {
+					image = 'data:image/jpeg;base64,' + imageData;
+					//this.base64Image.next(image);
+					resolve(image);
+				},
+				(err) => {
+					image = null;
+					reject(image);
+					//this.base64Image.next(image);
+				}
+			);
+
+  		});
+
   	}
 
 }
