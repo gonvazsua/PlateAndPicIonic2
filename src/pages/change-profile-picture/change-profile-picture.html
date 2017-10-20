@@ -9,20 +9,26 @@
 
 <ion-content padding>
 
-	<ion-card>
-  		<img src="assets/img/picture.png"/>
-  		
-  		<ion-card-content>
-  		</ion-card-content>
-
-	</ion-card>
-
 	<ion-grid>
+
 		<ion-row>
-			<ion-col>
-				<button ion-button full (click)="openActionSheet()">Cambiar foto</button>
+			<ion-col text-center>
+				<img *ngIf="!base64Image" src="assets/img/picture.png"/>
+  				<img *ngIf="base64Image" src="{{base64Image}}" class="rounded-image"/>
 			</ion-col>
 		</ion-row>
+
+		<ion-row>
+			<ion-col>
+
+				<button *ngIf="!pendingToSave" ion-button full (click)="openActionSheetAndGetImage()">Cambiar foto</button>
+				
+				<button color="secondary" *ngIf="pendingToSave" ion-button full (click)="saveImage()">Guardar</button>
+				<button color="danger" *ngIf="pendingToSave" ion-button full (click)="discardImage()">Descartar</button>
+
+			</ion-col>
+		</ion-row>
+		
 	</ion-grid>
 
 </ion-content>

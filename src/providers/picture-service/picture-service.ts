@@ -3,6 +3,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
+
 @Injectable()
 export class PictureServiceProvider {
 
@@ -11,6 +12,8 @@ export class PictureServiceProvider {
   		public actionSheetCtrl: ActionSheetController) {
 
   	}
+
+
 
   	getImageByActionSheet() {
 
@@ -63,13 +66,13 @@ export class PictureServiceProvider {
 
 	  			(imageData) => {
 					image = 'data:image/jpeg;base64,' + imageData;
-					//this.base64Image.next(image);
+					console.log("Image taken");
 					resolve(image);
 				},
 				(err) => {
 					image = null;
+					console.log("Image error: " + err.json());
 					reject(image);
-					//this.base64Image.next(image);
 				}
 			);
 

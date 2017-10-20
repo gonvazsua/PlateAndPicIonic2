@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 import { IndexPage } from '../pages/index/index';
 import { LoginPage } from '../pages/login/login';
@@ -36,6 +37,7 @@ import { RestaurantProvider } from '../providers/restaurant/restaurant';
 import { PlateProvider } from '../providers/plate/plate';
 import { GeolocationProvider } from '../providers/geolocation/geolocation';
 import { ApiPlacesProvider } from '../providers/api-places/api-places';
+import { UploadImageProvider } from '../providers/upload-image/upload-image';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,7 @@ import { ApiPlacesProvider } from '../providers/api-places/api-places';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
     Camera,
+    FileTransfer,
     PictureServiceProvider,
     AuthenticationProvider,
     UserProvider,
@@ -95,7 +98,8 @@ import { ApiPlacesProvider } from '../providers/api-places/api-places';
     RestaurantProvider,
     PlateProvider,
     GeolocationProvider,
-    ApiPlacesProvider
+    ApiPlacesProvider,
+    UploadImageProvider
   ]
 })
 export class AppModule {}

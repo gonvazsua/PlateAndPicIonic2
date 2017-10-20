@@ -9,6 +9,7 @@ export const UPDATE_PERSONAL_DATA_URL = ENDPOINT + "/user/updatePersonalData";
 export const UPDATE_PASSWORDS_URL = ENDPOINT + "/user/updatePassword";
 export const GET_USER_BY_ID = ENDPOINT + "/user/getUserById";
 export const FIND_USERS_BY_KEY = ENDPOINT + "/user/findByKey";
+export const UPDATE_PROFILE_PICTURE = ENDPOINT + "/user/updateProfilePicture";
 
 //PLATEPICTURES
 export const GET_PLATEPICTURES_BY_USERNAME = ENDPOINT + "/platePicture/getByUsername";
@@ -17,6 +18,7 @@ export const GET_PLATEPICTURES_BY_RESTAURANT_ID = ENDPOINT + "/platePicture/getB
 export const GET_PLATEPICTURES_BY_PLATE_ID = ENDPOINT + "/platePicture/getByPlate";
 export const PLATEPICTURE_LIKE = ENDPOINT + "/platePicture/like";
 export const PLATEPICTURE_UNLIKE = ENDPOINT + "/platePicture/unlike";
+export const UPLOAD_PLATE_PICTURE = ENDPOINT + "/platePicture/save";
 
 //COMMENTS
 export const GET_COMMENTS_BY_PLATEPICTUREID = ENDPOINT + "/comment/getByPlatePicture";
