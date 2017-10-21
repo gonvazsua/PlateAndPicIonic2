@@ -38,6 +38,8 @@ import { PlateProvider } from '../providers/plate/plate';
 import { GeolocationProvider } from '../providers/geolocation/geolocation';
 import { ApiPlacesProvider } from '../providers/api-places/api-places';
 import { UploadImageProvider } from '../providers/upload-image/upload-image';
+import { CategoryProvider } from '../providers/categories/categories';
+import { CityProvider } from '../providers/city/city';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import { UploadImageProvider } from '../providers/upload-image/upload-image';
     PlateProvider,
     GeolocationProvider,
     ApiPlacesProvider,
-    UploadImageProvider
+    UploadImageProvider,
+    CategoryProvider,
+    CityProvider
   ]
 })
 export class AppModule {}

@@ -28,6 +28,7 @@ export const SAVE_COMMENT = ENDPOINT + "/comment/save";
 export const GET_RESTAURANT_BY_ID = ENDPOINT + "/restaurant/getById";
 export const GET_RESTAURANT_BY_NAME = ENDPOINT + "/restaurant/getRestaurantsByName";
 export const SAVE_RESTAURANT = ENDPOINT + "/restaurant/save";
+export const FIND_RESTAURANTS_BY_CITY_AND_CATEGORY = ENDPOINT + "/restaurant/findByCityAndCategory";
 
 //PLATES
 export const GET_PLATES_BY_RESTAURANTID = ENDPOINT + "/plate/getPlatesByRestaurant";
@@ -36,3 +37,9 @@ export const GET_PLATES_BY_NAME = ENDPOINT + "/plate/findPlatesByName";
 //API-Places
 export const GET_API_KEY = "AIzaSyD_WL2_rolCu7nOpAbyDtv-uxdh7ZlIv8Q";
 export const GET_API_PLACES_ENDPOINT = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=1000&types=restaurant";
+
+//CATEGORY
+export const GET_CATEGORIES_BY_NAME = ENDPOINT + "/category/findByName";
+
+//CITY
+export const GET_CITIES_BY_NAME = ENDPOINT + "/city/findByName";

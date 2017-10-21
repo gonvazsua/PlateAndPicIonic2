@@ -42,7 +42,9 @@
 
 	<div [ngSwitch]="searchSegment">
 
+		<!-- ******************  -->
 		<!-- Restaurants results -->
+		<!-- ******************  -->
 
 	  	<ion-list *ngSwitchCase="'segment_restaurant'">
 
@@ -63,7 +65,9 @@
   	  	
   	  	</ion-list>
 
-  	  	<!-- Plates results -->
+  	  	<!-- ****************** -->
+  	  	<!-- Plates results     -->
+  	  	<!-- ****************** -->
 
   	  	<ion-list *ngSwitchCase="'segment_plate'">
 
@@ -83,7 +87,9 @@
 
 		</ion-list>
 
-	  	<!-- User results -->
+		<!-- ****************** -->
+	  	<!-- User segment       -->
+	  	<!-- ****************** -->
 
 	  	<ion-list *ngSwitchCase="'segment_user'">
 
@@ -102,7 +108,90 @@
             	</ion-card-content>
           	</ion-card>
 
-  	  	</ion-list>	  	  
+  	  	</ion-list>
+
+  	  	<!-- ****************** -->
+  	  	<!-- Categories Segment -->
+  	  	<!-- ****************** -->
+
+	  	<ion-list *ngSwitchCase="'segment_category'">
+
+	  		<ion-grid *ngIf="selectedCategory.categoryName != '' || selectedCity.cityName != ''">
+				<ion-row> 
+					<ion-col>
+
+						<button ion-button outline icon-left (click)="removeTag('category')" *ngIf="selectedCategory.categoryName != ''">
+							<ion-icon name="close"></ion-icon>
+							{{selectedCategory.categoryName}}
+						</button>
+
+						<button ion-button outline icon-left (click)="removeTag('city')" *ngIf="selectedCity.cityName != ''">
+							<ion-icon name="close"></ion-icon>
+							{{selectedCity.cityName}}
+						</button>
+
+					</ion-col>
+
+				</ion-row>
+			</ion-grid>
+
+			<ion-list *ngIf="restaurantsCategoriesList.length == 0">
+
+				<ion-item>
+					<ion-label floating>¿Dónde?</ion-label>
+					<ion-input type="text" [(ngModel)]="keySearchCity" (keyup)="searchCities()" maxlength="20"></ion-input>
+				</ion-item>
+
+				<ion-item>
+					<ion-label floating>¿Qué tipo de comida?</ion-label>
+					<ion-input type="text" [(ngModel)]="keySearchCategory" (keyup)="searchCategories()" maxlength="10"></ion-input>
+				</ion-item>
+
+			</ion-list>
+
+			<!-- Categories -->
+
+			<ion-grid *ngIf="categoriesList.length > 0">
+				<ion-row>
+
+					<ion-col>
+
+						<button *ngFor="let category of categoriesList; let i = index" ion-button outline (click)="addCategoryToTags(i)">
+							{{category.categoryName}}
+						</button>
+					</ion-col>
+					
+				</ion-row>
+			</ion-grid>
+
+			<!-- Cities -->
+
+			<ion-list *ngIf="cityList.length > 0">
+			  	<ion-item *ngFor="let city of cityList; let i = index" (click)="addCityToTags(i)">
+			    	<ion-icon name="pin" item-start></ion-icon>{{city.cityName}}
+			  	</ion-item>
+			</ion-list>
+
+			<!-- Restaurants -->
+
+			<ion-item *ngFor="let restaurant of restaurantsCategoriesList" (click)="saveAndGoToRestaurant(restaurant.restaurantId, null)">
+	      		<ion-thumbnail item-start>
+	        		<img *ngIf="!restaurant.picture" src="assets/img/place.png">
+	        		<img *ngIf="restaurant.picture" src="{{restaurant.picture}}">
+	      		</ion-thumbnail>
+	      		<h2>{{restaurant.name}}</h2>
+	      		<p>{{restaurant.address}}, {{restaurant.cityName}}</p>
+	    	</ion-item>
+			
+	    	<ion-card *ngIf="cityList.length == 0 && categoriesList.length == 0 && 
+	    		restaurantsCategoriesList.length == 0 && !isLoading">
+            	<ion-card-content>
+              		No hemos encontrado resultados para tu búsqueda
+            	</ion-card-content>
+          	</ion-card>
+
+  	  	</ion-list>
+
 
 
   	</div>
