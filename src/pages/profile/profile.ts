@@ -5,6 +5,7 @@ import { User } from '../../models/user';
 import { UserProvider } from '../../providers/user/user';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { AlertProvider } from '../../providers/alert/alert';
+import { PlatePicturePage } from '../../pages/plate-picture/plate-picture';
 
 export const PAGE_SIZE = 20;
 
@@ -148,6 +149,15 @@ export class ProfilePage {
       if(data.length == PAGE_SIZE){
         this.page = this.page + 1;
       }
+
+    }
+
+    /*
+      Go to details page of the selected Plate picture
+    */
+    goToPlatePictureDetails(platePictureId){
+
+      this.navCtrl.push(PlatePicturePage, {platePictureId: platePictureId});
 
     }
 }

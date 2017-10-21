@@ -94,10 +94,10 @@
 	  	<ion-list *ngSwitchCase="'segment_user'">
 
 	    	<ion-item *ngFor="let user of userList" (click)="goToProfile(user.userId)">
-	      		<ion-thumbnail item-start>
+	      		<ion-avatar item-start>
 	        		<img *ngIf="user.picture" src="{{user.picture}}">
           			<img *ngIf="!user.picture" src="assets/img/picture.png">
-	      		</ion-thumbnail>
+	      		</ion-avatar>
 	      		<h2>{{user.firstname}} {{user.lastname}}</h2>
 	      		<p>@{{user.username}}</p>
 	    	</ion-item>

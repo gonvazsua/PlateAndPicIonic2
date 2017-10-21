@@ -10,10 +10,10 @@
 
 	<ion-list class="no-margin-bottom">
 	    <ion-item>
-	      <ion-thumbnail item-start>
+	      <ion-avatar item-start>
 	        <img *ngIf="user.picture" src="{{user.picture}}">
           	<img *ngIf="!user.picture" src="assets/img/picture.png">
-	      </ion-thumbnail>
+	      </ion-avatar>
 	      <h2>{{user.firstname}} {{user.lastname}}</h2>
 	      <p>@{{user.username}}</p>
 	      <p class="profile-description">{{user.target}}</p>
@@ -25,7 +25,8 @@
 		<ion-grid>
 			<ion-row>
 
-				<ion-col *ngFor="let platePicture of userPlatePictures" col-6 no-padding>
+				<ion-col *ngFor="let platePicture of userPlatePictures" col-6 no-padding 
+					(click) = "goToPlatePictureDetails(platePicture.platePictureId)">
 					<img id="{{platePicture.platePictureId}}" src="{{platePicture.picture}}">
 				</ion-col>
 

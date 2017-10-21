@@ -19,6 +19,7 @@ export const GET_PLATEPICTURES_BY_PLATE_ID = ENDPOINT + "/platePicture/getByPlat
 export const PLATEPICTURE_LIKE = ENDPOINT + "/platePicture/like";
 export const PLATEPICTURE_UNLIKE = ENDPOINT + "/platePicture/unlike";
 export const UPLOAD_PLATE_PICTURE = ENDPOINT + "/platePicture/save";
+export const GET_PLATEPICTURE_BY_ID = ENDPOINT + "/platePicture/getById";
 
 //COMMENTS
 export const GET_COMMENTS_BY_PLATEPICTUREID = ENDPOINT + "/comment/getByPlatePicture";
