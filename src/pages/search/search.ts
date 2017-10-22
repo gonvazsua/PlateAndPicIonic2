@@ -137,8 +137,10 @@ export class SearchPage {
 
 				this.blockedSearch = false;
 
-				if(data != null)
-					this.restaurantList = this.buildRestaurantList(data);
+				if(data != null){
+					let restaurant = new Restaurant();
+					this.restaurantList = restaurant.buildFromList(data);
+				}
 
 				this.isLoading = false;
 
@@ -175,8 +177,10 @@ export class SearchPage {
 
 				this.blockedSearch = false;
 
-				if(data != null)
-					this.plateList = this.buildPlateList(data);
+				if(data != null){
+					let plate: Plate = new Plate();
+					this.plateList = plate.buildFromList(data);
+				}
 
 				this.isLoading = false;
 
@@ -213,8 +217,10 @@ export class SearchPage {
 
 				this.blockedSearch = false;
 
-				if(data != null)
-					this.userList = this.buildUserList(data);
+				if(data != null){
+					let user = new User();
+					this.userList = user.buildFromList(data);
+				}
 
 				this.isLoading = false;
 
@@ -247,142 +253,18 @@ export class SearchPage {
 
 	}
 
-	/*
-		Build Restaurant object from json response
-  	*/
-  	buildRestaurantList(list): Array<Restaurant>{
-
-  		let restaurantList: Array<Restaurant>;
-  		let restaurant: Restaurant;
-
-  		restaurantList = [];
-
-  		for(let item of list){
-
-  			restaurant = this.buildRestaurant(item);
-  			restaurantList.push(restaurant);
-
-  		}
-
-  		return restaurantList;
-
-  	}
-
-  	/*
-		Build Restaurant object from json response
-  	*/
-  	buildRestaurant(item): Restaurant {
-
-  		let restaurant: Restaurant;
-
-  		restaurant = new Restaurant(item.restaurantId, item.name, item.address, item.phoneNumber,
-			item.registeredOn, item.cityId, item.cityName, item.priceAverage, item.picture,
-			item.description, item.active, item.categories, item.latitude, item.longitude,
-			item.apiPlaceId, item.rating);
-
-  		return restaurant;
-
-  	}
-
-  	/*
-		Build Plate objects list from json response
-  	*/
-  	buildPlateList(list): Array<Plate>{
-
-  		let plateList: Array<Plate>;
-  		let plate: Plate;
-
-  		plateList = [];
-
-  		for(let item of list){
-
-  			plate = this.buildPlate(item);
-  			plateList.push(plate);
-
-  		}
-
-  		return plateList;
-
-  	}
-
-  	/*
-		Build Plate object from json response
-  	*/
-  	buildUser(item): User {
-
-  		let user: User;
-
-  		user = new User(item.userId, item.firstname, item.lastname, item.username, item.email,
-  			item.picture, item.target, item.restaurantId);
-
-  		return user;
-
-  	}
-
-  	/*
-		Build User objects list from json response
-  	*/
-  	buildUserList(list): Array<User>{
-
-  		let userList: Array<User>;
-  		let user: User;
-
-  		userList = [];
-
-  		for(let item of list){
-
-  			user = this.buildUser(item);
-  			userList.push(user);
-
-  		}
-
-  		return userList;
-
-  	}
-
-  	/*
-		Build Plate object from json response
-  	*/
-  	buildPlate(item): Plate {
-
-  		let plate: Plate;
-
-  		plate = new Plate(item.plateId, item.plateName, item.restaurantId, item.restaurantName,
-  			item.plateType, item.plateActive);
-
-  		return plate;
-
-  	}
-
-  	/*
-		Get restaurant by id from restaurant list
-  	*/
-  	getRestaurantFromList(restaurantId){
-
-  		let restaurant: Restaurant;
-
-  		for(let r of this.restaurantList){
-  			if(r.restaurantId == restaurantId){
-  				restaurant = r;
-  				break;
-  			}
-  		}
-
-  		return restaurant;
-
-  	}
-
   	/*
 		Save restaurant and redirect to Restaurant page
   	*/
-  	saveRestaurantAndRedirect(restaurantId){
+  	saveRestaurantAndRedirect(index){
 
-  		let restaurant: Restaurant = this.getRestaurantFromList(restaurantId);
+  		let restaurant: Restaurant = this.restaurantList[index];
   		
   		this.restaurantProvider.saveRestaurant(restaurant).then(
   			
   			(data) => {
-  				let restaurant: Restaurant = this.buildRestaurant(data);
+  				let restaurant: Restaurant = new Restaurant();
+  				restaurant.build(data);
   				this.navCtrl.push(RestaurantPage, {restaurantId: restaurant.restaurantId});
   			},
   			(err) => {
@@ -411,8 +293,10 @@ export class SearchPage {
 
 				this.blockedSearch = false;
 
-				if(data != null)
-					this.restaurantsCategoriesList = this.buildRestaurantList(data);
+				if(data != null){
+					let restaurant = new Restaurant();
+					this.restaurantsCategoriesList = restaurant.buildFromList(data);
+				}
 
 				this.isLoading = false;
 
@@ -433,11 +317,11 @@ export class SearchPage {
   	/*
 		Save restaurant if not exists, and redirect to Restaurant Page
   	*/
-  	saveAndGoToRestaurant(restaurantId, plateId){
+  	saveAndGoToRestaurant(restaurantId, plateId, index){
 
   		if(restaurantId == null || restaurantId == 0){
 
-  			this.saveRestaurantAndRedirect(restaurantId);
+  			this.saveRestaurantAndRedirect(index);
 
   		} else {
 

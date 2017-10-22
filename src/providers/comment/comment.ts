@@ -12,7 +12,7 @@ export class CommentProvider {
 
   	constructor(public http: Http, public storage: Storage) {
 
-  		this.newComment = new Comment(null,null,null,null,null,null, null);
+  		this.newComment = new Comment();
     
   	}
 
@@ -39,7 +39,8 @@ export class CommentProvider {
 
 			  		this.http.get(Constants.GET_COMMENTS_BY_PLATEPICTUREID, requestOptions).subscribe(
 			  			res => {
-			  				resolve(this.buildCommentList(res.json()));
+			  				let list: Array<Comment> = this.newComment.buildFromList(res.json());
+			  				resolve(list);
 			  			},
 			  			(err) => {
 			  				reject(err._body);
@@ -73,7 +74,7 @@ export class CommentProvider {
 		  				.subscribe(
 		  					res => {
 
-		  						this.newComment = this.newComment.build(res.json());
+		  						this.newComment.build(res.json());
 		  						resolve(this.newComment);
 
 		  					},
@@ -89,28 +90,6 @@ export class CommentProvider {
   			);
 
   		});
-
-  	}
-
-  	/*
-		Build a Comment object list from response body
-  	*/
-  	buildCommentList(jsonList): Array<Comment>{
-
-  		let commentList: Array<Comment>;
-  		let comment: Comment;
-
-  		commentList = [];
-
-  		for(let c of jsonList){
-
-  			comment = new Comment(c.commentId, c.comment, c.userId, c.username, c.userImage, 
-  				c.platePictureId, c.registeredOn);
-  			commentList.push(c);
-
-  		}
-
-  		return commentList;
 
   	}
 

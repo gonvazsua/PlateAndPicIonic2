@@ -13,7 +13,7 @@ export class UserProvider {
 
   	constructor(public http: Http, public storage: Storage) {
 
-    	this.user = new User(null, null, null, null, null, null, null, null);
+    	this.user = new User();
     	this.token = "";
 
   	}
@@ -33,7 +33,8 @@ export class UserProvider {
 
 			  		this.http.get(Constants.GET_AUTHENTICATED_USER_URL, {headers: headers}).subscribe(
 			  			res => {
-			  				resolve(this.user.build(res.json()));
+			  				this.user.build(res.json());
+			  				resolve(this.user);
 			  			},
 			  			(err) => {
 			  				reject(err._body);
@@ -146,7 +147,8 @@ export class UserProvider {
 
 			  		this.http.get(Constants.GET_USER_BY_ID, requestOptions).subscribe(
 			  			res => {
-			  				resolve(this.user.build(res.json()));
+			  				this.user.build(res.json());
+			  				resolve(this.user);
 			  			},
 			  			(err) => {
 			  				reject(err._body);

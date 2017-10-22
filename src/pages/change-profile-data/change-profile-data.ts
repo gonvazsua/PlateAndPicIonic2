@@ -26,7 +26,7 @@ export class ChangeProfileDataPage {
       public alert: AlertProvider) {
 
       this.showFormErrors = false;
-      this.user = new User(null, null, null, null, null, null, null, null);
+      this.user = new User();
 
   		this.profileDataForm = this.formBuilder.group({
   			username: ['', [Validators.required, Validators.maxLength(50)]],
@@ -44,7 +44,7 @@ export class ChangeProfileDataPage {
 
       this.userProvider.getLoggedUser().then(
         (data) => {
-          this.user = this.user.build(data);
+          this.user.build(data);
           this.loading.hide();
         },
         (err) => {

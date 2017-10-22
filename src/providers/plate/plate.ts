@@ -34,7 +34,8 @@ export class PlateProvider {
 
 			  		this.http.get(Constants.GET_PLATES_BY_RESTAURANTID, requestOptions).subscribe(
 			  			res => {
-			  				resolve(this.buildPlateList(res.json()));
+			  				let plate: Plate = new Plate();
+                resolve(plate.buildFromList(res.json()));
 			  			},
 			  			(err) => {
 			  				reject(err._body);
@@ -73,7 +74,8 @@ export class PlateProvider {
 
             this.http.get(Constants.GET_PLATES_BY_NAME, requestOptions).subscribe(
               res => {
-                resolve(this.buildPlateList(res.json()));
+                let plate: Plate = new Plate();
+                resolve(plate.buildFromList(res.json()));
               },
               (err) => {
                 reject(err._body);
@@ -86,31 +88,6 @@ export class PlateProvider {
         );
 
       });
-
-    }
-
-  	/*
-      Build Plate list from response in json
-    */
-    buildPlateList(jsonList): Array<Plate>{
-
-      let plateList: Array<Plate>;
-      let plate: Plate;
-
-      plateList = [];
-      
-      for(let p of jsonList){
-
-      	plate = new Plate(
-      		p.plateId, p.plateName, p.restaurantId, p.restaurantName,
-      		p.plateType, p.plateActive
-      	);
-
-      	plateList.push(plate);
-
-      }
-
-      return plateList;
 
     }
 

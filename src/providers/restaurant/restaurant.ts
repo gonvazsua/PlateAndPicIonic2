@@ -9,12 +9,7 @@ import { Restaurant } from '../../models/restaurant';
 @Injectable()
 export class RestaurantProvider {
 
-	private restaurant: Restaurant;
-
 	constructor(public http: Http, public storage: Storage) {
-    	
-		this.restaurant = new Restaurant(null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null);
 
   	}
 

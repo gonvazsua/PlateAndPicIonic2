@@ -22,8 +22,7 @@ export class PlatePicturePage {
 		public platePictureProvider: PlatePictureProvider,
 		public alert: AlertProvider) {
 		
-		this.platePicture = new PlatePicture(null, null, null, null, null, null,
-			null, null, null, null, null, null, null, null, null, null, null);
+		this.platePicture = new PlatePicture();
 
 	}
 
@@ -46,7 +45,7 @@ export class PlatePicturePage {
 
 			(data) => {
 
-				this.buildPlatePicture(data);
+				this.platePicture.build(data);
 		      	this.loading.hide();
 
 			},
@@ -55,21 +54,6 @@ export class PlatePicturePage {
 			}
 
 		);
-
-	}
-
-	/*
-		Build the PlatePicture object
-	*/
-	buildPlatePicture(data){
-
-		this.platePicture = new PlatePicture(
-      		data.platePictureId, data.title, data.userId, data.username,
-			data.userImage, data.restaurantId, data.restaurantName, data.cityId,
-			data.cityName, data.plateId, data.plateName, data.plateActive, data.picture,
-			data.likesNumber, data.commentsNumber, data.likeToUser, 
-			data.registeredOn
-      	);
 
 	}
 

@@ -36,7 +36,7 @@ export class CommentPage {
 
 		this.commentsList = [];
 		this.page = 0;
-		this.newComment = new Comment(null,null,null,null,null,null, null);
+		this.newComment = new Comment();
 
 		this.showFormErrors = false;
 

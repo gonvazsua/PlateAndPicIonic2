@@ -34,8 +34,7 @@ export class RestaurantPage {
   		public platePictureProvider: PlatePictureProvider,
       public plateProvider: PlateProvider) {
 
-		  this.restaurant = new Restaurant(null,null,null,null,null,null,null,null,null, null, 
-        null, null, null, null, null, null);
+		  this.restaurant = new Restaurant();
 		  this.restaurantId = this.navParams.get("restaurantId");
       this.plateId = this.navParams.get("plateId");
 		  this.categories = [];
@@ -80,7 +79,7 @@ export class RestaurantPage {
   		this.restaurantProvider.getRestaurantById(this.restaurantId).then(
   			(restaurant) => {
   				
-          this.restaurant = this.restaurant.build(restaurant);
+          this.restaurant.build(restaurant);
           this.loadCategoriesList();
 
   			},

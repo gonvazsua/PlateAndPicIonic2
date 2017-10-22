@@ -30,7 +30,7 @@ export class ProfilePage {
 
 		this.userPlatePictures = []; 
 		this.page = 0; 
-		this.user = new User(null, null, null, null, null, null, null, null);
+		this.user = new User();
 
 	}
 
@@ -72,7 +72,7 @@ export class ProfilePage {
   		this.userProvider.getUserById(userId).then(
   			(data) => {
 
-  				this.user = this.user.build(data);
+  				this.user.build(data);
   				this.loadPlatePictures();
 
   			},
@@ -92,7 +92,7 @@ export class ProfilePage {
   		this.userProvider.getLoggedUser().then(
   			(data) => {
 
-  				this.user = this.user.build(data);
+  				this.user.build(data);
   				this.loadPlatePictures();
 
   			},

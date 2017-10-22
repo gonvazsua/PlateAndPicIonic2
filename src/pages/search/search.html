@@ -48,7 +48,7 @@
 
 	  	<ion-list *ngSwitchCase="'segment_restaurant'">
 
-	    	<ion-item *ngFor="let restaurant of restaurantList" (click)="saveAndGoToRestaurant(restaurant.restaurantId, null)">
+	    	<ion-item *ngFor="let restaurant of restaurantList; let i = index" (click)="saveAndGoToRestaurant(restaurant.restaurantId, null, i)">
 	      		<ion-thumbnail item-start>
 	        		<img *ngIf="!restaurant.picture" src="assets/img/place.png">
 	        		<img *ngIf="restaurant.picture" src="{{restaurant.picture}}">
@@ -71,7 +71,7 @@
 
   	  	<ion-list *ngSwitchCase="'segment_plate'">
 
-		  	<ion-item *ngFor="let plate of plateList" (click)="saveAndGoToRestaurant(plate.restaurantId, plate.plateId)">
+		  	<ion-item *ngFor="let plate of plateList" (click)="saveAndGoToRestaurant(plate.restaurantId, plate.plateId, null)">
 		    	<ion-avatar item-start>
 		      		<img src="assets/img/dishes.png">
 		    	</ion-avatar>

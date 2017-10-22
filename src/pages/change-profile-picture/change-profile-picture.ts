@@ -26,7 +26,7 @@ export class ChangeProfilePicturePage {
       public uploadImageProvider: UploadImageProvider) {
 
   		this.base64Image = null;
-      this.user = new User(null, null, null, null, null, null, null, null);
+      this.user = new User();
       this.pendingToSave = false;
 
   	}
@@ -51,7 +51,7 @@ export class ChangeProfilePicturePage {
 
           (data) => {
 
-              this.user = this.user.build(data);
+              this.user.build(data);
 
               this.setImage(this.user.picture);
 
