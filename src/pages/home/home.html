@@ -21,32 +21,40 @@
 
       <img src="{{platePicture.picture}}">
 
-      <ion-card-content class="card-content-home">
+      <ion-card-content>
         <p text-capitalize><ion-icon name="md-restaurant"></ion-icon> {{platePicture.plateName}}</p>
-        <p *ngIf="platePicture.title"><ion-icon name="clipboard-outline"></ion-icon> {{platePicture.title}}</p>
+          <p *ngIf="platePicture.title"><ion-icon name="clipboard-outline"></ion-icon> {{platePicture.title}}</p>
       </ion-card-content>
 
-      <ion-row no-padding>
-        <ion-col col-6></ion-col>
-        <ion-col col-3>
-          
-          <button *ngIf="platePicture.likeToUser" (tap)="likeUnlike(platePicture.platePictureId)" ion-button color="danger" clear icon-left>
-            <ion-icon name="heart"></ion-icon> {{platePicture.likesNumber}}
-          </button>
-          <button *ngIf="!platePicture.likeToUser" (tap)="likeUnlike(platePicture.platePictureId)" ion-button color="dark" clear icon-left>
-            <ion-icon name="heart-outline"></ion-icon> {{platePicture.likesNumber}}
-          </button>
-
+      <ion-row>
+        <ion-col>
+            <button *ngIf="platePicture.likeToUser" (tap)="likeUnlike(platePicture.platePictureId)" ion-button icon-left clear small>
+              <ion-icon name="heart"></ion-icon>
+              <div>{{platePicture.likesNumber}} Likes</div>
+            </button>
+            <button *ngIf="!platePicture.likeToUser" (tap)="likeUnlike(platePicture.platePictureId)" ion-button icon-left clear small>
+              <ion-icon name="heart-outline"></ion-icon>
+              <div>{{platePicture.likesNumber}} Likes</div>
+            </button>
         </ion-col>
-        <ion-col col-3>
-          <button *ngIf="platePicture.commentsNumber > 0" ion-button color="dark" (click)="goToComments(platePicture.platePictureId)" clear icon-left>
-            <ion-icon name="chatbubbles"></ion-icon> {{platePicture.commentsNumber}}
-          </button>
-          <button *ngIf="platePicture.commentsNumber == null || platePicture.commentsNumber == null" ion-button color="dark" (click)="goToComments(platePicture.platePictureId)" clear icon-left>
-            <ion-icon name="chatbubbles-outline"></ion-icon> {{platePicture.commentsNumber}}
-          </button>
+        <ion-col>
+            <button *ngIf="platePicture.commentsNumber > 0" (click)="goToComments(platePicture.platePictureId)" ion-button icon-left clear small>
+              <ion-icon name="chatbubbles"></ion-icon>
+              <div>{{platePicture.commentsNumber}} Comentarios</div>
+            </button>
+            <button *ngIf="platePicture.commentsNumber == null" (click)="goToComments(platePicture.platePictureId)" (click)="goToComments(platePicture.platePictureId)" ion-button icon-left clear small>
+              <ion-icon name="chatbubbles"></ion-icon>
+              <div>{{platePicture.commentsNumber}} Comentarios</div>
+            </button>
+        </ion-col>
+        <ion-col center text-center>
+            <ion-note>
+              
+            </ion-note>
         </ion-col>
       </ion-row>
+
+      
 
     </ion-card>
 
