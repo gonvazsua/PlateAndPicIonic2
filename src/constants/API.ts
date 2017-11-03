@@ -1,4 +1,4 @@
-export const ENDPOINT = "http://192.168.1.133:8080";
+export const ENDPOINT = "http://192.168.1.130:8080";
 
 //LOGIN
 export const LOGIN_URL = ENDPOINT + "/auth";
@@ -34,6 +34,7 @@ export const FIND_RESTAURANTS_BY_CITY_AND_CATEGORY = ENDPOINT + "/restaurant/fin
 //PLATES
 export const GET_PLATES_BY_RESTAURANTID = ENDPOINT + "/plate/getPlatesByRestaurant";
 export const GET_PLATES_BY_NAME = ENDPOINT + "/plate/findPlatesByName";
+export const SAVE_PLATE = ENDPOINT + "/plate/save";
 
 //API-Places
 export const GET_API_KEY = "AIzaSyD_WL2_rolCu7nOpAbyDtv-uxdh7ZlIv8Q";

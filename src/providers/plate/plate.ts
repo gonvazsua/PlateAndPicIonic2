@@ -91,4 +91,39 @@ export class PlateProvider {
 
     }
 
+    savePlate(plate){
+
+      return new Promise((resolve, reject) => {
+
+        this.storage.get('token').then(
+          (token) => {
+
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('Authorization', token);
+
+            this.http.post(Constants.SAVE_PLATE, JSON.stringify(plate), {headers: headers})
+              .subscribe(
+                res => {
+
+                  plate = new Plate();
+                  plate.build(res.json());
+                  resolve(plate);
+
+                },
+                (err) => {
+                        reject(err._body);
+                }
+              );
+
+          },
+          (err) => {
+            reject("Ha ocurrido un problema");
+          }
+        );
+
+      });
+
+    }
+
 }

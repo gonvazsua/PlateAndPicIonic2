@@ -21,6 +21,8 @@ import { UploadPicturePage } from '../pages/upload-picture/upload-picture';
 import { CommentPage } from '../pages/comment/comment';
 import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { PlatePicturePage } from '../pages/plate-picture/plate-picture';
+import { SearchRestaurantPage } from '../pages/search-restaurant/search-restaurant';
+import { SearchPlatePage } from '../pages/search-plate/search-plate';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -58,6 +60,8 @@ import { CityProvider } from '../providers/city/city';
     CommentPage,
     RestaurantPage,
     PlatePicturePage,
+    SearchRestaurantPage,
+    SearchPlatePage,
     HomePage,
     TabsPage
   ],
@@ -83,6 +87,8 @@ import { CityProvider } from '../providers/city/city';
     CommentPage,
     RestaurantPage,
     PlatePicturePage,
+    SearchRestaurantPage,
+    SearchPlatePage,
     HomePage,
     TabsPage
   ],

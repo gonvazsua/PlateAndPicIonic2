@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>Restaurantes</ion-title>
+    
+    <ion-buttons end>
+      <button ion-button (click)="selectAndGoToUpload()">
+        Seleccionar
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+
+	<ion-searchbar [(ngModel)]="keySearch" (ionInput)="searchRestaurant()" class="searchbar-pap" placeholder="Introduce un restaurante"></ion-searchbar>
+
+  <!-- Loading div -->
+  <ion-grid *ngIf="blockedSearch">
+    <ion-row>
+      <ion-col text-center><ion-spinner name="bubbles"></ion-spinner></ion-col>
+    </ion-row>
+  </ion-grid>
+
+	<ion-list>
+
+    	<ion-item *ngFor="let restaurant of restaurantList; let i = index" (click)="selectRestaurant(i, $event)" class="result">
+      		<ion-thumbnail item-start>
+        		<img *ngIf="!restaurant.picture" src="assets/img/place.png">
+        		<img *ngIf="restaurant.picture" src="{{restaurant.picture}}">
+      		</ion-thumbnail>
+      		<h2>{{restaurant.name}}</h2>
+      		<p>{{restaurant.address}}, {{restaurant.cityName}}</p>
+    	</ion-item>
+
+    	<ion-card *ngIf="restaurantList.length == 0 && !blockedSearch">
+        	<ion-card-content>
+          		No hemos encontrado restaurantes para tu búsqueda
+        	</ion-card-content>
+      	</ion-card>
+	  	
+  	</ion-list>	
+
+</ion-content>

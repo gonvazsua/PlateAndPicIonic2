@@ -30,10 +30,12 @@ export class HomePage {
 
     /*
       Always executed when view loads:
+        1. Mark tab as selected
         1. Load last platePictures
     */
     ionViewDidLoad() {
       
+      this.navCtrl.parent.select(0);
       this.getLastPlatePictures();
 
     }

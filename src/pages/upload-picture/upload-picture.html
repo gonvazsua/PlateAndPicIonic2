@@ -1,18 +1,68 @@
-<!--
-  Generated template for the UploadPicturePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>UploadPicture</ion-title>
+    <ion-title>Compartir</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content class="card-background-page">
 
-<ion-content padding>
+	  <ion-card *ngIf="picture">
+    	<img src="{{picture}}" (press)="takePicture()"/>
+    	<div class="card-subtitle">Mantén pulsado para renovarla</div>
+  	</ion-card>
+
+  	<ion-card *ngIf="picture">
+
+      <!-- Select restaurant -->  		
+  		<ion-list>
+
+  			<button ion-item *ngIf="!selectedRestaurant" (click)="searchRestaurant()">
+		      <ion-icon name="pin" item-start></ion-icon> 1. Selecciona un restaurante
+		    </button>
+		    <button ion-item *ngIf="selectedRestaurant" (click)="searchRestaurant()">
+		      <ion-icon name="pin" item-start></ion-icon> En {{selectedRestaurant.name}}, {{selectedRestaurant.cityName}}
+		    </button>
+
+  		</ion-list>
+
+  	</ion-card>
+
+    <!-- Select plate -->
+    <ion-card *ngIf="selectedRestaurant">
+      <ion-list>
+
+        <button ion-item *ngIf="!selectedPlate" (click)="searchPlates()">
+          <ion-icon name="pizza" item-start></ion-icon> 2. Selecciona un plato
+        </button>
+        <button ion-item *ngIf="selectedPlate" (click)="searchPlates()">
+          <ion-icon name="pizza" item-start></ion-icon> {{selectedPlate.plateName}}
+        </button>
+
+      </ion-list>
+    </ion-card>
+
+    <!-- Select title -->
+    <ion-card *ngIf="selectedPlate">
+      <ion-list>
+
+        <ion-item>
+          <ion-label floating>¿Qué título ponemos?</ion-label>
+          <ion-textarea [(ngModel)]="title" maxlength="200"></ion-textarea>
+        </ion-item>
+
+      </ion-list>
+    </ion-card>
+
+    <ion-grid *ngIf="picture && selectedRestaurant && selectedPlate">
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left color="secondary" block (click)="buildAndSavePlatePicture()">
+            <ion-icon name="paper-plane"></ion-icon> ¡He terminado!
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
 </ion-content>

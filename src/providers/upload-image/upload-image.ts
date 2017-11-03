@@ -20,11 +20,16 @@ export class UploadImageProvider {
   	/*
 		Upload the Plate Picture calling to the correspondant API endpoint
   	*/
-  	uploadPlatePictureImage(base64Image){
+  	uploadPlatePicture(platePicture){
 
   		let endpoint = Constants.UPLOAD_PLATE_PICTURE;
 
-  		return this.upload(base64Image, endpoint);
+  		let params = {
+  			'image': platePicture.picture,
+  			'platePicture': platePicture
+  		};
+
+  		return this.upload(platePicture.picture, endpoint, params);
 
   	}
 
@@ -36,15 +41,16 @@ export class UploadImageProvider {
   		let endpoint = Constants.UPDATE_PROFILE_PICTURE;
 
   		console.log(endpoint);
+  		let params = {'image': base64Image};
 
-  		return this.upload(base64Image, endpoint);
+  		return this.upload(base64Image, endpoint, params);
 
   	}
 
   	/*
 		Upload a base64Image to the endpoint passed as parameter
   	*/
-  	upload(base64Image, endpoint){
+  	upload(base64Image, endpoint, params){
 
   		return new Promise((resolve, reject) => {
 
@@ -58,9 +64,10 @@ export class UploadImageProvider {
 		     			fileName: 'image',
 		     			mimeType: "image/jpg",
 		     			chunkedMode: false,
-		     			headers: {'Authorization': token},
-		     			params: {'image': base64Image}
+		     			headers: {'Authorization': token}
 		  			}
+
+		  			options.params = params;
 
 		  			console.log("Calling to endpoint to upload image");
 

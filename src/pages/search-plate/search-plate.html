@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>Selecciona un plato</ion-title>
+    
+    <ion-buttons end>
+      <button ion-button (click)="selectAndGoToUpload()" *ngIf="!isNewPlate">
+        Seleccionar
+      </button>
+      <button ion-button (click)="selectAndGoToUpload()" *ngIf="isNewPlate">
+        Guardar
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content no-padding>
+
+  	<!-- Loading div -->
+  	<ion-grid *ngIf="blockedSearch">
+    	<ion-row>
+      		<ion-col text-center><ion-spinner name="bubbles"></ion-spinner></ion-col>
+    	</ion-row>
+  	</ion-grid>
+
+	<ion-list *ngIf="plateList && plateList.length > 0">
+
+	  	<ion-item *ngFor="let plate of plateList; let i = index" (click)="selectPlate(i, $event)" class="result">
+	    	<ion-avatar item-start>
+	      		<img src="assets/img/dishes.png">
+	    	</ion-avatar>
+	    	<h2>{{plate.plateName}}</h2>
+	    	<p>En {{plate.restaurantName}}</p>
+	  	</ion-item>
+
+	</ion-list>
+
+	<ion-list>
+
+		<ion-item>
+			<ion-label>Mi plato no está en la lista</ion-label>
+			<ion-toggle [(ngModel)]="isNewPlate" checked="false"></ion-toggle>
+		</ion-item>
+
+  		<ion-item *ngIf="isNewPlate">
+    		<ion-label floating>Nombre del plato</ion-label>
+    		<ion-input type="text" [(ngModel)]="newPlateName" maxlength="50"></ion-input>
+  		</ion-item>
+
+	</ion-list>
+
+</ion-content>

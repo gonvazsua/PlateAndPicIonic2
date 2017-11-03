@@ -59,19 +59,21 @@ export class PictureServiceProvider {
 	    		sourceType: sourceType,
 			  	destinationType: this.camera.DestinationType.DATA_URL,
 			  	encodingType: this.camera.EncodingType.JPEG,
-			  	mediaType: this.camera.MediaType.PICTURE
+			  	mediaType: this.camera.MediaType.PICTURE,
+			  	targetWidth: 500,
+			  	targetHeight: 500,
+			  	correctOrientation: true
 			}
 
 	  		this.camera.getPicture(options).then(
 
 	  			(imageData) => {
 					image = 'data:image/jpeg;base64,' + imageData;
-					console.log("Image taken");
 					resolve(image);
 				},
 				(err) => {
 					image = null;
-					console.log("Image error: " + err.json());
+					console.log("Image error: " + err);
 					reject(image);
 				}
 			);
