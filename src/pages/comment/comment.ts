@@ -60,6 +60,8 @@ export class CommentPage {
   	*/
   	loadComments(){
 
+      this.loading.show();
+
   		this.commentProvider.getCommentsByPlatePictureId(this.platePictureId, this.page).then(
 
   			(data) => {
@@ -70,8 +72,11 @@ export class CommentPage {
 
 				  this.incrementPage(data);
 
+          this.loading.hide();
+
   			},
   			(err) => {
+          this.loading.hide();
   				this.page = 0;
 		        console.log("Error in loadComments" + err);
 		        this.alert.show("¡Ups!",err);

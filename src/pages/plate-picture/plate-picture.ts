@@ -50,6 +50,7 @@ export class PlatePicturePage {
 
 			},
 			(err) => {
+				this.loading.hide();
 				this.alert.show('¡Ups!', err);
 			}
 

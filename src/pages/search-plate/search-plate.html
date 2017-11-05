@@ -40,7 +40,7 @@
 
 	<ion-list>
 
-		<ion-item>
+		<ion-item *ngIf="plateList.length > 0">
 			<ion-label>Mi plato no está en la lista</ion-label>
 			<ion-toggle [(ngModel)]="isNewPlate" checked="false"></ion-toggle>
 		</ion-item>

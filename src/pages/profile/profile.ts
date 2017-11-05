@@ -69,14 +69,18 @@ export class ProfilePage {
   	*/
   	loadUserByIdAndPlatePictures(userId){
 
+      this.loading.show();
+
   		this.userProvider.getUserById(userId).then(
   			(data) => {
 
   				this.user.build(data);
   				this.loadPlatePictures();
+          this.loading.hide();
 
   			},
   			(err) => {
+          this.loading.hide();
   				this.page = 0;
           console.log("Error in loadUserByIdAndPlatePictures" + err);
   				this.alert.show("¡Ups!",err);
@@ -89,14 +93,18 @@ export class ProfilePage {
   	*/
   	loadLoggedUserAndPlatePictures(){
 
+      this.loading.show();
+
   		this.userProvider.getLoggedUser().then(
   			(data) => {
 
   				this.user.build(data);
   				this.loadPlatePictures();
+          this.loading.hide();
 
   			},
   			(err) => {
+          this.loading.hide();
           this.page = 0;
   				console.log("Error in loadLoggedUserAndPlatePictures" + err);
   				this.alert.show("¡Ups!",err);
@@ -110,15 +118,19 @@ export class ProfilePage {
   	*/
   	loadPlatePictures(){
 
+      this.loading.show();
+
       this.platePictureProvider.getPlatePicturesByUser(this.user, this.page).then(
 
         (data) => {
           
           this.addPlatePictures(data);
           this.incrementPage(data);
+          this.loading.hide();
 
         },
         (err) => {
+          this.loading.hide();
           this.page = 0;
           console.log("Error in loadLoggedUserAndPlatePictures" + err);
           this.alert.show("¡Ups!",err);

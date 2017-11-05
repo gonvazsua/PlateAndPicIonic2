@@ -6,6 +6,7 @@ import { AlertProvider } from '../../providers/alert/alert';
 import { PlatePictureProvider } from '../../providers/plate-picture/plate-picture';
 import { PlatePicture } from '../../models/plate-picture';
 import { PlateProvider } from '../../providers/plate/plate';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 @IonicPage()
 @Component({
@@ -32,7 +33,8 @@ export class RestaurantPage {
   		public restaurantProvider: RestaurantProvider,
   		public alert: AlertProvider,
   		public platePictureProvider: PlatePictureProvider,
-      public plateProvider: PlateProvider) {
+      public plateProvider: PlateProvider,
+      public loading: LoadingProvider) {
 
 		  this.restaurant = new Restaurant();
 		  this.restaurantId = this.navParams.get("restaurantId");
@@ -76,14 +78,18 @@ export class RestaurantPage {
   	*/
   	loadRestaurantById(){
 
+      this.loading.show();
+
   		this.restaurantProvider.getRestaurantById(this.restaurantId).then(
   			(restaurant) => {
   				
           this.restaurant.build(restaurant);
           this.loadCategoriesList();
+          this.loading.hide();
 
   			},
   			(err) => {
+          this.loading.hide();
   				this.alert.show("¡Ups!", err);
   			}
   		);
@@ -95,6 +101,8 @@ export class RestaurantPage {
   	*/
   	loadPlatePicturesByRestaurantId(){
 
+      this.loading.show();
+
       this.platePictureProvider.getPlatePicturesByRestaurantId(this.restaurantId, this.page).then(
 
         (data) => {
@@ -103,9 +111,12 @@ export class RestaurantPage {
 
           this.incrementPage(data);
 
+          this.loading.hide();
+
         },
         (err) => {
 
+          this.loading.hide();
           console.log("Error in loadPlatePicturesByRestaurantId" + err);
           this.alert.show("¡Ups!",err);
 
@@ -143,13 +154,17 @@ export class RestaurantPage {
     */
     loadPlatesByRestaurantId(){
 
+      this.loading.show();
+
       this.plateProvider.getPlatesByRestaurantId(this.restaurantId).then(
 
         (data) => {
           this.appendPlates(data);
+          this.loading.hide();
         },
         (err) => {
-
+          console.log("There was an error loading plates by restaurant");
+          this.loading.hide();
         }
 
       );
@@ -179,6 +194,8 @@ export class RestaurantPage {
         return this.loadPlatePicturesByRestaurantId();
       }
 
+      this.loading.show();
+
       this.platePictureProvider.getPlatePicturesByPlateId(plateId, this.page).then(
 
         (data) => {
@@ -189,9 +206,12 @@ export class RestaurantPage {
 
           this.incrementPage(data);
 
+          this.loading.hide();
+
         },
         (err) => {
 
+          this.loading.hide();
           console.log("Error in filterPlatePicturesByPlate" + err);
           this.alert.show("¡Ups!",err);
 

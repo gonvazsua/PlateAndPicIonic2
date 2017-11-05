@@ -45,6 +45,8 @@ export class HomePage {
     */
     getLastPlatePictures(){
 
+      this.loading.show();
+
       this.platePictureProvider.getLastPlatePictures(this.page).then(
 
         (data) => {
@@ -53,8 +55,11 @@ export class HomePage {
 
           this.incrementPage(data);
 
+          this.loading.hide();
+
         },
         (err) => {
+          this.loading.hide();
           this.page = 0;
           console.log("Error in getLastPlatePictures" + err);
           this.alert.show("¡Ups!",err);
