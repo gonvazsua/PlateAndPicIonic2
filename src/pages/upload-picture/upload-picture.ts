@@ -11,6 +11,7 @@ import { Plate } from '../../models/plate';
 import { SearchPlatePage } from '../../pages/search-plate/search-plate';
 import { UploadImageProvider } from '../../providers/upload-image/upload-image';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Upload process:
@@ -112,8 +113,10 @@ export class UploadPicturePage {
       Redirect to Home Page
     */
     redirectToHome(){
-      this.navCtrl.setRoot(HomePage);
-      this.navCtrl.popToRoot();
+      //this.navCtrl.setRoot(HomePage);
+      //this.navCtrl.popToRoot();
+      this.navCtrl.push(TabsPage);
+      this.navCtrl.setRoot(TabsPage);
     }
 
     /*

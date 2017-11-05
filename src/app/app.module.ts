@@ -14,6 +14,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { SettingsPage } from '../pages/settings/settings';
 import { ChangePasswordPage } from '../pages/change-password/change-password';
 import { ChangeProfileDataPage } from '../pages/change-profile-data/change-profile-data';
+import { ChangeRestaurantDataPage } from '../pages/change-restaurant-data/change-restaurant-data';
 import { ChangeProfilePicturePage } from '../pages/change-profile-picture/change-profile-picture';
 import { ProfilePage } from '../pages/profile/profile';
 import { SearchPage } from '../pages/search/search';
@@ -54,6 +55,7 @@ import { CityProvider } from '../providers/city/city';
     ChangePasswordPage,
     ChangeProfileDataPage,
     ChangeProfilePicturePage,
+    ChangeRestaurantDataPage,
     ProfilePage,
     SearchPage,
     UploadPicturePage,
@@ -81,6 +83,7 @@ import { CityProvider } from '../providers/city/city';
     ChangePasswordPage,
     ChangeProfileDataPage,
     ChangeProfilePicturePage,
+    ChangeRestaurantDataPage,
     ProfilePage,
     SearchPage,
     UploadPicturePage,
