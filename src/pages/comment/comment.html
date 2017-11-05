@@ -18,8 +18,7 @@
 	        		<img *ngIf="comment.userImage" src="{{comment.userImage}}">
 	        		<img *ngIf="!comment.userImage" src="assets/img/picture.png">
 	      		</ion-avatar>
-	      		<h2>@{{comment.username}}</h2>
-	      		<h4><i>{{comment.registeredOn}}</i></h4>
+	      		<h2>@{{comment.username}}, <i class="font">el {{comment.registeredOn}}</i></h2>
 	      		<p>{{comment.comment}}</p>
 	    	</ion-item>
 
