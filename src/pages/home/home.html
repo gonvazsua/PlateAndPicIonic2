@@ -6,6 +6,10 @@
 
 <ion-content no-padding>
 
+  <ion-refresher (ionRefresh)="refreshByScrollEvent($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
     <ion-card *ngFor="let platePicture of lastPlatePictures">
 
       <ion-item>
@@ -54,8 +58,10 @@
         </ion-col>
       </ion-row>
 
-      
-
     </ion-card>
+
+    <ion-infinite-scroll (ionInfinite)="getMoreResults($event)">
+     <ion-infinite-scroll-content></ion-infinite-scroll-content>
+   </ion-infinite-scroll>
 
 </ion-content>

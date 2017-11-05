@@ -86,7 +86,7 @@ export class HomePage {
     */
     incrementPage(data){
 
-      if(data.length == this.platePictureProvider.getRowLimit()){
+      if(data.length <= this.platePictureProvider.getRowLimit()){
         this.page = this.page + 1;
       }
 
@@ -189,6 +189,28 @@ export class HomePage {
         }
 
       }
+
+    }
+
+    /*
+      This function is called when the view is refreshed with the scroll down event
+    */
+    refreshByScrollEvent(refresher){
+
+      this.page = 0;
+      this.lastPlatePictures.length = 0;
+      this.getLastPlatePictures();
+      refresher.complete();
+
+    }
+
+    /*
+      Executed when the scroll is at the end of the page
+    */
+    getMoreResults(infiniteScroll){
+
+      this.getLastPlatePictures();
+      infiniteScroll.complete();
 
     }
 
