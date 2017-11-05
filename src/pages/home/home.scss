@@ -8,4 +8,34 @@ page-home {
 		color: #488aff !important;
 	}
 
+	ion-card {
+	    position: relative;
+	}
+
+	.background-dark {
+	    position: absolute;
+	    background-color: rgba(0, 0, 0, 0.5);
+	    bottom: 0%;
+	    height: 20%;
+	    width: 100%;
+	    padding-left: 3%;
+	}
+
+	.card-title {
+		top: 40%;
+		position:absolute;
+	    font-size: 2.0em;
+	    width: 100%;
+	    font-weight: bold;
+	    color: #fff;
+	}
+
+	.card-subtitle {
+	    font-size: 1.0em;
+	    position: absolute;
+	    top: 15%;
+	    width: 100%;
+	    color: #fff;
+	}
+
 }

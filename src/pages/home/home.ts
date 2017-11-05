@@ -7,6 +7,7 @@ import { LoadingProvider } from '../../providers/loading/loading';
 import { AlertProvider } from '../../providers/alert/alert';
 import { PlatePictureProvider } from '../../providers/plate-picture/plate-picture';
 import { PlatePicture } from '../../models/plate-picture';
+import { PlatePicturePage } from '../../pages/plate-picture/plate-picture';
 
 @Component({
   selector: 'page-home',
@@ -211,6 +212,15 @@ export class HomePage {
 
       this.getLastPlatePictures();
       infiniteScroll.complete();
+
+    }
+
+    /*
+      Go to details page of the selected Plate picture
+    */
+    goToPlatePictureDetails(platePictureId){
+
+      this.navCtrl.push(PlatePicturePage, {platePictureId: platePictureId});
 
     }
 
