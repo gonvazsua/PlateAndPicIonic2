@@ -44,6 +44,7 @@ import { ApiPlacesProvider } from '../providers/api-places/api-places';
 import { UploadImageProvider } from '../providers/upload-image/upload-image';
 import { CategoryProvider } from '../providers/categories/categories';
 import { CityProvider } from '../providers/city/city';
+import { FollowsProvider } from '../providers/follows/follows';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { CityProvider } from '../providers/city/city';
     ApiPlacesProvider,
     UploadImageProvider,
     CategoryProvider,
-    CityProvider
+    CityProvider,
+    FollowsProvider
   ]
 })
 export class AppModule {}

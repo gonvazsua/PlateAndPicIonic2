@@ -11,8 +11,13 @@ export const GET_USER_BY_ID = ENDPOINT + "/user/getUserById";
 export const FIND_USERS_BY_KEY = ENDPOINT + "/user/findByKey";
 export const UPDATE_PROFILE_PICTURE = ENDPOINT + "/user/updateProfilePicture";
 
+//FOLLOW
+export const GET_FOLLOWERS_BY_USER_ID = ENDPOINT + "/user/followersData";
+export const FOLLOW_TO_USER_ID = ENDPOINT + "/user/followToUser";
+export const UNFOLLOW_TO_USER_ID = ENDPOINT + "/user/unfollowToUser";
+
 //PLATEPICTURES
-export const GET_PLATEPICTURES_BY_USERNAME = ENDPOINT + "/platePicture/getByUsername";
+export const GET_PLATEPICTURES_BY_USERID = ENDPOINT + "/platePicture/getByUserId";
 export const GET_LAST_PLATEPICTURES = ENDPOINT + "/platePicture/lastPlatePictures";
 export const GET_PLATEPICTURES_BY_RESTAURANT_ID = ENDPOINT + "/platePicture/getByRestaurant";
 export const GET_PLATEPICTURES_BY_PLATE_ID = ENDPOINT + "/platePicture/getByPlate";

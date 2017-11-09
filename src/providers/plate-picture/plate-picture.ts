@@ -33,13 +33,13 @@ export class PlatePictureProvider {
 	  				let headers = new Headers();
 
 			  		headers.append('Authorization', token);
-			  		params.set('username', user.username);
+			  		params.set('userId', user.userId);
 			  		params.set('page', page);
 		
 			  		requestOptions.headers = headers;
 	  				requestOptions.params = params;
 
-			  		this.http.get(Constants.GET_PLATEPICTURES_BY_USERNAME, requestOptions).subscribe(
+			  		this.http.get(Constants.GET_PLATEPICTURES_BY_USERID, requestOptions).subscribe(
 			  			res => {
 			  				let pp: PlatePicture = new PlatePicture();
 			  				resolve(pp.buildFromList(res.json()));

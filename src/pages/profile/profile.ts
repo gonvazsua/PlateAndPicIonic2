@@ -6,6 +6,8 @@ import { UserProvider } from '../../providers/user/user';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { AlertProvider } from '../../providers/alert/alert';
 import { PlatePicturePage } from '../../pages/plate-picture/plate-picture';
+import { Follows } from '../../models/follows';
+import { FollowsProvider } from '../../providers/follows/follows';
 
 export const PAGE_SIZE = 20;
 
@@ -19,6 +21,8 @@ export class ProfilePage {
 	private userPlatePictures: Array<Object>;
 	private page: number;
 	private user: User;
+  private followersInformation: Follows;
+  private loadingAdditionalInfo: boolean;
 
 	constructor(
 	  	public navCtrl: NavController, 
@@ -26,11 +30,14 @@ export class ProfilePage {
 	  	public platePictureProvider: PlatePictureProvider,
 	  	public userProvider: UserProvider,
       public loading: LoadingProvider,
-      public alert: AlertProvider) {
+      public alert: AlertProvider,
+      public followsProvider: FollowsProvider) {
 
 		this.userPlatePictures = []; 
 		this.page = 0; 
 		this.user = new User();
+    this.followersInformation = null;
+    this.loadingAdditionalInfo = false;
 
 	}
 
@@ -61,6 +68,8 @@ export class ProfilePage {
   			this.loadLoggedUserAndPlatePictures();
 
   		}
+
+      this.loadFollwersAndData(userId);
 
   	}
 
@@ -172,4 +181,74 @@ export class ProfilePage {
       this.navCtrl.push(PlatePicturePage, {platePictureId: platePictureId});
 
     }
+
+    /*
+      Load the followers, publications and following data
+    */
+    loadFollwersAndData(userId){
+
+      this.loadingAdditionalInfo = true;
+
+      this.followsProvider.loadByUserId(userId).then(
+
+        (data) => {
+
+          this.followersInformation = new Follows();
+          this.followersInformation.build(data);
+          this.followersInformation.updateTransformationNumber();
+          this.loadingAdditionalInfo = false;
+
+        },
+        (err) => {
+
+          console.log("Error loading Followers and data: " + err);
+          this.loadingAdditionalInfo = false;
+          this.followersInformation = new Follows();
+
+        }
+
+      );
+
+    }
+
+    /*
+      Follow to the user from the followersInformation object
+    */
+    follow(){
+
+      this.followsProvider.follow(this.followersInformation).then(
+
+        (data) => {
+          this.followersInformation.isFollowing = true;
+          this.followersInformation.followersNumber++;
+          this.followersInformation.updateTransformationNumber();
+        },
+        (err) => {
+          console.log("Error following to user: " + err);
+        }
+
+      );
+
+    }
+
+    /*
+      Follow to the user from the followersInformation object
+    */
+    unfollow(){
+
+      this.followsProvider.unfollow(this.followersInformation).then(
+
+        (data) => {
+          this.followersInformation.isFollowing = false;
+          this.followersInformation.followersNumber--;
+          this.followersInformation.updateTransformationNumber();
+        },
+        (err) => {
+          console.log("Error unfollowing to user: " + err);
+        }
+
+      );
+
+    }
+
 }

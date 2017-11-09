@@ -25,6 +25,7 @@ export class LoadingProvider {
           spinner: "crescent",
           dismissOnPageChange: true
         });
+
         this.loader.present();
 
       }
@@ -33,9 +34,11 @@ export class LoadingProvider {
 
     hide(){
 
-      if(this.loader != null){
+      if(this.loader && this.isActive == true){
+
         this.loader.dismiss();
         this.isActive = false;
+      
       }
 
     }

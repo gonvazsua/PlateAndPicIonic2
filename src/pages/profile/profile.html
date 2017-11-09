@@ -8,6 +8,7 @@
 
 <ion-content>
 
+	<!-- Personal information -->
 	<ion-list class="no-margin-bottom">
 	    <ion-item>
 	      <ion-avatar item-start>
@@ -18,12 +19,52 @@
 	      <p>@{{user.username}}</p>
 	      <p class="profile-description">{{user.target}}</p>
 	    </ion-item>
-  </ion-list>
+  	</ion-list>
 
+  	<!-- Follows information -->
+  	<ion-grid>
+  		
+  		<ion-row *ngIf="followersInformation">
+  			
+  			<ion-col text-center>Seguidores</ion-col>
+
+  			<ion-col text-center>Publicaciones</ion-col>
+
+			<ion-col text-center *ngIf="!followersInformation.isLoggedUser">Siguiendo</ion-col>
+
+		</ion-row>
+		<ion-row *ngIf="followersInformation">			
+
+			<ion-col text-center>
+				<ion-badge item-end [ngClass]="{'margin-top': (!followersInformation.isLoggedUser)}">{{followersInformation.transformedFollowersNumber}}</ion-badge>
+			</ion-col>
+
+			<ion-col text-center>
+				<ion-badge item-end [ngClass]="{'margin-top': (!followersInformation.isLoggedUser)}">{{followersInformation.transformedPlatePicturesNumber}}</ion-badge>
+			</ion-col>
+
+			<ion-col text-center *ngIf="!followersInformation.isLoggedUser">
+				<button ion-button small outline color="success" *ngIf="followersInformation.isFollowing" (tap)="unfollow()">
+				  SIGUIENDO
+				</button>
+				<button ion-button small color="primary" *ngIf="!followersInformation.isFollowing" (tap)="follow()">
+				  SEGUIR
+				</button>
+			</ion-col>
+
+  		</ion-row>
+
+  		<ion-row *ngIf="loadingAdditionalInfo">
+  			<ion-col text-center><ion-spinner name="bubbles"></ion-spinner></ion-col>
+  		</ion-row>
+
+  	</ion-grid>
+
+  	<!-- Last platePictures -->
 	<div>
 		
 		<ion-grid>
-			<ion-row>
+			<ion-row *ngIf="userPlatePictures && userPlatePictures.length > 0">
 
 				<ion-col *ngFor="let platePicture of userPlatePictures" col-6 no-padding 
 					(click) = "goToPlatePictureDetails(platePicture.platePictureId)">
@@ -31,6 +72,15 @@
 				</ion-col>
 
 			</ion-row>
+
+			<ion-row *ngIf="userPlatePictures == null || userPlatePictures.length == 0">
+				<ion-card>
+	            	<ion-card-content>
+	              		Todavía no se ha compartido ninguna foto
+	            	</ion-card-content>
+	          	</ion-card>
+			</ion-row>
+
 		</ion-grid>
 
 	</div>
