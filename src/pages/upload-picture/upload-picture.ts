@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PlatePicture } from '../../models/plate-picture';
 import { AlertProvider } from '../../providers/alert/alert';
 import { PictureServiceProvider } from '../../providers/picture-service/picture-service';
-import { HomePage } from '../home/home';
 import { SearchRestaurantPage } from '../../pages/search-restaurant/search-restaurant';
 import { ModalController } from 'ionic-angular';
 import { Restaurant } from '../../models/restaurant';
@@ -11,7 +10,6 @@ import { Plate } from '../../models/plate';
 import { SearchPlatePage } from '../../pages/search-plate/search-plate';
 import { UploadImageProvider } from '../../providers/upload-image/upload-image';
 import { LoadingProvider } from '../../providers/loading/loading';
-import { TabsPage } from '../tabs/tabs';
 
 /**
  * Upload process:
@@ -65,9 +63,9 @@ export class UploadPicturePage {
   	*/
   	ionViewDidEnter() {
     	
-      if(this.picture == null){
-        this.takePicture();
-      }
+      //if(this.picture == null){
+        //this.takePicture();
+      //}
 
   	}
 
@@ -95,28 +93,29 @@ export class UploadPicturePage {
     /*
       If error is not null, show the error message
       If picture is null, it means that picture has never been selected,
-      so redirect to home page
+      so set the picture to null
     */
     checkPictureError(error){
 
       if(error != null){
         this.alertProvider.show('¡Ups!', "Ha habido un problema al obtener la imagen");
       }
-          
-      if(this.picture == null){
-        this.redirectToHome();
-      }   
+
+      this.picture = null;
 
     }
 
     /*
-      Redirect to Home Page
+      Clear view
     */
-    redirectToHome(){
-      //this.navCtrl.setRoot(HomePage);
-      //this.navCtrl.popToRoot();
-      this.navCtrl.push(TabsPage);
-      this.navCtrl.setRoot(TabsPage);
+    clearView(){
+
+      this.picture = null;
+      this.selectedRestaurant = null;
+      this.platePicture = new PlatePicture();
+      this.selectedPlate = null;
+      this.title = null;
+
     }
 
     /*
@@ -196,8 +195,8 @@ export class UploadPicturePage {
     }
 
     /*
-      Save the platePicture and redirect to HomePage
-      If the operation is success, redirect to HomePage.
+      Save the platePicture and clear the current view
+      If the operation is success, clear the view.
       Else, check picture error and show
     */
     savePlatePicture(){
@@ -208,11 +207,13 @@ export class UploadPicturePage {
 
         (data) => {
 
-          this.redirectToHome();
+          this.clearView();
+          this.loadingProvider.hide();
 
         },
         (err) => {
 
+          this.loadingProvider.hide();
           this.checkPictureError(err);
 
         }

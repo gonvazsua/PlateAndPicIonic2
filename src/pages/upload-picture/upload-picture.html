@@ -8,6 +8,19 @@
 
 <ion-content class="card-background-page">
 
+    <ion-card *ngIf="!picture">
+
+      <!-- Select restaurant -->      
+      <ion-list>
+
+        <button ion-item (click)="takePicture()">
+          <ion-icon name="camera" item-start></ion-icon> 1. Toma una foto
+        </button>
+
+      </ion-list>
+
+    </ion-card>
+
 	  <ion-card *ngIf="picture">
     	<img src="{{picture}}" (press)="takePicture()"/>
     	<div class="card-subtitle">Mantén pulsado para renovarla</div>

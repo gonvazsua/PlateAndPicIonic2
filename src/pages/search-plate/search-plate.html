@@ -5,11 +5,11 @@
     <ion-title>Selecciona un plato</ion-title>
     
     <ion-buttons end>
-      <button ion-button (click)="selectAndGoToUpload()" *ngIf="!isNewPlate">
-        Seleccionar
-      </button>
-      <button ion-button (click)="selectAndGoToUpload()" *ngIf="isNewPlate">
+      <button ion-button (click)="selectAndGoToUpload()" *ngIf="isNewPlate && newPlateName">
         Guardar
+      </button>
+      <button ion-button (click)="selectAndGoToUpload()" *ngIf="!newPlateName">
+        Volver
       </button>
     </ion-buttons>
 
@@ -26,14 +26,17 @@
     	</ion-row>
   	</ion-grid>
 
-	<ion-list *ngIf="plateList && plateList.length > 0">
+	<ion-list radio-group *ngIf="plateList && plateList.length > 0; let i = index" [(ngModel)]="selectedIndexPlate">
 
-	  	<ion-item *ngFor="let plate of plateList; let i = index" (click)="selectPlate(i, $event)" class="result">
+	  	<ion-item *ngFor="let plate of plateList; let i = index" class="result">
 	    	<ion-avatar item-start>
 	      		<img src="assets/img/dishes.png">
 	    	</ion-avatar>
-	    	<h2>{{plate.plateName}}</h2>
-	    	<p>En {{plate.restaurantName}}</p>
+	    	
+        <ion-label>{{plate.plateName}}</ion-label>
+
+        <ion-radio checked="false" class="plate-radio" (click)="selectPlate(i)" value="{{i}}"></ion-radio>
+
 	  	</ion-item>
 
 	</ion-list>
@@ -42,7 +45,7 @@
 
 		<ion-item *ngIf="plateList.length > 0">
 			<ion-label>Mi plato no está en la lista</ion-label>
-			<ion-toggle [(ngModel)]="isNewPlate" checked="false"></ion-toggle>
+			<ion-toggle [(ngModel)]="isNewPlate" (ionchange)="unselectSelectedPlate()" checked="false"></ion-toggle>
 		</ion-item>
 
   		<ion-item *ngIf="isNewPlate">

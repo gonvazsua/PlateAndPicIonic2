@@ -18,6 +18,7 @@ export class SearchPlatePage {
 	private isNewPlate: boolean;
 	private selectedPlate: Plate;
 	private newPlateName: string;
+  private selectedIndexPlate: number;
 
   	constructor(
   		public navCtrl: NavController,
@@ -32,7 +33,8 @@ export class SearchPlatePage {
   		this.blockedSearch = false;
   		this.isNewPlate = false;
   		this.selectedPlate = null;
-  		this.newPlateName = "";
+  		this.newPlateName = null;
+      this.selectedIndexPlate = null;
 
   	}
 
@@ -91,33 +93,13 @@ export class SearchPlatePage {
 	}
 
 	/*
-		Add selected class to the selected row of platelist
-	*/
-	selectPlate(index, event){
-
-		this.clearSelected();
-
-      	this.selectedPlate = this.plateList[index];
-
-      	event.currentTarget.classList.add("selected");
-
-	}
-
-	/*
       Loop over all elements having the "result" class remove the "selected" one
     */
     clearSelected(){
 
     	this.selectedPlate = null;
 
-    	let elems = document.querySelectorAll(".result");
-
-    	for(let i = 0; i < elems.length; i++){
-
-        	let elem = elems[i];
-        	elem.classList.remove("selected");
-
-    	}
+      this.selectedIndexPlate = null;
 
     }
 
@@ -133,6 +115,21 @@ export class SearchPlatePage {
     	} else {
     		this.isNewPlate = true;
     	}
+
+    }
+
+    /*
+      Select the plate and redirect to upload
+    */
+    selectPlate(index){
+
+      this.selectedPlate = this.plateList[this.selectedIndexPlate];
+
+      this.isNewPlate = false;
+
+      this.newPlateName = null;
+
+      this.redirectToUploadPage();
 
     }
 
@@ -184,6 +181,16 @@ export class SearchPlatePage {
     redirectToUploadPage(){
 
       	this.viewCtrl.dismiss(this.selectedPlate);
+
+    }
+
+    /*
+      Clear the radio buttons selected and set to empty the new plate name
+    */
+    unselectSelectedPlate(){
+
+      this.selectedPlate = null;
+      this.newPlateName = null;
 
     }
 
