@@ -135,7 +135,7 @@ export class SignupPage {
 
     let confirm = this.alertCtrl.create({
       title: 'Sobre los restaurantes....',
-      message: 'Al seleccionar que tienes un restaurante te pediremos que selecciones uno, y realizaremos una confirmación de identidad. ¿Quieres continuar?',
+      message: 'Al pulsar "Soy un restaurante", tendrás que seleccionarlo en el próximo paso. Verificaremos tu identidad para que puedas acceder a la gestión del restaurante.',
       buttons: [
         {
           text: 'Cancelar',
@@ -176,10 +176,11 @@ export class SignupPage {
 
         if(this.signUpForm.get("isUserRestaurant").value == true){
 
+          this.loading.hide();
           this.searchRestaurant();
         
         } else {
-
+          
           this.navCtrl.setRoot(TabsPage);
 
         }

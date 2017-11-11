@@ -5,8 +5,11 @@
     <ion-title>Restaurantes</ion-title>
     
     <ion-buttons end>
-      <button ion-button (click)="selectAndGoToUpload()">
+      <button ion-button (click)="selectAndGoToUpload()" *ngIf="selectedRestaurant">
         Seleccionar
+      </button>
+      <button ion-button (click)="redirectToBack()" *ngIf="!selectedRestaurant">
+        Volver
       </button>
     </ion-buttons>
 

@@ -1,7 +1,8 @@
 export const ENDPOINT = "http://192.168.1.130:8080";
 
-//LOGIN
+//LOGIN AND SIGN UP
 export const LOGIN_URL = ENDPOINT + "/auth";
+export const SIGNUP_URL = ENDPOINT + "/register";
 
 //USER
 export const GET_AUTHENTICATED_USER_URL = ENDPOINT + "/user/getAuthenticatedUser";
@@ -10,6 +11,7 @@ export const UPDATE_PASSWORDS_URL = ENDPOINT + "/user/updatePassword";
 export const GET_USER_BY_ID = ENDPOINT + "/user/getUserById";
 export const FIND_USERS_BY_KEY = ENDPOINT + "/user/findByKey";
 export const UPDATE_PROFILE_PICTURE = ENDPOINT + "/user/updateProfilePicture";
+export const SAVE_USER_RESTAURANT = ENDPOINT + "/user/saveUserRestaurant";
 
 //FOLLOW
 export const GET_FOLLOWERS_BY_USER_ID = ENDPOINT + "/user/followersData";

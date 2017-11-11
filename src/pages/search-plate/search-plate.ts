@@ -28,7 +28,7 @@ export class SearchPlatePage {
 
   		this.keySearch = null;
   		this.restaurantId = this.navParams.get("restaurantId");
-  		this.plateList = null;
+  		this.plateList = [];
   		this.blockedSearch = false;
   		this.isNewPlate = false;
   		this.selectedPlate = null;
