@@ -119,7 +119,7 @@ export class SearchRestaurantPage {
 
       } else {
 
-         this.redirectToUpload();
+         this.redirectToBack();
 
       }
 
@@ -128,7 +128,7 @@ export class SearchRestaurantPage {
     /*
       Set the params, redirect to Upload Page and clear selected restaurant
     */
-    redirectToUpload(){
+    redirectToBack(){
 
       this.viewCtrl.dismiss(this.selectedRestaurant);
 
@@ -145,7 +145,7 @@ export class SearchRestaurantPage {
 
           this.selectedRestaurant = new Restaurant();
           this.selectedRestaurant.build(data);
-          this.redirectToUpload();
+          this.redirectToBack();
 
         },
         (err) => {

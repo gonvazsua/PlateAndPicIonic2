@@ -9,7 +9,7 @@
 
 <ion-content padding>
 
-	<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+	<form [formGroup]="signUpForm" (ngSubmit)="checkValidSignUpForm()">
 
 		<ion-list>
 
@@ -29,23 +29,36 @@
 	    		<ion-input formControlName="repeatPassword" type="password" placeholder="Repite password"></ion-input>
 	  		</ion-item>
 
+	  		<!-- Restaurant users -->
+	  		<ion-item>
+				<ion-label>Tengo un restaurante</ion-label>
+				<ion-toggle formControlName="isUserRestaurant" (ionChange)="updateText($event)" checked="false"></ion-toggle>
+			</ion-item>
+
 		</ion-list>
 
 		<!-- Validation messages -->
-		<ion-list *ngIf="!signUpForm.valid">
+		<ion-list *ngIf="showRegisterErrors && !signUpForm.valid">
 
-			<ion-item color="danger" *ngIf="!signUpForm.valid">
+			<ion-item color="danger">
 				
 				<p *ngIf="signUpForm.get('username').hasError('required')">* Nombre de usuario obligatorio</p>
-				
+				<p *ngIf="signUpForm.get('username').hasError('minlength')">* Nombre de usuario mínimo 4 caracteres</p>
+				<p *ngIf="signUpForm.get('username').hasError('maxlength')">* Nombre de usuario máximo 40 caracteres</p>
+
 				<p *ngIf="signUpForm.get('email').hasError('required')">* Email obligatorio</p>
 				<p *ngIf="signUpForm.get('email').hasError('email')">* Email no valido</p>
+				<p *ngIf="signUpForm.get('email').hasError('maxlength')">* Email máximo 50 caracteres</p>
+				<p *ngIf="signUpForm.get('email').hasError('minlength')">* Email mínimo 4 caracteres</p>
 
 				<p *ngIf="signUpForm.get('password').hasError('required')">* Password obligatorio</p>
 				<p *ngIf="signUpForm.get('password').hasError('minlength')">* Password mínimo 4 caracteres</p>
+				<p *ngIf="signUpForm.get('password').hasError('maxlength')">* Password máximo 20 caracteres</p>
 
 				<p *ngIf="signUpForm.get('repeatPassword').hasError('required')">* Confirma password</p>
 				<p *ngIf="signUpForm.get('repeatPassword').hasError('minlength')">* Password mínimo 4 caracteres</p>
+				<p *ngIf="signUpForm.get('repeatPassword').hasError('maxlength')">* Password máximo 20 caracteres</p>
+				<p *ngIf="signUpForm.get('repeatPassword').hasError('equalTo')">* Las passwords no coinciden</p>
 
 			</ion-item>
 
@@ -55,7 +68,7 @@
 		<ion-grid>
 			<ion-row>
 				<ion-col>
-					<button type="submit" ion-button full color="success" [disabled]="!signUpForm.valid">He terminado</button>
+					<button type="submit" ion-button full color="success">{{buttonText}}</button>
 				</ion-col>
 			</ion-row>
 		</ion-grid>

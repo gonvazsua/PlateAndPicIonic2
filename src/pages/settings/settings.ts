@@ -40,7 +40,7 @@ export class SettingsPage {
     this.authProvider.logout().then(
       (success) => {
         this.navCtrl.setRoot(IndexPage);
-        window.location.reload();
+        //window.location.reload();
       },
       (error) => {
         console.log("Error logging out");

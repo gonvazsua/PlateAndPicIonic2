@@ -8,6 +8,7 @@ import * as Constants from '../../constants/API';
 export class AuthenticationProvider {
 
 	  public token: any;
+    public restaurantId: any;
 
   	constructor(
   		public http: Http,
@@ -33,7 +34,7 @@ export class AuthenticationProvider {
 		  				.subscribe(
 		  					res => {
 
-		  						let response = this.saveToken(res);
+		  						let response = this.saveTokenAndRestaurantId(res);
 		  						this.updateUserDataStorage(data, true);
 		  						resolve(response);
 
@@ -52,10 +53,42 @@ export class AuthenticationProvider {
 
   	}
 
-  	register(){
+    /*
+      Register new user and save local storage
+    */
+  	register(form){
+
+      return new Promise((resolve, reject) => {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        this.http.post(Constants.SIGNUP_URL, JSON.stringify(form), {headers: headers})
+          .subscribe(
+            res => {
+
+              let response = this.saveTokenAndRestaurantId(res);
+
+              let data = {
+                'username': form.username,
+                'password': form.password
+              };
+
+              this.updateUserDataStorage(data, true);
+              resolve(response);
+
+            },
+            (err) => {
+              reject(err._body);
+            }
+          );
+      });
 
   	}
 
+    /*
+      Call to login service and store the user data in the local storage
+    */
   	login(data, keepConnected){
 
   		return new Promise((resolve, reject) => {
@@ -67,7 +100,7 @@ export class AuthenticationProvider {
   				.subscribe(
   					res => {
 
-  						let response = this.saveToken(res);
+  						let response = this.saveTokenAndRestaurantId(res);
   						this.updateUserDataStorage(data, keepConnected);
   						resolve(response);
 
@@ -89,9 +122,14 @@ export class AuthenticationProvider {
   			
   			this.storage.remove('userData').then(
   				(success) => {
+
+            this.storage.clear();
+            console.log("logged out correctly");
   					resolve(true);
+
   				},
   				(err) => {
+            console.log("Problem logging out: " + err);
   					reject(false);
   				}
   			);
@@ -102,11 +140,18 @@ export class AuthenticationProvider {
     /*
       Update storaged token from authentication response
     */
-  	saveToken(res){
-  		let response = res.json();
-		  this.token = response.token;
-		  this.storage.set('token', this.token);
-		  return response;
+  	saveTokenAndRestaurantId(res){
+  		
+      let response = res.json();
+		  
+      this.token = response.token;
+		  this.restaurantId = response.restaurantId;
+
+      this.storage.set('token', this.token);
+      this.storage.set('restaurantId', this.restaurantId);
+		  
+      return response;
+
   	}
 
     /*

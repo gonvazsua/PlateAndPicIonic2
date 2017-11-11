@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TabsPage } from '../tabs/tabs';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
-import { AlertController } from 'ionic-angular';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { AlertProvider } from '../../providers/alert/alert';
 
@@ -17,20 +16,17 @@ export class LoginPage {
 	  private loginForm: FormGroup;
     private keepConnected: boolean;
     private showLoginErrors: boolean;
-    private showRegisterErrors: boolean;
 
   	constructor(
   		public navCtrl: NavController, 
   		public navParams: NavParams,
   		public formBuilder: FormBuilder,
-      public alertCtrl: AlertController,
       public authenticationProvider: AuthenticationProvider,
       public loading: LoadingProvider,
       public alert: AlertProvider) {
 
       this.keepConnected = true;
       this.showLoginErrors = false;
-      this.showRegisterErrors = false;
 
 	  	this.loginForm = this.formBuilder.group({
 	  		username: ['', [Validators.required]],
