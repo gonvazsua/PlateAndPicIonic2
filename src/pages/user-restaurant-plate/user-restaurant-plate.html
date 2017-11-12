@@ -1,0 +1,33 @@
+<ion-header>
+
+	<ion-navbar>
+
+  		<ion-title>Gestionar platos</ion-title>
+
+  		<ion-buttons end>
+	      	<button ion-button (tap)="goToEditPlate(-1)">
+	        	Nuevo
+	      	</button>
+    	</ion-buttons>
+
+  	</ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+	<ion-item *ngFor="let plate of plateList; let i = index">
+    	
+    	<ion-avatar item-start (tap)="goToEditPlate(i)">
+      		<img src="assets/img/dishes.png">
+    	</ion-avatar>
+    	
+	    <ion-label (tap)="goToEditPlate(i)">{{plate.plateName}}</ion-label>
+
+	    <ion-toggle *ngIf="plate.plateActive" (ionChange)="updatePlateActive(i, $event)" item-end checked="true" color="secondary"></ion-toggle>
+
+	    <ion-toggle *ngIf="!plate.plateActive" (ionChange)="updatePlateActive(i, $event)" item-end checked="false" color="secondary"></ion-toggle>
+
+  	</ion-item>
+
+</ion-content>

@@ -1,0 +1,81 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Mi restaurante</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+	<ion-grid>
+		<ion-row text-center>
+			<ion-col *ngIf="restaurant.picture">
+				<img width="80" class="radius" height="80" src="{{restaurant.picture}}" (tap)="loadPicture()"/>
+			</ion-col>
+			<ion-col *ngIf="!restaurant.picture">
+				<ion-img width="80" height="80" src="assets/img/place.png" (tap)="loadPicture()"></ion-img>
+			</ion-col>
+		</ion-row>
+		<ion-row text-center>
+			<ion-col>
+				<p class="no-margin"><a href="#" (tap)="loadPicture()" class="primary">Actualizar foto</a></p>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<form [formGroup]="restaurantForm" (ngSubmit)="saveRestaurantForm()">
+
+		<ion-list>
+
+			<ion-item>
+	    		<ion-input disabled="true" formControlName="name" type="text" placeholder="Nombre del restaurante" maxlength="50" value="{{restaurant.name}}"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input formControlName="address" type="text" placeholder="Dirección" maxlength="100"value="{{restaurant.address}}"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input formControlName="phoneNumber" type="text" placeholder="Teléfono" maxlength="12"value="{{restaurant.phoneNumber}}"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input disabled="true" formControlName="cityName" type="text" placeholder="Ciudad" maxlength="20"value="{{restaurant.cityName}}"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input formControlName="priceAverage" type="text" placeholder="Precio medio" maxlength="6" value="{{restaurant.priceAverage}}"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-input disabled="true" formControlName="rating" type="text" placeholder="Puntuación" maxlength="3" value="{{restaurant.rating}}"></ion-input>
+	  		</ion-item>
+
+	  		<ion-item>
+	    		<ion-textarea formControlName="description" name="description" maxlength="150" placeholder="Describe tu restaurante" value="{{restaurant.description}}" rows="5"></ion-textarea>
+	  		</ion-item>
+
+		</ion-list>
+
+		<!-- Form errors -->
+		<ion-list *ngIf="!restaurantForm.valid && restaurantForm.touched">
+			<ion-item color="danger">
+				
+				<p *ngIf="restaurantForm.get('address').hasError('required')">* La dirección es obligatoria</p>
+
+			</ion-item>
+
+		</ion-list>
+
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<button type="submit" ion-button full color="success" [disabled]="!restaurantForm.valid">Guardar</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+	</form>
+
+</ion-content>

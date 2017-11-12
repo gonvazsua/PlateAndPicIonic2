@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Tabs } from 'ionic-angular';
 import { CommentPage } from '../comment/comment';
 import { RestaurantPage } from '../restaurant/restaurant';
 import { ProfilePage } from '../profile/profile';
@@ -31,12 +31,10 @@ export class HomePage {
 
     /*
       Always executed when view loads:
-        1. Mark tab as selected
         1. Load last platePictures
     */
     ionViewDidLoad() {
       
-      this.navCtrl.parent.select(0);
       this.getLastPlatePictures();
 
     }

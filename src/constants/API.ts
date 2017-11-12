@@ -37,11 +37,15 @@ export const GET_RESTAURANT_BY_ID = ENDPOINT + "/restaurant/getById";
 export const GET_RESTAURANT_BY_NAME = ENDPOINT + "/restaurant/getRestaurantsByName";
 export const SAVE_RESTAURANT = ENDPOINT + "/restaurant/save";
 export const FIND_RESTAURANTS_BY_CITY_AND_CATEGORY = ENDPOINT + "/restaurant/findByCityAndCategory";
+export const GET_USER_RESTAURANT = ENDPOINT + "/restaurant/getUserRestaurant";
+export const UPDATE_RESTAURANT = ENDPOINT + "/restaurant/update";
+export const SAVE_RESTAURANT_PICTURE = ENDPOINT + "/restaurant/savePicture";
 
 //PLATES
 export const GET_PLATES_BY_RESTAURANTID = ENDPOINT + "/plate/getPlatesByRestaurant";
 export const GET_PLATES_BY_NAME = ENDPOINT + "/plate/findPlatesByName";
 export const SAVE_PLATE = ENDPOINT + "/plate/save";
+export const GET_PLATES_USER_RESTAURANT = ENDPOINT + "/plate/getByUserRestaurant";
 
 //API-Places
 export const GET_API_KEY = "AIzaSyD_WL2_rolCu7nOpAbyDtv-uxdh7ZlIv8Q";

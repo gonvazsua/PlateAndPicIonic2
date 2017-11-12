@@ -48,6 +48,20 @@ export class UploadImageProvider {
   	}
 
   	/*
+		Upload the Restaurant Picture calling to the correspondant API endpoint
+  	*/
+  	uploadRestaurantPicture(base64Image){
+
+  		let endpoint = Constants.SAVE_RESTAURANT_PICTURE;
+
+  		console.log(endpoint);
+  		let params = {'image': base64Image};
+
+  		return this.upload(base64Image, endpoint, params);
+
+  	}
+
+  	/*
 		Upload a base64Image to the endpoint passed as parameter
   	*/
   	upload(base64Image, endpoint, params){

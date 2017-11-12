@@ -24,6 +24,10 @@ import { RestaurantPage } from '../pages/restaurant/restaurant';
 import { PlatePicturePage } from '../pages/plate-picture/plate-picture';
 import { SearchRestaurantPage } from '../pages/search-restaurant/search-restaurant';
 import { SearchPlatePage } from '../pages/search-plate/search-plate';
+import { UserRestaurantPage } from '../pages/user-restaurant/user-restaurant';
+import { UserRestaurantPlatePage } from '../pages/user-restaurant-plate/user-restaurant-plate';
+import { UserRestaurantTagsPage } from '../pages/user-restaurant-tags/user-restaurant-tags';
+import { PlatePage } from '../pages/plate/plate';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -45,6 +49,7 @@ import { UploadImageProvider } from '../providers/upload-image/upload-image';
 import { CategoryProvider } from '../providers/categories/categories';
 import { CityProvider } from '../providers/city/city';
 import { FollowsProvider } from '../providers/follows/follows';
+import { HttpProvider } from '../providers/http/http';
 
 @NgModule({
   declarations: [
@@ -65,6 +70,10 @@ import { FollowsProvider } from '../providers/follows/follows';
     PlatePicturePage,
     SearchRestaurantPage,
     SearchPlatePage,
+    UserRestaurantPage,
+    UserRestaurantPlatePage,
+    UserRestaurantTagsPage,
+    PlatePage,
     HomePage,
     TabsPage
   ],
@@ -93,6 +102,10 @@ import { FollowsProvider } from '../providers/follows/follows';
     PlatePicturePage,
     SearchRestaurantPage,
     SearchPlatePage,
+    UserRestaurantPage,
+    UserRestaurantPlatePage,
+    UserRestaurantTagsPage,
+    PlatePage,
     HomePage,
     TabsPage
   ],
@@ -117,7 +130,8 @@ import { FollowsProvider } from '../providers/follows/follows';
     UploadImageProvider,
     CategoryProvider,
     CityProvider,
-    FollowsProvider
+    FollowsProvider,
+    HttpProvider
   ]
 })
 export class AppModule {}

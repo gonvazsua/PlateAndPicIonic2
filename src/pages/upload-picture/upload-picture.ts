@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { PlatePicture } from '../../models/plate-picture';
 import { AlertProvider } from '../../providers/alert/alert';
 import { PictureServiceProvider } from '../../providers/picture-service/picture-service';
@@ -10,6 +10,8 @@ import { Plate } from '../../models/plate';
 import { SearchPlatePage } from '../../pages/search-plate/search-plate';
 import { UploadImageProvider } from '../../providers/upload-image/upload-image';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { TabsPage } from '../tabs/tabs';
+
 
 /**
  * Upload process:
@@ -47,7 +49,8 @@ export class UploadPicturePage {
       public alertProvider: AlertProvider,
       public modalCtrl: ModalController,
       public uploadImageProvider: UploadImageProvider,
-      public loadingProvider: LoadingProvider) {
+      public loadingProvider: LoadingProvider,
+      private app: App) {
   		
   		this.picture = null;
       this.selectedRestaurant = null;
@@ -63,9 +66,9 @@ export class UploadPicturePage {
   	*/
   	ionViewDidEnter() {
     	
-      //if(this.picture == null){
-        //this.takePicture();
-      //}
+      if(this.picture == null){
+        this.takePicture();
+      }
 
   	}
 
@@ -102,6 +105,7 @@ export class UploadPicturePage {
       }
 
       this.picture = null;
+      this.app.getRootNav().setRoot(TabsPage);
 
     }
 
@@ -209,6 +213,8 @@ export class UploadPicturePage {
 
           this.clearView();
           this.loadingProvider.hide();
+          this.app.getRootNav().setRoot(TabsPage);
+
 
         },
         (err) => {

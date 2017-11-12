@@ -44,8 +44,10 @@ export class ProfilePage {
 	/*
 		Always executed on view load
 	*/
-  	ionViewDidLoad() {
+  	ionViewDidEnter() {
     	
+      this.userPlatePictures.length = 0;
+
   		this.getUserAndLoadPlatePictures();
 
   	}

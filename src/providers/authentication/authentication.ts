@@ -8,6 +8,7 @@ import * as Constants from '../../constants/API';
 export class AuthenticationProvider {
 
 	  public token: any;
+    public verificationStatus: any;
     public restaurantId: any;
 
   	constructor(
@@ -145,9 +146,12 @@ export class AuthenticationProvider {
       let response = res.json();
 		  
       this.token = response.token;
-		  this.restaurantId = response.restaurantId;
+		  this.verificationStatus = response.verificationStatus;
+      this.restaurantId = response.restaurantId;
+
 
       this.storage.set('token', this.token);
+      this.storage.set('verificationStatus', this.verificationStatus);
       this.storage.set('restaurantId', this.restaurantId);
 		  
       return response;

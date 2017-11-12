@@ -10,36 +10,56 @@
 <ion-content padding>
 
 	<ion-list>
+
+		<ion-list-header>Usuarios</ion-list-header>
   		
-  		<ion-item>
-		    <ion-thumbnail item-start>
-		      <img src="assets/img/picture.png" (click)="goToUpdateProfilePicture()">
-		    </ion-thumbnail>
-			<h2 (click)="goToUpdateProfilePicture()">Cambiar foto de perfil</h2>
-			<button ion-button clear item-end icon-only><ion-icon name="right"></ion-icon></button>
+  		<ion-item (tap)="goToUpdateProfilePicture()">
+  			<ion-icon name="contact" item-start></ion-icon>
+			Cambiar foto de perfil
 		</ion-item>
 
-		<ion-item>
-		    <ion-thumbnail item-start>
-		      <img src="assets/img/no-image.png" (click)="goToUpdateProfileData()">
-		    </ion-thumbnail>
-			<h2 (click)="goToUpdateProfileData()">Cambiar datos personales</h2>
+		<ion-item (tap)="goToUpdateProfileData()">
+		    <ion-icon name="construct" item-start></ion-icon>
+		    Cambiar datos personales
 		</ion-item>
 
-		<ion-item>
-		    <ion-thumbnail item-start>
-		      <img src="assets/img/password.png" (click)="goToUpdatePassword()">
-		    </ion-thumbnail>
-			<h2 (click)="goToUpdatePassword()">Cambiar contraseña</h2>
+		<ion-item (tap)="goToUpdatePassword()">
+		    <ion-icon name="lock" item-start></ion-icon>
+		    Cambiar contraseña
 		</ion-item>
 
-		<ion-item>
-		    <ion-thumbnail item-start>
-		      <img src="assets/img/logout.png" (click)="goToLogout()">
-		    </ion-thumbnail>
-			<h2 (click)="goToLogout()">Desconectar</h2>
+		<ion-item (tap)="goToLogout()">
+		    <ion-icon name="exit" item-start></ion-icon>
+		    Desconectar
 		</ion-item>
 
-</ion-list>
+		<ion-list-header class="margin-top">Restaurante</ion-list-header>
+
+		<!-- User not restaurant -->
+		<ion-item *ngIf="!isUserRestaurant" (tap)="convertToUserRestaurant()">
+		    <ion-icon name="md-restaurant" item-start></ion-icon>
+		    Asociar mi cuenta a un restaurante
+		</ion-item>
+
+		<!-- User restaurant but not active -->
+		<ion-item *ngIf="isUserRestaurant" (tap)="manageUserRestaurant()">
+		    <ion-icon name="md-restaurant" item-start></ion-icon>
+		    Gestionar mi restaurante
+		    <p *ngIf="!verificationStatusActive">Verificación pendiente</p>
+		</ion-item>
+
+		<!-- Manage Plates -->
+		<ion-item *ngIf="isUserRestaurant && verificationStatusActive" (tap)="managePlates()">
+		    <ion-icon name="pizza" item-start></ion-icon>
+		    Gestionar platos
+		</ion-item>
+
+		<!-- Manage Plates -->
+		<ion-item *ngIf="isUserRestaurant && verificationStatusActive" (tap)="manageTags()">
+		    <ion-icon name="pricetag" item-start></ion-icon>
+		    Gestionar etiquetas
+		</ion-item>
+
+	</ion-list>
 
 </ion-content>

@@ -158,6 +158,7 @@ export class SearchPlatePage {
     	this.selectedPlate = new Plate();
     	this.selectedPlate.restaurantId = this.restaurantId;
     	this.selectedPlate.plateName = this.newPlateName;
+      this.selectedPlate.plateActive = true;
 
     	this.plateProvider.savePlate(this.selectedPlate).then(
 

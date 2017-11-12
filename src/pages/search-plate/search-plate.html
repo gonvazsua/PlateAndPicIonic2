@@ -26,7 +26,7 @@
     	</ion-row>
   	</ion-grid>
 
-	<ion-list radio-group *ngIf="plateList && plateList.length > 0; let i = index" [(ngModel)]="selectedIndexPlate">
+	<ion-list radio-group *ngIf="plateList && plateList.length > 0" [(ngModel)]="selectedIndexPlate">
 
 	  	<ion-item *ngFor="let plate of plateList; let i = index" class="result">
 	    	<ion-avatar item-start>
