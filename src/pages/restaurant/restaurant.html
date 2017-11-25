@@ -18,10 +18,13 @@
 	      <p class="profile-description">{{restaurant.description}}</p>
 
         <!-- Categories -->
-        <button ion-button outline *ngFor="let category of categories">{{category}}</button>
+        <ion-scroll scrollX="true" style="height:50px">
+          <button ion-button outline small *ngFor="let category of categories">{{category}}</button>
+        </ion-scroll>
 
-	    </ion-item>
-  	</ion-list>
+	    </ion-item> 
+
+  </ion-list>
 
   	<div>
 	  <ion-segment [(ngModel)]="segmentOption">

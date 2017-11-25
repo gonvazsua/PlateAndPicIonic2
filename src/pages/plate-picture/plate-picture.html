@@ -7,9 +7,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content no-padding>
 
-	<ion-card>
+	<ion-card class="custom-card">
 
   		<ion-item>
     		<ion-avatar item-start>
@@ -31,23 +31,40 @@
 
   		<ion-row>
     		<ion-col>
-      			<button ion-button icon-left clear small>
+
+      			<button *ngIf="platePicture.likeToUser" color="danger" ion-button icon-left clear small (tap)="likeUnlike(platePicture.platePictureId)">
         			<ion-icon name="heart"></ion-icon>
         			<div>{{platePicture.likesNumber}} Likes</div>
       			</button>
+
+            <button *ngIf="!platePicture.likeToUser" color="dark" ion-button icon-left clear small (tap)="likeUnlike(platePicture.platePictureId)">
+              <ion-icon name="heart"></ion-icon>
+              <div>{{platePicture.likesNumber}} Likes</div>
+            </button>
+
     		</ion-col>
+
     		<ion-col>
-      			<button ion-button icon-left clear small>
+      			
+            <button *ngIf="platePicture.commentsNumber > 0" color="dark" (tap)="goToComments(platePicture.platePictureId)" ion-button icon-left clear small>
         			<ion-icon name="chatbubbles"></ion-icon>
         			<div>{{platePicture.commentsNumber}} Comentarios</div>
       			</button>
+
+            <button *ngIf="platePicture.commentsNumber == null || platePicture.commentsNumber == 0" color="dark" (tap)="goToComments(platePicture.platePictureId)" ion-button icon-left clear small>
+              <ion-icon name="chatbubbles-outline"></ion-icon>
+              <div>{{platePicture.commentsNumber}} Comentarios</div>
+            </button>
+
     		</ion-col>
-    		<ion-col center text-center>
+    		
+        <ion-col center text-center>
       			<ion-note>
         			
       			</ion-note>
     		</ion-col>
-  		</ion-row>
+  		
+      </ion-row>
 
 	</ion-card>
 

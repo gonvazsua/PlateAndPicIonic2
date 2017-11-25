@@ -5,6 +5,7 @@ import { LoadingProvider } from '../../providers/loading/loading';
 import { PlatePictureProvider } from '../../providers/plate-picture/plate-picture';
 import { AlertProvider } from '../../providers/alert/alert';
 import { RestaurantPage } from '../restaurant/restaurant';
+import { CommentPage } from '../comment/comment';
 
 @IonicPage()
 @Component({
@@ -63,6 +64,66 @@ export class PlatePicturePage {
     */
   	goToRestaurant(restaurantId){
   		this.navCtrl.push(RestaurantPage, {restaurantId: restaurantId});
+  	}
+
+  	/*
+      Like or unlike the platepicture passed as parameter
+    */
+    likeUnlike(platePictureId){
+
+        this.updateLikeUnlike(this.platePicture);
+
+        this.updateIcon(this.platePicture);
+
+    }
+
+    /*
+      Save the like or unlike
+    */
+    updateLikeUnlike(platePicture){
+
+      if(platePicture.likeToUser){
+
+        this.platePictureProvider.unlikePlatePicture(platePicture);
+
+      } else {
+
+        this.platePictureProvider.likePlatePicture(platePicture);
+
+      }
+
+    }
+
+    /*
+      Update the icon by changing the value of likeToUser field,
+      and update the likesNumber variable
+    */
+    updateIcon(platePicture){
+
+      if(platePicture.likeToUser){
+
+        platePicture.likeToUser = false;
+        platePicture.likesNumber--;
+
+      } else {
+
+        platePicture.likeToUser = true;
+        if(platePicture.likesNumber == null){
+          platePicture.likesNumber = 1;
+        }
+        else{
+          platePicture.likesNumber++; 
+        }
+
+      }
+
+    }
+
+    /*
+      Go to comments page
+    */
+  	goToComments(platePictureId){
+  		this.navCtrl.push(CommentPage, {platePictureId: platePictureId});
   	}
 
 }

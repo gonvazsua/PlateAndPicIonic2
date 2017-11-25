@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, Tabs } from 'ionic-angular';
-import { CommentPage } from '../comment/comment';
 import { RestaurantPage } from '../restaurant/restaurant';
 import { ProfilePage } from '../profile/profile';
 import { LoadingProvider } from '../../providers/loading/loading';
@@ -92,13 +91,6 @@ export class HomePage {
     }
 
     /*
-      Go to comments page
-    */
-  	goToComments(platePictureId){
-  		this.navCtrl.push(CommentPage, {platePictureId: platePictureId});
-  	}
-
-    /*
       Go to Restaurants page
     */
   	goToRestaurant(restaurantId){
@@ -110,85 +102,6 @@ export class HomePage {
     */
     goToProfile(userId){
        this.navCtrl.push(ProfilePage, {userId: userId}); 
-    }
-
-    /*
-      Like or unlike the platepicture passed as parameter
-    */
-    likeUnlike(platePictureId){
-
-      let platePicture = this.getPlatePictureFromListById(platePictureId);
-
-      if(platePicture){
-
-        this.updateLikeUnlike(platePicture);
-
-        this.updateIcon(platePicture);
-
-      }
-
-
-    }
-
-    /*
-      Return the platePicture object with the Id passed as parameter
-    */
-    getPlatePictureFromListById(platePictureId): PlatePicture {
-
-      let platePicture = null;
-
-      for(let pp of this.lastPlatePictures){
-
-        if(pp.platePictureId == platePictureId){
-          platePicture = pp;
-        }
-
-      }
-
-      return platePicture;
-
-    }
-
-    /*
-      Save the like or unlike
-    */
-    updateLikeUnlike(platePicture){
-
-      if(platePicture.likeToUser){
-
-        this.platePictureProvider.unlikePlatePicture(platePicture);
-
-      } else {
-
-        this.platePictureProvider.likePlatePicture(platePicture);
-
-      }
-
-    }
-
-    /*
-      Update the icon by changing the value of likeToUser field,
-      and update the likesNumber variable
-    */
-    updateIcon(platePicture){
-
-      if(platePicture.likeToUser){
-
-        platePicture.likeToUser = false;
-        platePicture.likesNumber--;
-
-      } else {
-
-        platePicture.likeToUser = true;
-        if(platePicture.likesNumber == null){
-          platePicture.likesNumber = 1;
-        }
-        else{
-          platePicture.likesNumber++; 
-        }
-
-      }
-
     }
 
     /*

@@ -10,6 +10,7 @@ export class AuthenticationProvider {
 	  public token: any;
     public verificationStatus: any;
     public restaurantId: any;
+    public restaurantName: any;
 
   	constructor(
   		public http: Http,
@@ -35,7 +36,7 @@ export class AuthenticationProvider {
 		  				.subscribe(
 		  					res => {
 
-		  						let response = this.saveTokenAndRestaurantId(res);
+		  						let response = this.saveTokenAndRestaurant(res);
 		  						this.updateUserDataStorage(data, true);
 		  						resolve(response);
 
@@ -68,7 +69,7 @@ export class AuthenticationProvider {
           .subscribe(
             res => {
 
-              let response = this.saveTokenAndRestaurantId(res);
+              let response = this.saveTokenAndRestaurant(res);
 
               let data = {
                 'username': form.username,
@@ -101,7 +102,7 @@ export class AuthenticationProvider {
   				.subscribe(
   					res => {
 
-  						let response = this.saveTokenAndRestaurantId(res);
+  						let response = this.saveTokenAndRestaurant(res);
   						this.updateUserDataStorage(data, keepConnected);
   						resolve(response);
 
@@ -141,18 +142,20 @@ export class AuthenticationProvider {
     /*
       Update storaged token from authentication response
     */
-  	saveTokenAndRestaurantId(res){
+  	saveTokenAndRestaurant(res){
   		
       let response = res.json();
 		  
       this.token = response.token;
 		  this.verificationStatus = response.verificationStatus;
       this.restaurantId = response.restaurantId;
+      this.restaurantName = response.restaurantName;
 
 
       this.storage.set('token', this.token);
       this.storage.set('verificationStatus', this.verificationStatus);
       this.storage.set('restaurantId', this.restaurantId);
+      this.storage.set('restaurantName', this.restaurantName);
 		  
       return response;
 

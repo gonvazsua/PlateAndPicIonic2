@@ -20,6 +20,10 @@ export const SEGMENT_PLATE = "segment_plate";
 export const SEGMENT_CATEGORY = "segment_category";
 export const SEGMENT_USER = "segment_user";
 export const MIN_LENGHT_KEY_SEARCH = 4;
+export const SEARCH_RESTAURANT = "Buscar restaurante";
+export const SEARCH_PLATES = "Buscar platos";
+export const SEARCH_CATEGORY = "Buscar por categoría";
+export const SEARCH_USERS = "Buscar usuarios";
 
 @IonicPage()
 @Component({
@@ -28,6 +32,7 @@ export const MIN_LENGHT_KEY_SEARCH = 4;
 })
 export class SearchPage {
 
+	private title: string;
 	private searchSegment:string;
 	private keySearch:string;
 	private blockedSearch: boolean;
@@ -58,6 +63,7 @@ export class SearchPage {
 		
 		//Initialize segment to Restaurants
 		this.searchSegment = SEGMENT_RESTAURANT;
+		this.title = SEARCH_RESTAURANT;
 
 		this.restaurantList = [];
 		this.plateList = [];
@@ -88,21 +94,25 @@ export class SearchPage {
 			
 			case SEGMENT_RESTAURANT:
 				
+				this.title = SEARCH_RESTAURANT;
 				this.searchRestaurants();
 				break;
 
 			case SEGMENT_PLATE:
 
+				this.title = SEARCH_PLATES;
 				this.searchPlates();
 				break;
 			
 			case SEGMENT_CATEGORY:
 
+				this.title = SEARCH_CATEGORY;
 				this.resetCategorySearch();
 				break;
 
 			case SEGMENT_USER:
 
+				this.title = SEARCH_USERS;
 				this.searchUsers();
 				break;
 			
