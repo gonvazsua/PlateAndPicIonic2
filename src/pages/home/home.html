@@ -18,7 +18,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-    <ion-card *ngFor="let platePicture of lastPlatePictures">
+    <ion-card *ngFor="let platePicture of lastPlatePictures" class="home-card">
 
       <img src="{{platePicture.picture}}" (click)="goToPlatePictureDetails(platePicture.platePictureId)">
 

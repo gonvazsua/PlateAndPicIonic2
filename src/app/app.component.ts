@@ -20,6 +20,7 @@ export class MyApp {
     
       splashScreen.hide();
 
+      //Check user is authenticated
       authProvider.checkAuthentication().then(
           (success) => {
             this.rootPage = TabsPage;
