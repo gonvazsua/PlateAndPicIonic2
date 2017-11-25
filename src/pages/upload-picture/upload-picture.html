@@ -21,9 +21,12 @@
   			<button ion-item *ngIf="!selectedRestaurant" (click)="searchRestaurant()">
 		      <ion-icon name="pin" item-start></ion-icon> 1. Selecciona un restaurante
 		    </button>
-		    <button ion-item *ngIf="selectedRestaurant" (click)="searchRestaurant()">
+		    <button ion-item *ngIf="selectedRestaurant && !isUserRestaurant" (click)="searchRestaurant()">
 		      <ion-icon name="pin" item-start></ion-icon> En {{selectedRestaurant.name}}, {{selectedRestaurant.cityName}}
 		    </button>
+        <button ion-item *ngIf="isUserRestaurant">
+          <ion-icon name="pin" item-start></ion-icon> Mi restaurante
+        </button>
 
   		</ion-list>
 
@@ -33,7 +36,7 @@
     <ion-card *ngIf="selectedRestaurant">
       <ion-list>
 
-        <button ion-item *ngIf="!selectedPlate" (click)="searchPlates()">
+        <button ion-item *ngIf="!selectedPlate && picture" (click)="searchPlates()">
           <ion-icon name="pizza" item-start></ion-icon> 2. Selecciona un plato
         </button>
         <button ion-item *ngIf="selectedPlate" (click)="searchPlates()">

@@ -156,6 +156,10 @@ export class AuthenticationProvider {
       this.storage.set('verificationStatus', this.verificationStatus);
       this.storage.set('restaurantId', this.restaurantId);
       this.storage.set('restaurantName', this.restaurantName);
+
+      if(this.restaurantId){
+        this.storage.set("isUserRestaurant", true);
+      }
 		  
       return response;
 

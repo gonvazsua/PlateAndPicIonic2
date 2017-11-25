@@ -28,7 +28,6 @@ import { UserRestaurantPage } from '../pages/user-restaurant/user-restaurant';
 import { UserRestaurantPlatePage } from '../pages/user-restaurant-plate/user-restaurant-plate';
 import { UserRestaurantTagsPage } from '../pages/user-restaurant-tags/user-restaurant-tags';
 import { PlatePage } from '../pages/plate/plate';
-
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 

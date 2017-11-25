@@ -7,6 +7,7 @@ import { PlatePictureProvider } from '../../providers/plate-picture/plate-pictur
 import { PlatePicture } from '../../models/plate-picture';
 import { PlateProvider } from '../../providers/plate/plate';
 import { LoadingProvider } from '../../providers/loading/loading';
+import { UploadPicturePage } from '../upload-picture/upload-picture';
 
 @IonicPage()
 @Component({
@@ -233,6 +234,15 @@ export class RestaurantPage {
         this.categories = this.restaurant.categories.split(separator);
 
       }
+
+    }
+
+    /*
+      Go to upload page from restaurant page
+    */
+    uploadFromRestaurant(){
+
+      this.navCtrl.push(UploadPicturePage, {'restaurant': this.restaurant});
 
     }
 

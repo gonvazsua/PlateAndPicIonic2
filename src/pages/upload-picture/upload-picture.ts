@@ -11,13 +11,13 @@ import { SearchPlatePage } from '../../pages/search-plate/search-plate';
 import { UploadImageProvider } from '../../providers/upload-image/upload-image';
 import { LoadingProvider } from '../../providers/loading/loading';
 import { TabsPage } from '../tabs/tabs';
-
+import { Storage } from '@ionic/storage';
 
 /**
  * Upload process:
  	1. Take picture
- 	2. Get location and search restaurant by name
- 	3. Select a restaurant:
+ 	2. Get location and search restaurant by name (Deprecated)
+ 	3. Select a restaurant (if user has a restaurant, only can select their restaurant):
  	4. 	If restaurant already exists, load plate list
  	5. 	If restaurant does not exist, save it
 	6. If plate does not exists in restaurant, enable input text for saving it
@@ -41,6 +41,7 @@ export class UploadPicturePage {
     private selectedRestaurant: Restaurant;
     private selectedPlate: Plate;
     private title: string;
+    private isUserRestaurant: boolean;
 
   	constructor(
       public navCtrl: NavController, 
@@ -50,13 +51,14 @@ export class UploadPicturePage {
       public modalCtrl: ModalController,
       public uploadImageProvider: UploadImageProvider,
       public loadingProvider: LoadingProvider,
-      private app: App) {
+      private app: App, public storage: Storage) {
   		
   		this.picture = null;
       this.selectedRestaurant = null;
       this.platePicture = new PlatePicture();
       this.selectedPlate = null;
       this.title = null;
+      this.isUserRestaurant = false;
 
   	}
 
@@ -70,7 +72,57 @@ export class UploadPicturePage {
         this.takePicture();
       }
 
+      this.checkRestaurantUserOrParams();
+
   	}
+
+    /*
+      If the user has a restaurant or a restaurant is in the params,
+      auto-select it.
+    */
+    checkRestaurantUserOrParams(){
+
+      if(this.navParams.get('restaurant')){
+        this.selectedRestaurant = this.navParams.get('restaurant');
+      }
+
+      this.checkUserRestaurant();
+
+    }
+
+    /*
+      Check if the user has a restaurant and load it
+    */
+    checkUserRestaurant() {
+
+      this.storage.get("isUserRestaurant").then(
+
+        (isUserRestaurant) => {
+          
+          this.isUserRestaurant = true;
+          this.selectedRestaurant = new Restaurant();
+
+          //Get restaurantId from storage
+          this.storage.get("restaurantId").then(
+
+            (restaurantId) => {
+              this.selectedRestaurant.restaurantId = restaurantId;
+            },
+            (err) => {
+              this.alertProvider.show("¡Ups!", "Ha habido un problema al cargar tu restaurante");
+              this.app.getRootNav().setRoot(TabsPage);
+            }
+
+          );
+        },
+        (err) => {
+          this.selectedRestaurant = null;
+          this.isUserRestaurant = false;
+        }
+
+      );
+
+    }
 
     /*
       Take a picture if already does not exist
