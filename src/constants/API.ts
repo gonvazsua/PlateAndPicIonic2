@@ -1,4 +1,4 @@
-export const ENDPOINT = "http://192.168.1.130:8080";
+export const ENDPOINT = "http://192.168.1.141:8080";
 
 //LOGIN AND SIGN UP
 export const LOGIN_URL = ENDPOINT + "/auth";
@@ -53,6 +53,11 @@ export const GET_API_PLACES_ENDPOINT = "https://maps.googleapis.com/maps/api/pla
 
 //CATEGORY
 export const GET_CATEGORIES_BY_NAME = ENDPOINT + "/category/findByName";
+export const GET_ALL_CATEGORIES = ENDPOINT + "/category/getAll";
+export const GET_USER_RESTAURANT_CATEGORIES = ENDPOINT + "/category/getByUserRestaurant";
+export const GET_NO_USER_RESTAURANT_CATEGORIES = ENDPOINT + "/category/getNoUserRestaurant";
+export const ADD_CATEGORY = ENDPOINT + "/category/add";
+export const REMOVE_CATEGORY = ENDPOINT + "/category/remove";
 
 //CITY
 export const GET_CITIES_BY_NAME = ENDPOINT + "/city/findByName";

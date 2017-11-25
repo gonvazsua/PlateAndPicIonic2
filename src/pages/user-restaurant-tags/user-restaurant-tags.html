@@ -24,7 +24,10 @@
     	<!-- Selected Categories -->
     	<ion-row>
     		<ion-col>
-			    <button ion-button outline *ngFor="let category of restaurantCategories; let i = index" (tap)="removeCategoryFromRestaurant(i)">{{category.categoryName}}</button>
+			    <button ion-button outline icon-left *ngFor="let category of restaurantCategories; let i = index" (tap)="removeCategoryFromRestaurant(i)">
+                    <ion-icon name="close"></ion-icon>
+                    {{category.categoryName}}
+                </button>
     		</ion-col>
     	</ion-row>
 

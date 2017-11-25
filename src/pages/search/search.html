@@ -125,7 +125,7 @@
 							{{selectedCategory.categoryName}}
 						</button>
 
-						<button ion-button outline icon-left (click)="removeTag('city')" *ngIf="selectedCity.cityName != ''">
+						<button ion-button outline icon-left (click)="removeTag('city')" *ngIf="selectedCity.cityName != '' ">
 							<ion-icon name="close"></ion-icon>
 							{{selectedCity.cityName}}
 						</button>
@@ -137,14 +137,14 @@
 
 			<ion-list *ngIf="restaurantsCategoriesList.length == 0">
 
-				<ion-item>
+				<ion-item *ngIf="categoriesList.length == 0 && !selectedCity.cityName">
 					<ion-label floating>¿Dónde?</ion-label>
 					<ion-input type="text" [(ngModel)]="keySearchCity" (keyup)="searchCities()" maxlength="20"></ion-input>
 				</ion-item>
 
-				<ion-item>
+				<ion-item *ngIf="cityList.length == 0 && !selectedCategory.categoryName">
 					<ion-label floating>¿Qué tipo de comida?</ion-label>
-					<ion-input type="text" [(ngModel)]="keySearchCategory" (keyup)="searchCategories()" maxlength="10"></ion-input>
+					<ion-input type="text" [(ngModel)]="keySearchCategory" (keyup)="searchCategories()" maxlength="20"></ion-input>
 				</ion-item>
 
 			</ion-list>
