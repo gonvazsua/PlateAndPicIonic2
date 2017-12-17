@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="background-white">
 
   <ion-navbar>
     <ion-title>Registro</ion-title>
@@ -7,7 +7,12 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding  class="background">
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
 
 	<form [formGroup]="signUpForm" (ngSubmit)="checkValidSignUpForm()">
 
@@ -35,6 +40,12 @@
 				<ion-toggle formControlName="isUserRestaurant" (ionChange)="updateText($event)" checked="false"></ion-toggle>
 			</ion-item>
 
+			<!-- Legal text -->
+	  		<ion-item>
+				<ion-label (tap)="showLegalText()">Acepto las condiciones</ion-label>
+				<ion-toggle formControlName="legal" checked="false"></ion-toggle>
+			</ion-item>
+
 		</ion-list>
 
 		<!-- Validation messages -->
@@ -60,6 +71,8 @@
 				<p *ngIf="signUpForm.get('repeatPassword').hasError('maxlength')">* Password máximo 20 caracteres</p>
 				<p *ngIf="signUpForm.get('repeatPassword').hasError('equalTo')">* Las passwords no coinciden</p>
 
+				<p *ngIf="signUpForm.get('legal').hasError('required')">* Acepte las condiciones legales</p>
+
 			</ion-item>
 
 	  		
@@ -75,4 +88,5 @@
 
 	</form>
 
-</ion-content>
+  </ion-toolbar>
+</ion-footer>

@@ -10,6 +10,7 @@ import { SearchRestaurantPage } from '../search-restaurant/search-restaurant';
 import { ModalController } from 'ionic-angular';
 import { Restaurant } from '../../models/restaurant';
 import { UserProvider } from '../../providers/user/user';
+import { LegalTextPage } from '../legal-text/legal-text';
 
 /*
   1. Complete sign up form
@@ -40,7 +41,7 @@ export class SignupPage {
       public alert: AlertProvider,
       public alertCtrl: AlertController,
       public modalCtrl: ModalController,
-      public userProvider: UserProvider) {
+      public userProvider: UserProvider,) {
 
       this.showRegisterErrors = false;
       this.buttonText = "He terminado";
@@ -51,7 +52,8 @@ export class SignupPage {
   		  email: ['', [Validators.required, Validators.email, Validators.maxLength(50), Validators.minLength(4)]],
   		  password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
   		  repeatPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20), this.equalto('password')]],
-        isUserRestaurant: [false, []]
+        isUserRestaurant: [false, []],
+        legal: [false, [Validators.requiredTrue]]
   	  });
 
   }
@@ -246,6 +248,17 @@ export class SignupPage {
       }
 
     );
+
+  }
+
+  /*
+    Show legal text in new modal
+  */
+  showLegalText(){
+
+      let modal = this.modalCtrl.create(LegalTextPage);
+
+      modal.present();
 
   }
 

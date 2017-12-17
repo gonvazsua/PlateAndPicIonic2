@@ -98,17 +98,22 @@ export class UploadPicturePage {
       this.storage.get("isUserRestaurant").then(
 
         (isUserRestaurant) => {
-          
-          this.isUserRestaurant = true;
-          this.selectedRestaurant = new Restaurant();
 
           //Get restaurantId from storage
           this.storage.get("restaurantId").then(
 
             (restaurantId) => {
-              this.selectedRestaurant.restaurantId = restaurantId;
+
+              if(isUserRestaurant && restaurantId){
+                this.isUserRestaurant = true;
+                this.selectedRestaurant = new Restaurant();
+                this.selectedRestaurant.restaurantId = restaurantId;  
+              }
+              
             },
             (err) => {
+              this.selectedRestaurant = null;
+              this.isUserRestaurant = false;
               this.alertProvider.show("¡Ups!", "Ha habido un problema al cargar tu restaurante");
               this.app.getRootNav().setRoot(TabsPage);
             }
