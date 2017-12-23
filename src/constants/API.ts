@@ -1,4 +1,4 @@
-export const ENDPOINT = "http://192.168.1.134:8080";
+export const ENDPOINT = "http://192.168.1.144:8080";
 
 //LOGIN AND SIGN UP
 export const LOGIN_URL = ENDPOINT + "/auth";
@@ -31,6 +31,7 @@ export const GET_PLATEPICTURE_BY_ID = ENDPOINT + "/platePicture/getById";
 //COMMENTS
 export const GET_COMMENTS_BY_PLATEPICTUREID = ENDPOINT + "/comment/getByPlatePicture";
 export const SAVE_COMMENT = ENDPOINT + "/comment/save";
+export const REMOVE_COMMENT = ENDPOINT + "/comment/remove";
 
 //RESTAURANTS
 export const GET_RESTAURANT_BY_ID = ENDPOINT + "/restaurant/getById";

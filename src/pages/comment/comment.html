@@ -11,7 +11,7 @@
 
 	<ion-list>
 
-	  <ion-item-sliding *ngFor="let comment of commentsList">
+	  <ion-item-sliding *ngFor="let comment of commentsList; let i = index">
 	    
 	    	<ion-item (click)="goToProfile(comment.userId)">
 	      		<ion-avatar item-start>
@@ -21,6 +21,14 @@
 	      		<h2>@{{comment.username}}, <i class="font">el {{comment.registeredOn}}</i></h2>
 	      		<p>{{comment.comment}}</p>
 	    	</ion-item>
+
+	    	<ion-item-options *ngIf="comment.username == loggedUsername">
+
+		      <button ion-button icon-only color="danger" (click)="confirmRemoveComment(i, comment.commentId)">
+		      	<ion-icon name="trash"></ion-icon>
+		      </button>
+		    
+		    </ion-item-options>
 
 	  	</ion-item-sliding>
 

@@ -93,4 +93,40 @@ export class CommentProvider {
 
   	}
 
+  	/*
+		Remove comment by id
+  	*/
+  	removeComment(comment){
+
+  		return new Promise((resolve, reject) => {
+
+  			this.storage.get('token').then(
+	  			(token) => {
+
+	  				let headers = new Headers();
+		  			headers.append('Content-Type', 'application/json');
+		  			headers.append('Authorization', token);
+
+		  			this.http.post(Constants.REMOVE_COMMENT, JSON.stringify(comment), {headers: headers})
+		  				.subscribe(
+		  					res => {
+
+		  						resolve();
+
+		  					},
+		  					(err) => {
+		              			reject(err._body);
+		  					}
+		  				);
+
+	  			},
+	  			(err) => {
+	  				reject("Ha ocurrido un problema");
+	  			}
+  			);
+
+  		});
+
+  	}
+
 }
